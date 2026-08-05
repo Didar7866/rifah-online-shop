@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rifah Online Shop</title>
+<style>
+:root{--p:#173b36;--g:#d6aa58;--bg:#f7f4ee;--t:#17211f}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,"Noto Sans Bengali",sans-serif;color:var(--t)}
+.top{background:var(--p);color:#fff;text-align:center;padding:8px;font-size:13px}
+header{border-bottom:1px solid #e8e4dc;background:#fff}.nav{max-width:1200px;margin:auto;padding:16px 20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.logo{font-size:23px;font-weight:800;color:var(--p);white-space:nowrap}.logo b{color:var(--g)}
+.search{flex:1;display:flex;border:1px solid #ddd;border-radius:10px;overflow:hidden;background:#fafafa;min-width:220px}.search input{flex:1;border:0;padding:12px;outline:0;background:transparent}.search button{border:0;background:var(--p);color:white;padding:0 18px}
+.links{display:flex;gap:16px}.cats{max-width:1200px;margin:auto;padding:12px 20px;display:flex;gap:24px;overflow:auto;white-space:nowrap;font-size:14px}.cats a:hover{color:var(--g)}
+.hero{max-width:1200px;margin:22px auto;padding:0 20px}.heroBox{background:linear-gradient(120deg,#173b36,#315b52);border-radius:20px;padding:55px;color:#fff;min-height:340px;display:flex;align-items:center}.heroText{max-width:600px}.eyebrow{color:#e8c878;letter-spacing:2px;font-size:12px;font-weight:bold}.hero h1{font-size:46px;line-height:1.08;margin:12px 0}.hero p{line-height:1.7;color:#dce8e4}.btn{display:inline-block;background:var(--g);color:#fff;padding:13px 22px;border-radius:9px;font-weight:bold;margin-top:8px}
+.section{max-width:1200px;margin:52px auto;padding:0 20px}.head{display:flex;justify-content:space-between;align-items:end;margin-bottom:20px}.head h2{margin:0;font-size:28px}.muted{color:#69736f;font-size:14px}
+.categoryGrid,.products{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.category{background:var(--bg);padding:25px;border-radius:14px;text-align:center;font-weight:bold}.category small{display:block;color:#69736f;margin-top:7px;font-weight:normal}
+.card{border:1px solid #e8e4dc;border-radius:14px;overflow:hidden;background:#fff}.photo{height:210px;background:var(--bg);display:flex;align-items:center;justify-content:center;color:#999}.info{padding:14px}.tag{font-size:11px;color:var(--g);font-weight:bold}.name{font-weight:bold;margin:7px 0}.price{color:var(--p);font-weight:800}.actions{display:flex;gap:8px;margin-top:12px}.cart{flex:1;border:0;border-radius:8px;background:var(--p);color:#fff;padding:10px;font-weight:bold}.heart{width:42px;border:1px solid #ddd;border-radius:8px;background:#fff}
+.features{background:var(--bg);padding:30px 20px}.featureGrid{max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.feature{background:#fff;padding:20px;border-radius:12px}.feature b{display:block;margin-bottom:7px}
+footer{background:#122d29;color:#dce6e2;padding:42px 20px 22px;margin-top:55px}.foot{max-width:1200px;margin:auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:25px}.foot h3{color:#fff}.foot a{display:block;margin:9px 0;color:#c8d4d0;font-size:14px}.copy{max-width:1200px;margin:30px auto 0;border-top:1px solid #35504b;padding-top:16px;font-size:12px}
+@media(max-width:800px){.heroBox{padding:35px 25px}.hero h1{font-size:34px}.categoryGrid,.products,.featureGrid{grid-template-columns:repeat(2,1fr)}.foot{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.nav{padding:13px 12px}.hero{padding:0 12px}.heroBox{padding:28px 20px;border-radius:14px}.section{padding:0 12px;margin:40px auto}.categoryGrid,.products{gap:10px}.photo{height:150px}.featureGrid,.foot{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="top">সারা বাংলাদেশে ডেলিভারি • নিরাপদ শপিং • Cash on Delivery</div>
+<header>
+<div class="nav">
+<a class="logo" href="#">Rifah <b>Online Shop</b></a>
+<div class="search"><input placeholder="আপনি কী খুঁজছেন?"><button>Search</button></div>
+<div class="links"><a href="#">♡</a><a href="#">🛒</a></div>
+</div>
+<div class="cats"><a href="#">সব পণ্য</a><a href="#">মেয়েদের</a><a href="#">ছেলেদের</a><a href="#">বাচ্চাদের</a><a href="#">Electronics</a><a href="#">নতুন পণ্য</a><a href="#">অফার</a></div>
+</header>
+<main>
+<section class="hero"><div class="heroBox"><div class="heroText"><div class="eyebrow">RIFAH ONLINE SHOP</div><h1>আপনার পছন্দ, আমাদের যত্নে।</h1><p>ফ্যাশন, পরিবার ও দৈনন্দিন প্রয়োজনের পণ্য এক জায়গায়। নতুন কালেকশন ও আকর্ষণীয় অফার দেখুন।</p><a class="btn" href="#products">শপিং শুরু করুন →</a></div></div></section>
+<section class="section"><div class="head"><div><h2>Shop by Category</h2><div class="muted">আপনার পছন্দের ক্যাটাগরি বেছে নিন</div></div></div>
+<div class="categoryGrid"><a class="category" href="#">👗<br>Women Fashion<small>মেয়েদের পোশাক</small></a><a class="category" href="#">👔<br>Men Fashion<small>ছেলেদের পোশাক</small></a><a class="category" href="#">🧸<br>Kids<small>বাচ্চাদের পণ্য</small></a><a class="category" href="#">⚡<br>Electronics<small>ইলেক্ট্রনিক পণ্য</small></a></div></section>
+<section class="section" id="products"><div class="head"><div><h2>Featured Products</h2><div class="muted">জনপ্রিয় কিছু পণ্য</div></div><a class="muted" href="#">সব দেখুন →</a></div>
+<div class="products">
+<div class="card"><div class="photo">Product Image</div><div class="info"><div class="tag">NEW</div><div class="name">Premium Fashion Dress</div><div class="price">৳ 1,490</div><div class="actions"><button class="cart">Add to Cart</button><button class="heart">♡</button></div></div></div>
+<div class="card"><div class="photo">Product Image</div><div class="info"><div class="tag">BEST SELLER</div><div class="name">Premium Men's Shirt</div><div class="price">৳ 890</div><div class="actions"><button class="cart">Add to Cart</button><button class="heart">♡</button></div></div></div>
+<div class="card"><div class="photo">Product Image</div><div class="info"><div class="tag">KIDS</div><div class="name">Kids Collection</div><div class="price">৳ 690</div><div class="actions"><button class="cart">Add to Cart</button><button class="heart">♡</button></div></div></div>
+<div class="card"><div class="photo">Product Image</div><div class="info"><div class="tag">ELECTRONICS</div><div class="name">Smart Gadget</div><div class="price">৳ 1,290</div><div class="actions"><button class="cart">Add to Cart</button><button class="heart">♡</button></div></div></div>
+</div></section>
+<section class="features"><div class="featureGrid"><div class="feature"><b>🚚 Fast Delivery</b><span class="muted">দেশজুড়ে ডেলিভারি সুবিধা</span></div><div class="feature"><b>🔒 Secure Shopping</b><span class="muted">নিরাপদ ও নির্ভরযোগ্য শপিং</span></div><div class="feature"><b>💳 Easy Payment</b><span class="muted">COD ও অনলাইন পেমেন্ট</span></div><div class="feature"><b>↩️ Customer Support</b><span class="muted">সহযোগিতার জন্য আমরা আছি</span></div></div></section>
+</main>
+<footer><div class="foot"><div><h3>Rifah Online Shop</h3><p>ফ্যাশন ও দৈনন্দিন প্রয়োজনের পণ্য এক জায়গায়।</p></div><div><h3>Shop</h3><a href="#">Women</a><a href="#">Men</a><a href="#">Kids</a><a href="#">Electronics</a></div><div><h3>Help</h3><a href="#">Contact</a><a href="#">Delivery</a><a href="#">Returns</a><a href="#">Privacy</a></div><div><h3>Follow Us</h3><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">WhatsApp</a></div></div><div class="copy">© 2026 Rifah Online Shop. All rights reserved.</div></footer>
+</body>
+</html>
