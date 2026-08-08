@@ -1018,6 +1018,198 @@ footer{
     © 2026 Rifah Online Shop. All Rights Reserved.
   </div>
 </footer>
+<style>
+#rifah-cart-box{
+position:fixed;
+right:15px;
+bottom:15px;
+z-index:9999;
+background:#42145F;
+color:white;
+padding:12px 18px;
+border-radius:30px;
+font-weight:bold;
+box-shadow:0 5px 20px rgba(0,0,0,.25);
+cursor:pointer;
+}
+#rifah-cart-panel{
+display:none;
+position:fixed;
+right:15px;
+bottom:75px;
+width:320px;
+max-width:90%;
+background:white;
+color:#222;
+z-index:10000;
+border-radius:15px;
+padding:18px;
+box-shadow:0 5px 30px rgba(0,0,0,.3);
+}
+#rifah-cart-panel h3{
+margin-top:0;
+color:#42145F;
+}
+.rifah-cart-item{
+border-bottom:1px solid #ddd;
+padding:10px 0;
+}
+.rifah-cart-total{
+font-weight:bold;
+font-size:18px;
+margin-top:15px;
+}
+#rifah-checkout{
+width:100%;
+margin-top:15px;
+padding:12px;
+border:0;
+border-radius:8px;
+background:#C72C8A;
+color:white;
+font-weight:bold;
+}
+</style>
 
+<div id="rifah-cart-box">🛒 Cart (<span id="rifah-cart-count">0</span>)</div>
+
+<div id="rifah-cart-panel">
+<h3>Your Cart</h3>
+<div id="rifah-cart-items">Your cart is empty.</div>
+<div class="rifah-cart-total">
+Total: ৳<span id="rifah-cart-total">0</span>
+</div>
+<button id="rifah-checkout">Checkout</button>
+</div>
+
+<script>
+(function(){
+
+let cart = JSON.parse(localStorage.getItem("rifahCart") || "[]");
+
+function updateCart(){
+
+let count = cart.reduce((sum,item)=>sum+item.qty,0);
+
+document.getElementById("rifah-cart-count").textContent=count;
+
+let items=document.getElementById("rifah-cart-items");
+let total=0;
+
+if(cart.length===0){
+items.innerHTML="Your cart is empty.";
+document.getElementById("rifah-cart-total").textContent="0";
+return;
+}
+
+items.innerHTML="";
+
+cart.forEach((item,index)=>{
+
+total += item.price * item.qty;
+
+let div=document.createElement("div");
+div.className="rifah-cart-item";
+
+div.innerHTML=
+"<b>"+item.name+"</b><br>"+
+"৳"+item.price+" × "+item.qty+
+" <button data-remove='"+index+"' style='float:right'>Remove</button>";
+
+items.appendChild(div);
+
+});
+
+document.getElementById("rifah-cart-total").textContent=total;
+
+localStorage.setItem("rifahCart",JSON.stringify(cart));
+
+}
+
+document.querySelectorAll("button, a").forEach(function(btn){
+
+if(btn.textContent.trim().toLowerCase().includes("add to cart")){
+
+btn.addEventListener("click",function(e){
+
+e.preventDefault();
+
+let card=btn.closest(".product-card, .product, .card, article, div");
+
+let name="Rifah Product";
+let price=0;
+
+if(card){
+
+let text=card.innerText;
+
+let lines=text.split("\n").map(x=>x.trim()).filter(Boolean);
+
+if(lines.length>0) name=lines[0];
+
+let match=text.match(/৳\s*([0-9,]+)/);
+
+if(match) price=parseInt(match[1].replace(/,/g,""));
+
+}
+
+let existing=cart.find(x=>x.name===name);
+
+if(existing){
+existing.qty++;
+}else{
+cart.push({
+name:name,
+price:price,
+qty:1
+});
+}
+
+updateCart();
+
+alert(name+" added to cart!");
+
+});
+
+}
+
+});
+
+document.getElementById("rifah-cart-box").onclick=function(){
+
+let panel=document.getElementById("rifah-cart-panel");
+
+panel.style.display =
+panel.style.display==="block" ? "none" : "block";
+
+};
+
+document.getElementById("rifah-cart-items").addEventListener("click",function(e){
+
+if(e.target.dataset.remove){
+
+cart.splice(parseInt(e.target.dataset.remove),1);
+
+updateCart();
+
+}
+
+});
+
+document.getElementById("rifah-checkout").onclick=function(){
+
+if(cart.length===0){
+alert("Your cart is empty.");
+return;
+}
+
+alert("Checkout system will be connected next.");
+
+};
+
+updateCart();
+
+})();
+</script>
 </body>
 </html>
