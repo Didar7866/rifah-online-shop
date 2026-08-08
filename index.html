@@ -1203,7 +1203,27 @@ alert("Your cart is empty.");
 return;
 }
 
-alert("Checkout system will be connected next.");
+const customerName = prompt("আপনার নাম লিখুন:");
+if (!customerName) return;
+
+const phone = prompt("আপনার মোবাইল নম্বর লিখুন:");
+if (!phone) return;
+
+const address = prompt("আপনার সম্পূর্ণ ঠিকানা লিখুন:");
+if (!address) return;
+
+const payment = prompt(
+  "Payment Method লিখুন:\n1. Cash on Delivery\n2. bKash\n3. Nagad"
+);
+
+alert(
+  "Order Confirmed!\n\n" +
+  "Customer: " + customerName + "\n" +
+  "Phone: " + phone + "\n" +
+  "Address: " + address + "\n" +
+  "Payment: " + payment + "\n\n" +
+  "আপনার অর্ডার গ্রহণ করা হয়েছে।"
+);
 
 };
 
