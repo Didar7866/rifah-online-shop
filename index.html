@@ -1196,34 +1196,295 @@ updateCart();
 
 });
 
-document.getElementById("rifah-checkout").onclick=function(){
+const oldCheckout = document.getElementById("rifah-checkout-box");
+if (oldCheckout) oldCheckout.remove();
 
-if(cart.length===0){
-alert("Your cart is empty.");
-return;
-}
+document.body.insertAdjacentHTML("beforeend", `
+<div id="rifah-checkout-box" style="
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.55);
+z-index:9999;
+overflow-y:auto;
+padding:20px 12px;
+font-family:Arial,sans-serif;
+">
 
-const customerName = prompt("আপনার নাম লিখুন:");
-if (!customerName) return;
+<div style="
+max-width:520px;
+margin:20px auto;
+background:#fff;
+border-radius:20px;
+padding:22px;
+box-shadow:0 10px 40px rgba(0,0,0,.25);
+">
 
-const phone = prompt("আপনার মোবাইল নম্বর লিখুন:");
-if (!phone) return;
+<div style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+">
 
-const address = prompt("আপনার সম্পূর্ণ ঠিকানা লিখুন:");
-if (!address) return;
+<h2 style="margin:0;color:#42145F;">
+Checkout
+</h2>
 
-const payment = prompt(
-  "Payment Method লিখুন:\n1. Cash on Delivery\n2. bKash\n3. Nagad"
-);
+<button id="closeCheckout" style="
+border:0;
+background:#f1f1f1;
+border-radius:50%;
+width:38px;
+height:38px;
+font-size:22px;
+">
+×
+</button>
+
+</div>
+
+<h3 style="color:#42145F;margin-bottom:12px;">
+Customer Information
+</h3>
+
+<div style="
+border:1px solid #ddd;
+border-radius:14px;
+padding:15px;
+">
+
+<input
+id="customerName"
+type="text"
+placeholder="আপনার নাম"
+style="
+width:100%;
+padding:14px;
+margin-bottom:12px;
+border:1px solid #ddd;
+border-radius:10px;
+box-sizing:border-box;
+font-size:16px;
+">
+
+<input
+id="customerPhone"
+type="tel"
+placeholder="মোবাইল নম্বর"
+style="
+width:100%;
+padding:14px;
+margin-bottom:12px;
+border:1px solid #ddd;
+border-radius:10px;
+box-sizing:border-box;
+font-size:16px;
+">
+
+<textarea
+id="customerAddress"
+placeholder="সম্পূর্ণ ঠিকানা"
+style="
+width:100%;
+height:90px;
+padding:14px;
+border:1px solid #ddd;
+border-radius:10px;
+box-sizing:border-box;
+font-size:16px;
+resize:none;
+"></textarea>
+
+</div>
+
+<h3 style="color:#42145F;margin:22px 0 12px;">
+Payment Method
+</h3>
+
+<button id="paymentButton" style="
+width:100%;
+padding:15px;
+background:#42145F;
+color:white;
+border:0;
+border-radius:12px;
+font-size:17px;
+font-weight:bold;
+text-align:left;
+">
+💳 Select Payment Method
+</button>
+
+<div id="paymentOptions" style="
+display:none;
+margin-top:10px;
+border:1px solid #ddd;
+border-radius:12px;
+overflow:hidden;
+">
+
+<button class="paymentOption" data-payment="Cash on Delivery">
+🏠 Cash on Delivery
+</button>
+
+<button class="paymentOption" data-payment="bKash">
+🟣 bKash
+</button>
+
+<button class="paymentOption" data-payment="Nagad">
+🟠 Nagad
+</button>
+
+<button class="paymentOption" data-payment="Rocket">
+🔵 Rocket
+</button>
+
+<button class="paymentOption" data-payment="Visa Card">
+💳 Visa Card
+</button>
+
+<button class="paymentOption" data-payment="Mastercard">
+💳 Mastercard
+</button>
+
+<button class="paymentOption" data-payment="American Express">
+💳 American Express
+</button>
+
+<button class="paymentOption" data-payment="International Card">
+🌐 International Card
+</button>
+
+</div>
+
+<div id="selectedPayment" style="
+margin-top:12px;
+padding:12px;
+background:#f7f1fa;
+border-radius:10px;
+display:none;
+color:#42145F;
+font-weight:bold;
+">
+</div>
+
+<button id="placeOrderButton" style="
+width:100%;
+margin-top:22px;
+padding:16px;
+background:#b00068;
+color:white;
+border:0;
+border-radius:12px;
+font-size:18px;
+font-weight:bold;
+">
+Place Order
+</button>
+
+</div>
+</div>
+`);
+
+const checkoutBox =
+document.getElementById("rifah-checkout-box");
+
+const paymentButton =
+document.getElementById("paymentButton");
+
+const paymentOptions =
+document.getElementById("paymentOptions");
+
+const selectedPayment =
+document.getElementById("selectedPayment");
+
+document.getElementById("closeCheckout").onclick = () => {
+checkoutBox.remove();
+};
+
+paymentButton.onclick = () => {
+
+paymentOptions.style.display =
+paymentOptions.style.display === "none"
+? "block"
+: "none";
+
+};
+
+document.querySelectorAll(".paymentOption").forEach(option => {
+
+option.style.width = "100%";
+option.style.padding = "14px";
+option.style.border = "0";
+option.style.borderBottom = "1px solid #eee";
+option.style.background = "#fff";
+option.style.textAlign = "left";
+option.style.fontSize = "16px";
+
+option.onclick = () => {
+
+const method = option.dataset.payment;
+
+paymentButton.innerHTML = "💳 " + method;
+
+selectedPayment.innerHTML =
+"Selected: " + method;
+
+selectedPayment.style.display = "block";
+
+paymentOptions.style.display = "none";
+
+};
+
+});
+
+document.getElementById("placeOrderButton").onclick = () => {
+
+const name =
+document.getElementById("customerName").value.trim();
+
+const phone =
+document.getElementById("customerPhone").value.trim();
+
+const address =
+document.getElementById("customerAddress").value.trim();
+
+const payment =
+selectedPayment.textContent
+.replace("Selected: ","")
+.trim();
+
+if (!name || !phone || !address) {
 
 alert(
-  "Order Confirmed!\n\n" +
-  "Customer: " + customerName + "\n" +
-  "Phone: " + phone + "\n" +
-  "Address: " + address + "\n" +
-  "Payment: " + payment + "\n\n" +
-  "আপনার অর্ডার গ্রহণ করা হয়েছে।"
+"দয়া করে নাম, মোবাইল নম্বর ও সম্পূর্ণ ঠিকানা পূরণ করুন।"
 );
+
+return;
+
+}
+
+if (!payment) {
+
+alert(
+"দয়া করে একটি Payment Method নির্বাচন করুন।"
+);
+
+return;
+
+}
+
+alert(
+"Order Confirmed!\n\n" +
+"নাম: " + name + "\n" +
+"মোবাইল: " + phone + "\n" +
+"ঠিকানা: " + address + "\n" +
+"Payment: " + payment
+);
+
+checkoutBox.remove();
+
+};
 
 };
 
