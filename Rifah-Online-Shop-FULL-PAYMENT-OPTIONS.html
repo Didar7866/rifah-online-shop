@@ -1,0 +1,1824 @@
+<!DOCTYPE html>
+<!-- Rifah Online Shop: single-file storefront + cart + checkout + delivery + payment UI -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Rifah Online Shop | Shop Everything You Love</title>
+
+<meta name="description" content="Rifah Online Shop - Fashion, Kids, Electronics, Toys and more.">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap');
+
+:root{
+  --primary:#42145F;
+  --secondary:#6B2589;
+  --accent:#C72C8A;
+  --gold:#D6A84F;
+  --bg:#FAF9F7;
+  --white:#FFFFFF;
+  --text:#18151C;
+  --muted:#77717C;
+  --border:#EDE7EF;
+  --shadow:0 8px 30px rgba(66,20,95,.08);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Inter,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+button{
+  font-family:inherit;
+  cursor:pointer;
+  border:0;
+}
+
+.container{
+  width:min(1200px,92%);
+  margin:auto;
+}
+
+/* TOP BAR */
+.topbar{
+  background:var(--primary);
+  color:white;
+  font-size:13px;
+  padding:9px 0;
+}
+
+.topbar-inner{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.topbar span{
+  opacity:.95;
+}
+
+/* HEADER */
+.header{
+  background:white;
+  border-bottom:1px solid var(--border);
+  position:sticky;
+  top:0;
+  z-index:50;
+}
+
+.header-main{
+  min-height:82px;
+  display:flex;
+  align-items:center;
+  gap:25px;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  min-width:190px;
+}
+
+.logo-mark{
+  width:48px;
+  height:48px;
+  border-radius:14px;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  font-family:Poppins;
+  font-size:26px;
+  font-weight:800;
+}
+
+.logo-text{
+  margin-left:10px;
+  line-height:1;
+}
+
+.logo-text strong{
+  font-family:Poppins;
+  color:var(--primary);
+  font-size:23px;
+}
+
+.logo-text small{
+  display:block;
+  color:var(--accent);
+  font-weight:700;
+  margin-top:5px;
+}
+
+/* SEARCH */
+.search{
+  flex:1;
+  max-width:600px;
+  height:48px;
+  display:flex;
+  border:1px solid var(--border);
+  border-radius:12px;
+  overflow:hidden;
+  background:#fff;
+}
+
+.search select{
+  border:0;
+  padding:0 12px;
+  outline:0;
+  background:white;
+  color:var(--text);
+}
+
+.search input{
+  flex:1;
+  border:0;
+  outline:0;
+  padding:0 10px;
+  font-size:14px;
+}
+
+.search button{
+  width:52px;
+  background:var(--accent);
+  color:white;
+  font-size:19px;
+}
+
+/* HEADER ACTIONS */
+.actions{
+  display:flex;
+  gap:18px;
+  align-items:center;
+}
+
+.action{
+  text-align:center;
+  font-size:12px;
+  color:var(--text);
+  position:relative;
+}
+
+.action-icon{
+  font-size:21px;
+  display:block;
+  margin-bottom:3px;
+}
+
+.badge{
+  position:absolute;
+  top:-5px;
+  right:-8px;
+  width:18px;
+  height:18px;
+  background:var(--accent);
+  color:white;
+  border-radius:50%;
+  font-size:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* NAV */
+.nav{
+  background:var(--primary);
+  color:white;
+}
+
+.nav-inner{
+  display:flex;
+  align-items:center;
+  gap:30px;
+  min-height:47px;
+}
+
+.nav a{
+  font-size:14px;
+  font-weight:600;
+}
+
+.category-btn{
+  background:var(--secondary);
+  padding:14px 20px;
+  font-weight:700;
+}
+
+/* HERO */
+.hero{
+  padding:28px 0;
+}
+
+.hero-box{
+  min-height:410px;
+  border-radius:22px;
+  overflow:hidden;
+  background:
+  radial-gradient(circle at 85% 25%,rgba(199,44,138,.25),transparent 25%),
+  linear-gradient(115deg,#f5e8f8,#fff7fb);
+  display:flex;
+  align-items:center;
+  position:relative;
+}
+
+.hero-content{
+  width:52%;
+  padding:55px;
+}
+
+.hero-label{
+  color:var(--accent);
+  font-weight:800;
+  font-size:14px;
+  margin-bottom:12px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+
+.hero h1{
+  font-family:Poppins;
+  color:var(--primary);
+  font-size:48px;
+  line-height:1.1;
+  margin-bottom:15px;
+}
+
+.hero p{
+  color:var(--muted);
+  line-height:1.7;
+  margin-bottom:25px;
+}
+
+.primary-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:var(--primary);
+  color:white;
+  padding:14px 23px;
+  border-radius:10px;
+  font-weight:700;
+}
+
+.primary-btn:hover{
+  background:var(--accent);
+}
+
+.hero-art{
+  flex:1;
+  height:100%;
+  min-height:410px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.hero-circle{
+  width:280px;
+  height:280px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:white;
+  font-family:Poppins;
+  font-size:80px;
+  font-weight:800;
+  box-shadow:0 25px 60px rgba(66,20,95,.25);
+}
+
+/* SECTION */
+.section{
+  padding:35px 0;
+}
+
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.section-head h2{
+  font-family:Poppins;
+  color:var(--primary);
+  font-size:25px;
+}
+
+.view{
+  color:var(--accent);
+  font-weight:700;
+  font-size:14px;
+}
+
+/* CATEGORIES */
+.categories{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:14px;
+}
+
+.category{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px 10px;
+  text-align:center;
+  transition:.2s;
+}
+
+.category:hover{
+  transform:translateY(-4px);
+  box-shadow:var(--shadow);
+}
+
+.cat-icon{
+  width:60px;
+  height:60px;
+  margin:auto auto 10px;
+  border-radius:50%;
+  background:#f5eaf8;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+}
+
+.category strong{
+  font-size:13px;
+}
+
+/* PRODUCTS */
+.products{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:16px;
+}
+
+.product{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:16px;
+  overflow:hidden;
+  transition:.2s;
+}
+
+.product:hover{
+  transform:translateY(-4px);
+  box-shadow:var(--shadow);
+}
+
+.product-image{
+  height:210px;
+  background:linear-gradient(145deg,#f4e9f7,#fff);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:70px;
+  position:relative;
+}
+
+.sale{
+  position:absolute;
+  top:10px;
+  left:10px;
+  background:var(--accent);
+  color:white;
+  padding:5px 8px;
+  border-radius:6px;
+  font-size:11px;
+  font-weight:700;
+}
+
+.product-info{
+  padding:14px;
+}
+
+.product-name{
+  font-weight:600;
+  font-size:14px;
+  min-height:38px;
+}
+
+.rating{
+  color:#E0A72E;
+  font-size:13px;
+  margin:7px 0;
+}
+
+.price{
+  font-family:Poppins;
+  color:var(--primary);
+  font-weight:800;
+  font-size:18px;
+}
+
+.old-price{
+  color:#aaa;
+  text-decoration:line-through;
+  font-size:12px;
+  margin-left:5px;
+}
+
+.add{
+  width:100%;
+  margin-top:10px;
+  padding:10px;
+  background:var(--accent);
+  color:white;
+  border-radius:8px;
+  font-weight:700;
+}
+
+/* PROMO */
+.promo-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+
+.promo{
+  border-radius:18px;
+  padding:28px;
+  min-height:150px;
+  background:linear-gradient(135deg,#f3e6f8,#fff);
+}
+
+.promo:nth-child(2){
+  background:linear-gradient(135deg,#fff0f7,#fff);
+}
+
+.promo h3{
+  font-family:Poppins;
+  color:var(--primary);
+  margin-bottom:7px;
+}
+
+.promo a{
+  display:inline-block;
+  margin-top:15px;
+  color:var(--accent);
+  font-weight:700;
+  font-size:13px;
+}
+
+/* TRUST */
+.trust{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:25px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+}
+
+.trust-item{
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+
+.trust-icon{
+  width:45px;
+  height:45px;
+  background:#f4eaf7;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+}
+
+.trust strong{
+  display:block;
+  font-size:13px;
+}
+
+.trust small{
+  color:var(--muted);
+  font-size:11px;
+}
+
+/* FOOTER */
+footer{
+  margin-top:45px;
+  background:#24102f;
+  color:#eee;
+}
+
+.footer{
+  padding:45px 0 25px;
+  display:grid;
+  grid-template-columns:1.5fr 1fr 1fr 1fr;
+  gap:40px;
+}
+
+.footer h3{
+  font-family:Poppins;
+  margin-bottom:15px;
+}
+
+.footer p,.footer a{
+  display:block;
+  color:#cfc5d3;
+  font-size:13px;
+  line-height:2;
+}
+
+.copyright{
+  border-top:1px solid #432d4e;
+  padding:18px 0;
+  text-align:center;
+  color:#aaa;
+  font-size:12px;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+
+  .header-main{
+    flex-wrap:wrap;
+    padding:12px 0;
+    gap:12px;
+  }
+
+  .logo{
+    min-width:auto;
+  }
+
+  .search{
+    order:3;
+    flex-basis:100%;
+    max-width:none;
+  }
+
+  .actions{
+    margin-left:auto;
+    gap:12px;
+  }
+
+  .nav-inner{
+    overflow-x:auto;
+    gap:20px;
+    white-space:nowrap;
+  }
+
+  .hero-content{
+    width:100%;
+    padding:35px 25px;
+  }
+
+  .hero h1{
+    font-size:36px;
+  }
+
+  .hero-art{
+    display:none;
+  }
+
+  .categories{
+    grid-template-columns:repeat(4,1fr);
+  }
+
+  .products{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .promo-grid{
+    grid-template-columns:1fr;
+  }
+
+  .trust{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .footer{
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+@media(max-width:500px){
+
+  .topbar-inner{
+    justify-content:center;
+    text-align:center;
+  }
+
+  .topbar-inner span:last-child{
+    display:none;
+  }
+
+  .logo-text strong{
+    font-size:20px;
+  }
+
+  .logo-mark{
+    width:42px;
+    height:42px;
+  }
+
+  .actions .action span:last-child{
+    display:none;
+  }
+
+  .categories{
+    grid-template-columns:repeat(4,1fr);
+    gap:8px;
+  }
+
+  .category{
+    padding:12px 5px;
+  }
+
+  .cat-icon{
+    width:45px;
+    height:45px;
+    font-size:21px;
+  }
+
+  .category strong{
+    font-size:10px;
+  }
+
+  .products{
+    gap:10px;
+  }
+
+  .product-image{
+    height:150px;
+    font-size:50px;
+  }
+
+  .product-info{
+    padding:10px;
+  }
+
+  .product-name{
+    font-size:12px;
+  }
+
+  .price{
+    font-size:15px;
+  }
+
+  .footer{
+    grid-template-columns:1fr;
+  }
+
+  .trust{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+  <div class="container topbar-inner">
+    <span>🚚 Fast & Reliable Delivery Across Bangladesh</span>
+    <span>✨ Special Offers Available Today</span>
+  </div>
+</div>
+
+<header class="header">
+  <div class="container header-main">
+
+<a href="#" class="logo">
+    <img src="logo.png" alt="Rifah Online Shop" style="width:180px;height:auto;display:block;">
+</a>
+
+    <div class="search">
+      <select>
+        <option>All Categories</option>
+        <option>Women's Fashion</option>
+        <option>Men's Fashion</option>
+        <option>Kids & Baby</option>
+        <option>Electronics</option>
+        <option>Toys</option>
+      </select>
+      <input type="search" placeholder="Search for products...">
+      <button>⌕</button>
+    </div>
+
+    <div class="actions">
+
+      <a class="action" href="#">
+        <span class="action-icon">👤</span>
+        <span>Account</span>
+      </a>
+
+      <a class="action" href="#">
+        <span class="action-icon">♡</span>
+        <span>Wishlist</span>
+      </a>
+
+      <a class="action" href="#">
+        <span class="action-icon">🛒</span>
+        <span>Cart</span>
+        <b class="badge">0</b>
+      </a>
+
+    </div>
+  </div>
+</header>
+
+<nav class="nav">
+  <div class="container nav-inner">
+    <a class="category-btn" href="#">☰ Browse Categories</a>
+    <a href="#">Home</a>
+    <a href="#">Shop</a>
+    <a href="#">Hot Deals</a>
+    <a href="#">New Arrivals</a>
+    <a href="#">About Us</a>
+    <a href="#">Contact</a>
+  </div>
+</nav>
+
+<main>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-box">
+
+      <div class="hero-content">
+        <div class="hero-label">Biggest Sale of the Year</div>
+
+        <h1>Everything You Love, In One Place.</h1>
+
+        <p>
+          Discover fashion, kids products, electronics, toys
+          and more at Rifah Online Shop.
+        </p>
+
+        <a href="#products" class="primary-btn">
+          Shop Now →
+        </a>
+      </div>
+
+      <div class="hero-art">
+        <div class="hero-circle">R</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+
+    <div class="section-head">
+      <h2>Shop by Category</h2>
+      <a href="#" class="view">View All →</a>
+    </div>
+
+    <div class="categories">
+
+      <a class="category" href="#">
+        <div class="cat-icon">👗</div>
+        <strong>Women's Fashion</strong>
+      </a>
+
+      <a class="category" href="#">
+        <div class="cat-icon">👔</div>
+        <strong>Men's Fashion</strong>
+      </a>
+
+      <a class="category" href="#">
+        <div class="cat-icon">👶</div>
+        <strong>Kids & Baby</strong>
+      </a>
+
+      <a class="category" href="#">
+        <div class="cat-icon">⚡</div>
+        <strong>Electronics</strong>
+      </a>
+
+      <a class="category" href="#">
+        <div class="cat-icon">🧸</div>
+        <strong>Toys</strong>
+      </a>
+
+      <a class="category" href="#">
+        <div class="cat-icon">🏠</div>
+        <strong>Home</strong>
+      </a>
+
+      <a class="category" href="#">
+        <div class="cat-icon">＋</div>
+        <strong>More</strong>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<section class="section" id="products">
+  <div class="container">
+
+    <div class="section-head">
+      <h2>Best Selling Products</h2>
+      <a href="#" class="view">View All →</a>
+    </div>
+
+    <div class="products">
+
+      <article class="product">
+        <div class="product-image">
+          <span class="sale">-20%</span>👗
+        </div>
+        <div class="product-info">
+          <div class="product-name">Premium Women's Dress</div>
+          <div class="rating">★★★★★ (12)</div>
+          <span class="price">৳1,250</span>
+          <span class="old-price">৳1,550</span>
+          <button class="add">Add to Cart</button>
+        </div>
+      </article>
+
+      <article class="product">
+        <div class="product-image">
+          <span class="sale">NEW</span>👔
+        </div>
+        <div class="product-info">
+          <div class="product-name">Men's Premium Casual Shirt</div>
+          <div class="rating">★★★★★ (8)</div>
+          <span class="price">৳880</span>
+          <span class="old-price">৳1,100</span>
+          <button class="add">Add to Cart</button>
+        </div>
+      </article>
+
+      <article class="product">
+        <div class="product-image">👧</div>
+        <div class="product-info">
+          <div class="product-name">Kids Party Dress</div>
+          <div class="rating">★★★★★ (15)</div>
+          <span class="price">৳750</span>
+          <span class="old-price">৳950</span>
+          <button class="add">Add to Cart</button>
+        </div>
+      </article>
+
+      <article class="product">
+        <div class="product-image">
+          <span class="sale">-15%</span>💡
+        </div>
+        <div class="product-info">
+          <div class="product-name">LED Smart Bulb</div>
+          <div class="rating">★★★★☆ (9)</div>
+          <span class="price">৳350</span>
+          <span class="old-price">৳420</span>
+          <button class="add">Add to Cart</button>
+        </div>
+      </article>
+
+      <article class="product">
+        <div class="product-image">🧸</div>
+        <div class="product-info">
+          <div class="product-name">Soft Teddy Bear</div>
+          <div class="rating">★★★★★ (20)</div>
+          <span class="price">৳420</span>
+          <span class="old-price">৳550</span>
+          <button class="add">Add to Cart</button>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+
+    <div class="promo-grid">
+
+      <div class="promo">
+        <h3>Combo Offers</h3>
+        <p>Save more when you buy together.</p>
+        <a href="#">Shop Offers →</a>
+      </div>
+
+      <div class="promo">
+        <h3>Deals of the Day</h3>
+        <p>Limited-time discounts on selected products.</p>
+        <a href="#">View Deals →</a>
+      </div>
+
+      <div class="promo">
+        <h3>New Arrivals</h3>
+        <p>Discover the latest products.</p>
+        <a href="#">Explore Now →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+
+    <div class="section-head">
+      <h2>Why Choose Rifah Online Shop?</h2>
+    </div>
+
+    <div class="trust">
+
+      <div class="trust-item">
+        <div class="trust-icon">🛡️</div>
+        <div>
+          <strong>Quality Products</strong>
+          <small>Selected with care</small>
+        </div>
+      </div>
+
+      <div class="trust-item">
+        <div class="trust-icon">🚚</div>
+        <div>
+          <strong>Fast Delivery</strong>
+          <small>Reliable delivery service</small>
+        </div>
+      </div>
+
+      <div class="trust-item">
+        <div class="trust-icon">💳</div>
+        <div>
+          <strong>Secure Payment</strong>
+          <small>COD & Online Payment</small>
+        </div>
+      </div>
+
+      <div class="trust-item">
+        <div class="trust-icon">🎧</div>
+        <div>
+          <strong>Customer Support</strong>
+          <small>We're here to help</small>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container footer">
+
+    <div>
+      <h3>Rifah Online Shop</h3>
+      <p>
+        Your trusted online shopping destination for
+        fashion, lifestyle, electronics and more.
+      </p>
+    </div>
+
+    <div>
+      <h3>Customer Service</h3>
+      <a href="#">Contact Us</a>
+      <a href="#">Shipping Policy</a>
+      <a href="#">Return Policy</a>
+      <a href="#">Terms & Conditions</a>
+    </div>
+
+    <div>
+      <h3>My Account</h3>
+      <a href="#">My Orders</a>
+      <a href="#">Wishlist</a>
+      <a href="#">Track Order</a>
+      <a href="#">Login / Register</a>
+    </div>
+
+    <div>
+      <h3>Payment</h3>
+      <p>Cash on Delivery</p>
+      <p>Online Payment</p>
+      <p>bKash • Nagad • Card</p>
+    </div>
+
+  </div>
+
+  <div class="copyright">
+    © 2026 Rifah Online Shop. All Rights Reserved.
+  </div>
+</footer>
+<style>
+#rifah-cart-box{
+position:fixed;
+right:15px;
+bottom:15px;
+z-index:9999;
+background:#42145F;
+color:white;
+padding:12px 18px;
+border-radius:30px;
+font-weight:bold;
+box-shadow:0 5px 20px rgba(0,0,0,.25);
+cursor:pointer;
+}
+#rifah-cart-panel{
+display:none;
+position:fixed;
+right:15px;
+bottom:75px;
+width:320px;
+max-width:90%;
+background:white;
+color:#222;
+z-index:10000;
+border-radius:15px;
+padding:18px;
+box-shadow:0 5px 30px rgba(0,0,0,.3);
+}
+#rifah-cart-panel h3{
+margin-top:0;
+color:#42145F;
+}
+.rifah-cart-item{
+border-bottom:1px solid #ddd;
+padding:10px 0;
+}
+.rifah-cart-total{
+font-weight:bold;
+font-size:18px;
+margin-top:15px;
+}
+#rifah-checkout{
+width:100%;
+margin-top:15px;
+padding:12px;
+border:0;
+border-radius:8px;
+background:#C72C8A;
+color:white;
+font-weight:bold;
+}
+
+/* Enhanced checkout */
+.rifah-checkout-summary{
+  background:#faf7fc;border:1px solid #eadff0;border-radius:14px;
+  padding:15px;margin:18px 0;
+}
+.rifah-summary-row{
+  display:flex;justify-content:space-between;gap:12px;
+  padding:6px 0;font-size:14px;color:#555;
+}
+.rifah-summary-row.total{
+  border-top:1px solid #ddd;margin-top:8px;padding-top:12px;
+  font-size:18px;font-weight:800;color:#42145F;
+}
+.rifah-plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.rifah-plan{
+  border:1px solid #ddd;background:#fff;border-radius:10px;
+  padding:11px 6px;text-align:center;font-size:13px;font-weight:700;
+}
+.rifah-plan.active{border:2px solid #42145F;background:#f7f1fa;color:#42145F}
+.rifah-coupon{display:flex;gap:8px;margin-top:10px}
+.rifah-coupon input{flex:1;padding:12px;border:1px solid #ddd;border-radius:9px}
+.rifah-coupon button{padding:12px 15px;border:0;border-radius:9px;background:#42145F;color:#fff;font-weight:700}
+.rifah-note{
+  width:100%;min-height:75px;padding:12px;border:1px solid #ddd;
+  border-radius:10px;box-sizing:border-box;font-size:14px;resize:vertical;
+}
+@media(max-width:500px){.rifah-plan-grid{grid-template-columns:1fr}.rifah-coupon{flex-direction:column}}
+
+</style>
+
+<div id="rifah-cart-box">🛒 Cart (<span id="rifah-cart-count">0</span>)</div>
+
+<div id="rifah-cart-panel">
+<h3>Your Cart</h3>
+<div id="rifah-cart-items">Your cart is empty.</div>
+<div class="rifah-cart-total">
+Total: ৳<span id="rifah-cart-total">0</span>
+</div>
+<button id="rifah-checkout">Checkout</button>
+</div>
+
+<script>
+(function(){
+
+  let cart = JSON.parse(localStorage.getItem("rifahCart") || "[]");
+
+  function updateCart(){
+    const count = cart.reduce((sum,item) => sum + item.qty, 0);
+    document.getElementById("rifah-cart-count").textContent = count;
+
+    const items = document.getElementById("rifah-cart-items");
+    let total = 0;
+
+    if(cart.length === 0){
+      items.innerHTML = "Your cart is empty.";
+      document.getElementById("rifah-cart-total").textContent = "0";
+      localStorage.setItem("rifahCart", JSON.stringify(cart));
+      return;
+    }
+
+    items.innerHTML = "";
+
+    cart.forEach((item,index) => {
+      total += item.price * item.qty;
+
+      const div = document.createElement("div");
+      div.className = "rifah-cart-item";
+      div.innerHTML =
+        "<b>" + item.name + "</b><br>" +
+        "৳" + item.price.toLocaleString() + " × " + item.qty +
+        " <button data-remove='" + index + "' style='float:right'>Remove</button>";
+
+      items.appendChild(div);
+    });
+
+    document.getElementById("rifah-cart-total").textContent = total.toLocaleString();
+    localStorage.setItem("rifahCart", JSON.stringify(cart));
+  }
+
+  // Add to Cart
+  document.querySelectorAll(".add").forEach(function(btn){
+    btn.addEventListener("click", function(e){
+      e.preventDefault();
+
+      const card = btn.closest(".product");
+      if(!card) return;
+
+      const nameEl = card.querySelector(".product-name");
+      const priceEl = card.querySelector(".price");
+
+      const name = nameEl ? nameEl.textContent.trim() : "Rifah Product";
+      const priceText = priceEl ? priceEl.textContent.replace(/[^\d]/g,"") : "0";
+      const price = parseInt(priceText, 10) || 0;
+
+      const existing = cart.find(item => item.name === name);
+
+      if(existing){
+        existing.qty += 1;
+      }else{
+        cart.push({
+          name: name,
+          price: price,
+          qty: 1
+        });
+      }
+
+      updateCart();
+      alert(name + " added to cart!");
+    });
+  });
+
+  // Open/close cart
+  document.getElementById("rifah-cart-box").onclick = function(){
+    const panel = document.getElementById("rifah-cart-panel");
+    panel.style.display = panel.style.display === "block" ? "none" : "block";
+  };
+
+  // Remove item
+  document.getElementById("rifah-cart-items").addEventListener("click", function(e){
+    if(e.target.dataset.remove !== undefined){
+      cart.splice(parseInt(e.target.dataset.remove,10), 1);
+      updateCart();
+    }
+  });
+
+  // Checkout modal
+  document.body.insertAdjacentHTML("beforeend", `
+    <div id="rifah-checkout-box" style="
+      display:none;
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.55);
+      z-index:99999;
+      overflow-y:auto;
+      padding:20px 12px;
+      font-family:Arial,sans-serif;
+    ">
+      <div style="
+        max-width:520px;
+        margin:20px auto;
+        background:#fff;
+        border-radius:20px;
+        padding:22px;
+        box-shadow:0 10px 40px rgba(0,0,0,.25);
+      ">
+        <div style="
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+          margin-bottom:20px;
+        ">
+          <h2 style="margin:0;color:#42145F;">Checkout</h2>
+
+          <button id="closeCheckout" type="button" style="
+            border:0;
+            background:#f1f1f1;
+            border-radius:50%;
+            width:38px;
+            height:38px;
+            font-size:22px;
+          ">×</button>
+        </div>
+
+        <h3 style="color:#42145F;margin-bottom:12px;">Customer Information</h3>
+
+        <div style="
+          border:1px solid #ddd;
+          border-radius:14px;
+          padding:15px;
+        ">
+          <input id="customerName" type="text" placeholder="আপনার নাম" style="
+            width:100%;
+            padding:14px;
+            margin-bottom:12px;
+            border:1px solid #ddd;
+            border-radius:10px;
+            box-sizing:border-box;
+            font-size:16px;
+          ">
+
+          <input id="customerEmail" type="email" placeholder="ইমেইল (Optional)" style="
+            width:100%;
+            padding:14px;
+            margin-bottom:12px;
+            border:1px solid #ddd;
+            border-radius:10px;
+            box-sizing:border-box;
+            font-size:16px;
+          ">
+
+          <input id="customerPhone" type="tel" placeholder="মোবাইল নম্বর" style="
+            width:100%;
+            padding:14px;
+            margin-bottom:12px;
+            border:1px solid #ddd;
+            border-radius:10px;
+            box-sizing:border-box;
+            font-size:16px;
+          ">
+
+          <textarea id="customerAddress" placeholder="সম্পূর্ণ ঠিকানা" style="
+            width:100%;
+            height:90px;
+            padding:14px;
+            border:1px solid #ddd;
+            border-radius:10px;
+            box-sizing:border-box;
+            font-size:16px;
+            resize:none;
+          "></textarea>
+        </div>
+
+        
+
+
+<div style="margin:0 0 18px;padding:15px;border:1px solid #eadff0;border-radius:14px;background:#faf7fc;">
+  <h3 style="color:#42145F;margin:0 0 12px;">Delivery Address</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+    <div>
+      <label style="display:block;font-size:13px;font-weight:700;color:#555;margin-bottom:6px;">District</label>
+      <select id="deliveryDistrict" style="width:100%;height:50px;padding:0 12px;border:1px solid #ddd;border-radius:10px;background:#fff;font-size:15px;appearance:auto;">
+        <option value="">Select District</option>
+      </select>
+    </div>
+    <div>
+      <label style="display:block;font-size:13px;font-weight:700;color:#555;margin-bottom:6px;">Thana / Upazila</label>
+      <select id="deliveryThana" disabled style="width:100%;height:50px;padding:0 12px;border:1px solid #ddd;border-radius:10px;background:#fff;font-size:15px;appearance:auto;">
+        <option value="">Select Thana</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div style="margin:0 0 18px;padding:15px;border:1px solid #eadff0;border-radius:14px;background:#faf7fc;">
+  <h3 style="color:#42145F;margin:0 0 8px;">Delivery Charge</h3>
+  <div id="deliveryChargeMessage" style="color:#555;font-size:14px;">District নির্বাচন করলে Delivery Charge অটোমেটিক নির্ধারণ হবে।</div>
+</div>
+
+<div class="rifah-checkout-summary">
+  <h3 style="color:#42145F;margin:0 0 10px;">Order Summary</h3>
+  <div id="checkoutItems"></div>
+  <div class="rifah-summary-row"><span>Subtotal</span><strong>৳<span id="checkoutSubtotal">0</span></strong></div>
+  <div class="rifah-summary-row"><span>Delivery Charge</span><strong>৳<span id="checkoutDelivery">0</span></strong></div>
+  <div class="rifah-summary-row"><span>Discount</span><strong>− ৳<span id="checkoutDiscount">0</span></strong></div>
+  <div class="rifah-summary-row total"><span>Total</span><strong>৳<span id="checkoutTotal">0</span></strong></div>
+
+  <div style="margin-top:15px;font-weight:700;color:#42145F;">Payment Plan <span style="font-size:12px;color:#777;font-weight:500;">(Choose how much to pay now)</span></div>
+  <div class="rifah-plan-grid" style="grid-template-columns:repeat(2,1fr);">
+    <button type="button" class="rifah-plan" data-plan="delivery">🚚 শুধু Delivery Charge</button>
+    <button type="button" class="rifah-plan" data-plan="0">🏠 No Advance / COD</button>
+    <button type="button" class="rifah-plan" data-plan="50">💰 50% Advance</button>
+    <button type="button" class="rifah-plan active" data-plan="100">💳 100% Full Payment</button>
+  </div>
+  <div style="margin-top:9px;font-size:12px;color:#666;">
+    Delivery Charge = শুধু ৳80/৳120 আগে। No Advance/COD = আগে কোনো টাকা নয়।
+  </div>
+  <div id="paymentPlanAmount" style="margin-top:10px;padding:11px;border-radius:10px;background:#fff;border:1px solid #e7d9ee;color:#42145F;font-size:14px;">
+    Pay Now: <strong>৳0</strong> · Remaining: <strong>৳0</strong>
+  </div>
+
+  <div style="margin-top:16px;font-weight:700;color:#42145F;">Coupon / Gift Voucher</div>
+  <div class="rifah-coupon">
+    <input id="couponCode" type="text" placeholder="Coupon code">
+    <button id="applyCoupon" type="button">Apply</button>
+  </div>
+
+  <div style="margin-top:16px;font-weight:700;color:#42145F;">Special Notes</div>
+  <textarea id="orderNote" class="rifah-note" placeholder="কোনো বিশেষ নির্দেশনা থাকলে লিখুন..."></textarea>
+</div>
+
+<h3 style="color:#42145F;margin:22px 0 12px;">Payment Method</h3>
+
+        <button id="paymentButton" type="button" style="
+          width:100%;
+          padding:15px;
+          background:#42145F;
+          color:white;
+          border:0;
+          border-radius:12px;
+          font-size:17px;
+          font-weight:bold;
+          text-align:left;
+        ">💳 Select Payment Method</button>
+
+        <div id="paymentOptions" style="
+          display:none;
+          margin-top:10px;
+          border:1px solid #ddd;
+          border-radius:12px;
+          overflow:hidden;
+        ">
+          <button type="button" class="paymentOption" data-payment="Cash on Delivery">🏠 Cash on Delivery</button>
+          <button type="button" class="paymentOption" data-payment="Online Payment">💳 Online Payment</button>
+          <button type="button" class="paymentOption" data-payment="bKash">🟣 bKash</button>
+          <button type="button" class="paymentOption" data-payment="Nagad">🟠 Nagad</button>
+          <button type="button" class="paymentOption" data-payment="Rocket">🔵 Rocket</button>
+          <button type="button" class="paymentOption" data-payment="Visa Card">💳 Visa Card</button>
+          <button type="button" class="paymentOption" data-payment="Mastercard">💳 Mastercard</button>
+          <button type="button" class="paymentOption" data-payment="American Express">💳 American Express</button>
+          <button type="button" class="paymentOption" data-payment="International Card">🌐 International Card</button>
+        </div>
+
+        <div id="paymentDetails" style="display:none;margin-top:12px;padding:14px;background:#faf7fc;border:1px solid #eadff0;border-radius:12px;"></div>
+
+        <div id="selectedPayment" style="
+          margin-top:12px;
+          padding:12px;
+          background:#f7f1fa;
+          border-radius:10px;
+          display:none;
+          color:#42145F;
+          font-weight:bold;
+        "></div>
+
+        <button id="placeOrderButton" type="button" style="
+          width:100%;
+          margin-top:22px;
+          padding:16px;
+          background:#b00068;
+          color:white;
+          border:0;
+          border-radius:12px;
+          font-size:18px;
+          font-weight:bold;
+        ">PLACE ORDER</button>
+      </div>
+    </div>
+  `);
+
+  const checkoutBox = document.getElementById("rifah-checkout-box");
+  const paymentButton = document.getElementById("paymentButton");
+  const paymentOptions = document.getElementById("paymentOptions");
+  const selectedPayment = document.getElementById("selectedPayment");
+
+  // Checkout button
+  document.getElementById("rifah-checkout").onclick = function(){
+    if(cart.length === 0){
+      alert("আপনার Cart খালি। আগে একটি Product Add to Cart করুন।");
+      return;
+    }
+    document.getElementById("rifah-cart-panel").style.display = "none";
+    renderCheckoutSummary();
+    checkoutBox.style.display = "block";
+  };
+
+  // Close checkout
+  document.getElementById("closeCheckout").onclick = function(){
+    checkoutBox.style.display = "none";
+  };
+
+  // Payment menu
+  paymentButton.onclick = function(){
+    paymentOptions.style.display =
+      paymentOptions.style.display === "block" ? "none" : "block";
+  };
+
+
+
+  // Bangladesh District + Thana/Upazila dropdowns
+  const bangladeshDistricts = {"ঢাকা": ["ধামরাই", "দোহার", "কেরানীগঞ্জ", "নবাবগঞ্জ", "সাভার"], "ফরিদপুর": ["আলফাডাঙ্গা", "ভাঙ্গা", "বোয়ালমারী", "চরভদ্রাসন", "ফরিদপুর সদর", "মধুখালী", "নগরকান্দা", "সদরপুর", "সালথা"], "গাজীপুর": ["গাজীপুর সদর", "কালিয়াকৈর", "কালীগঞ্জ", "কাপাসিয়া", "শ্রীপুর"], "গোপালগঞ্জ": ["গোপালগঞ্জ সদর", "কাশিয়ানী", "কোটালীপাড়া", "মুকসুদপুর", "টুঙ্গিপাড়া"], "কিশোরগঞ্জ": ["অষ্টগ্রাম", "বাজিতপুর", "ভৈরব", "হোসেনপুর", "ইটনা", "করিমগঞ্জ", "কটিয়াদী", "কিশোরগঞ্জ সদর", "কুলিয়ারচর", "মিঠামইন", "নিকলী", "পাকুন্দিয়া", "তাড়াইল"], "মাদারীপুর": ["কালকিনি", "মাদারীপুর সদর", "রাজৈর", "শিবচর", "ডাসার"], "মানিকগঞ্জ": ["দৌলতপুর", "ঘিওর", "হরিরামপুর", "মানিকগঞ্জ সদর", "সাটুরিয়া", "শিবালয়", "সিংগাইর"], "মুন্সীগঞ্জ": ["গজারিয়া", "লৌহজং", "মুন্সীগঞ্জ সদর", "সিরাজদিখান", "শ্রীনগর", "টংগীবাড়ী"], "নারায়ণগঞ্জ": ["আড়াইহাজার", "বন্দর", "নারায়ণগঞ্জ সদর", "রূপগঞ্জ", "সোনারগাঁ"], "নরসিংদী": ["বেলাব", "মনোহরদী", "নরসিংদী সদর", "পলাশ", "রায়পুরা", "শিবপুর"], "রাজবাড়ী": ["বালিয়াকান্দি", "কালুখালী", "পাংশা", "রাজবাড়ী সদর", "গোয়ালন্দ"], "শরীয়তপুর": ["ভেদরগঞ্জ", "ডামুড্যা", "গোসাইরহাট", "নড়িয়া", "শরীয়তপুর সদর", "জাজিরা"], "টাঙ্গাইল": ["বাসাইল", "ভূঞাপুর", "দেলদুয়ার", "ধনবাড়ী", "ঘাটাইল", "গোপালপুর", "কালিহাতী", "মধুপুর", "মির্জাপুর", "নাগরপুর", "সখীপুর", "টাঙ্গাইল সদর"], "বাগেরহাট": ["বাগেরহাট সদর", "চিতলমারী", "ফকিরহাট", "কচুয়া", "মোল্লাহাট", "মোংলা", "মোড়েলগঞ্জ", "রামপাল", "শরণখোলা"], "চুয়াডাঙ্গা": ["আলমডাঙ্গা", "চুয়াডাঙ্গা সদর", "দামুড়হুদা", "জীবননগর"], "যশোর": ["অভয়নগর", "বাঘারপাড়া", "চৌগাছা", "ঝিকরগাছা", "কেশবপুর", "মনিরামপুর", "শার্শা", "যশোর সদর"], "ঝিনাইদহ": ["ঝিনাইদহ সদর", "কালীগঞ্জ", "কোটচাঁদপুর", "মহেশপুর", "শৈলকুপা", "হরিণাকুন্ডু"], "খুলনা": ["বটিয়াঘাটা", "দাকোপ", "ডুমুরিয়া", "দিঘলিয়া", "কয়রা", "পাইকগাছা", "ফুলতলা", "রূপসা", "তেরখাদা", "খুলনা সদর"], "কুষ্টিয়া": ["ভেড়ামারা", "দৌলতপুর", "খোকসা", "কুমারখালী", "কুষ্টিয়া সদর", "মিরপুর"], "মাগুরা": ["মাগুরা সদর", "মহম্মদপুর", "শালিখা", "শ্রীপুর"], "মেহেরপুর": ["গাংনী", "মেহেরপুর সদর", "মুজিবনগর"], "নড়াইল": ["কালিয়া", "লোহাগড়া", "নড়াইল সদর"], "সাতক্ষীরা": ["আশাশুনি", "দেবহাটা", "কলারোয়া", "কালিগঞ্জ", "সাতক্ষীরা সদর", "শ্যামনগর", "তালা"], "বরগুনা": ["আমতলী", "বামনা", "বরগুনা সদর", "বেতাগী", "পাথরঘাটা", "তালতলী"], "বরিশাল": ["আগৈলঝাড়া", "বাবুগঞ্জ", "বাকেরগঞ্জ", "বানারীপাড়া", "বরিশাল সদর", "গৌরনদী", "হিজলা", "মেহেন্দিগঞ্জ", "মুলাদী", "উজিরপুর"], "ভোলা": ["ভোলা সদর", "বোরহানউদ্দিন", "চরফ্যাশন", "দৌলতখান", "লালমোহন", "মনপুরা", "তজুমদ্দিন"], "ঝালকাঠি": ["ঝালকাঠি সদর", "কাঁঠালিয়া", "নলছিটি", "রাজাপুর"], "পটুয়াখালী": ["বাউফল", "দশমিনা", "দুমকি", "গলাচিপা", "কলাপাড়া", "মির্জাগঞ্জ", "পটুয়াখালী সদর", "রাঙ্গাবালী"], "পিরোজপুর": ["ভান্ডারিয়া", "কাউখালী", "মঠবাড়িয়া", "নাজিরপুর", "নেছারাবাদ", "পিরোজপুর সদর", "ইন্দুরকানী"], "চট্টগ্রাম": ["আনোয়ারা", "বাঁশখালী", "বন্দর", "বোয়ালখালী", "চন্দনাইশ", "ফটিকছড়ি", "হাটহাজারী", "কর্ণফুলী", "লোহাগাড়া", "মীরসরাই", "পটিয়া", "রাঙ্গুনিয়া", "রাউজান", "সন্দ্বীপ", "সাতকানিয়া", "সীতাকুণ্ড"], "কক্সবাজার": ["চকরিয়া", "কক্সবাজার সদর", "কুতুবদিয়া", "মহেশখালী", "পেকুয়া", "রামু", "টেকনাফ", "উখিয়া", "ঈদগাঁও"], "খাগড়াছড়ি": ["দীঘিনালা", "খাগড়াছড়ি সদর", "লক্ষ্মীছড়ি", "মহালছড়ি", "মানিকছড়ি", "মাটিরাঙ্গা", "পানছড়ি", "রামগড়"], "রাঙ্গামাটি": ["বাঘাইছড়ি", "বরকল", "বেলাইছড়ি", "জুরাছড়ি", "কাপ্তাই", "কাউখালী", "লংগদু", "নানিয়ারচর", "রাজস্থলী", "রাঙ্গামাটি সদর"], "বান্দরবান": ["আলীকদম", "বান্দরবান সদর", "লামা", "নাইক্ষ্যংছড়ি", "রোয়াংছড়ি", "রুমা", "থানচি"], "সিলেট": ["বালাগঞ্জ", "বিয়ানীবাজার", "বিশ্বনাথ", "কোম্পানীগঞ্জ", "ফেঞ্চুগঞ্জ", "গোলাপগঞ্জ", "গোয়াইনঘাট", "জৈন্তাপুর", "কানাইঘাট", "সিলেট সদর", "জকিগঞ্জ", "দক্ষিণ সুরমা", "ওসমানীনগর"], "হবিগঞ্জ": ["আজমিরীগঞ্জ", "বাহুবল", "বানিয়াচং", "চুনারুঘাট", "হবিগঞ্জ সদর", "লাখাই", "মাধবপুর", "নবীগঞ্জ", "শায়েস্তাগঞ্জ"], "মৌলভীবাজার": ["বড়লেখা", "জুড়ী", "কমলগঞ্জ", "কুলাউড়া", "মৌলভীবাজার সদর", "রাজনগর", "শ্রীমঙ্গল"], "সুনামগঞ্জ": ["বিশ্বম্ভরপুর", "ছাতক", "দিরাই", "ধর্মপাশা", "দোয়ারাবাজার", "জামালগঞ্জ", "জগন্নাথপুর", "শান্তিগঞ্জ", "সুনামগঞ্জ সদর", "তাহিরপুর", "মধ্যনগর", "শাল্লা"], "বগুড়া": ["আদমদীঘি", "বগুড়া সদর", "ধুনট", "দুপচাঁচিয়া", "গাবতলী", "কাহালু", "নন্দীগ্রাম", "সারিয়াকান্দি", "শাজাহানপুর", "শেরপুর", "শিবগঞ্জ", "সোনাতলা"], "জয়পুরহাট": ["আক্কেলপুর", "জয়পুরহাট সদর", "কালাই", "ক্ষেতলাল", "পাঁচবিবি"], "নওগাঁ": ["আত্রাই", "বদলগাছী", "ধামইরহাট", "মান্দা", "মহাদেবপুর", "নওগাঁ সদর", "নিয়ামতপুর", "পত্নীতলা", "পোরশা", "রাণীনগর", "সাপাহার"], "নাটোর": ["বাগাতিপাড়া", "বড়াইগ্রাম", "গুরুদাসপুর", "লালপুর", "নাটোর সদর", "সিংড়া", "নলডাঙ্গা"], "চাঁপাইনবাবগঞ্জ": ["ভোলাহাট", "গোমস্তাপুর", "নাচোল", "চাঁপাইনবাবগঞ্জ সদর", "শিবগঞ্জ"], "পাবনা": ["আটঘরিয়া", "বেড়া", "ভাঙ্গুড়া", "চাটমোহর", "ফরিদপুর", "ঈশ্বরদী", "পাবনা সদর", "সাঁথিয়া", "সুজানগর"], "রাজশাহী": ["বাঘা", "বাগমারা", "চারঘাট", "দুর্গাপুর", "গোদাগাড়ী", "মোহনপুর", "পবা", "পুঠিয়া", "তানোর", "রাজশাহী সদর"], "সিরাজগঞ্জ": ["বেলকুচি", "চৌহালী", "কামারখন্দ", "কাজীপুর", "রায়গঞ্জ", "শাহজাদপুর", "সিরাজগঞ্জ সদর", "তাড়াশ", "উল্লাপাড়া"], "দিনাজপুর": ["বিরল", "বীরগঞ্জ", "বিরামপুর", "বোচাগঞ্জ", "চিরিরবন্দর", "দিনাজপুর সদর", "ফুলবাড়ী", "ঘোড়াঘাট", "হাকিমপুর", "কাহারোল", "খানসামা", "নবাবগঞ্জ", "পার্বতীপুর"], "গাইবান্ধা": ["ফুলছড়ি", "গাইবান্ধা সদর", "গোবিন্দগঞ্জ", "পলাশবাড়ী", "সাদুল্লাপুর", "সাঘাটা", "সুন্দরগঞ্জ"], "কুড়িগ্রাম": ["ভুরুঙ্গামারী", "চর রাজিবপুর", "চিলমারী", "ফুলবাড়ী", "কুড়িগ্রাম সদর", "নাগেশ্বরী", "রাজারহাট", "রৌমারী", "উলিপুর"], "লালমনিরহাট": ["আদিতমারী", "হাতীবান্ধা", "কালীগঞ্জ", "লালমনিরহাট সদর", "পাটগ্রাম"], "নীলফামারী": ["ডিমলা", "ডোমার", "জলঢাকা", "কিশোরগঞ্জ", "নীলফামারী সদর", "সৈয়দপুর"], "পঞ্চগড়": ["আটোয়ারী", "বোদা", "দেবীগঞ্জ", "পঞ্চগড় সদর", "তেঁতুলিয়া"], "রংপুর": ["বদরগঞ্জ", "গঙ্গাচড়া", "কাউনিয়া", "মিঠাপুকুর", "পীরগাছা", "পীরগঞ্জ", "রংপুর সদর", "তারাগঞ্জ"], "ঠাকুরগাঁও": ["বালিয়াডাঙ্গী", "হরিপুর", "পীরগঞ্জ", "রাণীশংকৈল", "ঠাকুরগাঁও সদর"], "ময়মনসিংহ": ["ভালুকা", "ধোবাউড়া", "ফুলবাড়ীয়া", "গফরগাঁও", "গৌরীপুর", "হালুয়াঘাট", "ঈশ্বরগঞ্জ", "ময়মনসিংহ সদর", "মুক্তাগাছা", "নান্দাইল", "ফুলপুর", "ত্রিশাল", "তারাকান্দা"], "নেত্রকোণা": ["আটপাড়া", "বারহাট্টা", "দুর্গাপুর", "খালিয়াজুড়ী", "কলমাকান্দা", "কেন্দুয়া", "মদন", "মোহনগঞ্জ", "নেত্রকোণা সদর", "পূর্বধলা"], "শেরপুর": ["ঝিনাইগাতী", "নকলা", "নালিতাবাড়ী", "শেরপুর সদর", "শ্রীবরদী"], "জামালপুর": ["বকশীগঞ্জ", "দেওয়ানগঞ্জ", "ইসলামপুর", "জামালপুর সদর", "মাদারগঞ্জ", "মেলান্দহ", "সরিষাবাড়ী"], "ব্রাহ্মণবাড়িয়া": ["আখাউড়া", "আশুগঞ্জ", "বাঞ্ছারামপুর", "ব্রাহ্মণবাড়িয়া সদর", "কসবা", "নবীনগর", "নাসিরনগর", "সরাইল", "বিজয়নগর"], "কুমিল্লা": ["বরুড়া", "ব্রাহ্মণপাড়া", "বুড়িচং", "চান্দিনা", "চৌদ্দগ্রাম", "দাউদকান্দি", "দেবিদ্বার", "হোমনা", "লাকসাম", "লালমাই", "মেঘনা", "মনোহরগঞ্জ", "মুরাদনগর", "নাঙ্গলকোট", "সদর দক্ষিণ", "তিতাস", "কুমিল্লা আদর্শ সদর"], "চাঁদপুর": ["চাঁদপুর সদর", "ফরিদগঞ্জ", "হাইমচর", "হাজীগঞ্জ", "কচুয়া", "মতলব দক্ষিণ", "মতলব উত্তর", "শাহরাস্তি"], "ফেনী": ["ছাগলনাইয়া", "দাগনভূঞা", "ফেনী সদর", "ফুলগাজী", "পরশুরাম", "সোনাগাজী"], "লক্ষ্মীপুর": ["কমলনগর", "লক্ষ্মীপুর সদর", "রামগঞ্জ", "রামগতি", "রায়পুর"], "নোয়াখালী": ["বেগমগঞ্জ", "চাটখিল", "কোম্পানীগঞ্জ", "হাতিয়া", "কবিরহাট", "সেনবাগ", "সুবর্ণচর", "নোয়াখালী সদর", "সোনাইমুড়ী"]};
+
+
+  const districtSelect = document.getElementById("deliveryDistrict");
+  const thanaSelect = document.getElementById("deliveryThana");
+
+  Object.keys(bangladeshDistricts).sort((a,b)=>a.localeCompare(b,"bn")).forEach(function(district){
+    const option = document.createElement("option");
+    option.value = district;
+    option.textContent = district;
+    districtSelect.appendChild(option);
+  });
+
+  districtSelect.addEventListener("change", function(){
+    const district = this.value;
+    thanaSelect.innerHTML = '<option value="">Select Thana</option>';
+    thanaSelect.disabled = !district;
+    updateDeliveryCharge();
+
+    if(district){
+      bangladeshDistricts[district].forEach(function(thana){
+        const option = document.createElement("option");
+        option.value = thana;
+        option.textContent = thana;
+        thanaSelect.appendChild(option);
+      });
+    }
+  });
+
+  // Delivery charge: Dhaka = ৳80, all other districts = ৳120
+  let deliveryCharge = 0;
+
+  function updateDeliveryCharge(){
+    const district = document.getElementById("deliveryDistrict").value;
+    if(!district){
+      deliveryCharge = 0;
+      document.getElementById("deliveryChargeMessage").textContent =
+        "District নির্বাচন করলে Delivery Charge অটোমেটিক নির্ধারণ হবে।";
+    }else if(district === "ঢাকা"){
+      deliveryCharge = 80;
+      document.getElementById("deliveryChargeMessage").innerHTML =
+        "ঢাকার ভিতরে Delivery Charge: <strong>৳80</strong>";
+    }else{
+      deliveryCharge = 120;
+      document.getElementById("deliveryChargeMessage").innerHTML =
+        "ঢাকার বাইরে Delivery Charge: <strong>৳120</strong>";
+    }
+    renderCheckoutSummary();
+  }
+
+  // Checkout summary
+  let selectedPlan = "full";
+  let discount = 0;
+
+  function renderCheckoutSummary(){
+    const list = document.getElementById("checkoutItems");
+    const subtotal = cart.reduce((sum,item) => sum + item.price * item.qty, 0);
+    const total = Math.max(0, subtotal + (cart.length ? deliveryCharge : 0) - discount);
+
+    list.innerHTML = cart.map(item =>
+      `<div class="rifah-summary-row"><span>${item.name} × ${item.qty}</span><strong>৳${(item.price * item.qty).toLocaleString()}</strong></div>`
+    ).join("");
+
+    document.getElementById("checkoutSubtotal").textContent = subtotal.toLocaleString();
+    document.getElementById("checkoutDelivery").textContent = cart.length ? deliveryCharge.toLocaleString() : "0";
+    document.getElementById("checkoutDiscount").textContent = discount.toLocaleString();
+    document.getElementById("checkoutTotal").textContent = total.toLocaleString();
+    updatePaymentPlanAmount();
+  }
+
+  function updatePaymentPlanAmount(){
+    const subtotal = cart.reduce((sum,item) => sum + item.price * item.qty, 0);
+    const total = Math.max(0, subtotal + (cart.length ? deliveryCharge : 0) - discount);
+
+    let payNow = 0;
+    let remaining = total;
+    let label = "No Advance / COD";
+
+    if(selectedPlan === "delivery"){
+      payNow = deliveryCharge;
+      remaining = Math.max(0, total - deliveryCharge);
+      label = "শুধু Delivery Charge";
+    }else if(selectedPlan === "50"){
+      payNow = Math.round(total * 0.50);
+      remaining = Math.max(0, total - payNow);
+      label = "50% Advance";
+    }else if(selectedPlan === "100"){
+      payNow = total;
+      remaining = 0;
+      label = "100% Full Payment";
+    }
+
+    document.getElementById("paymentPlanAmount").innerHTML =
+      "<strong>" + label + "</strong><br>" +
+      "এখন দিতে হবে: <strong>৳" + payNow.toLocaleString() +
+      "</strong> · পরে দিতে হবে: <strong>৳" + remaining.toLocaleString() + "</strong>";
+  }
+
+  document.querySelectorAll(".rifah-plan").forEach(function(plan){
+    plan.onclick = function(){
+      document.querySelectorAll(".rifah-plan").forEach(p => p.classList.remove("active"));
+      plan.classList.add("active");
+      selectedPlan = plan.dataset.plan;
+      updatePaymentPlanAmount();
+    };
+  });
+
+  document.getElementById("applyCoupon").onclick = function(){
+    const code = document.getElementById("couponCode").value.trim().toUpperCase();
+
+    if(code === "RIFAH10"){
+      discount = Math.round(cart.reduce((sum,item) => sum + item.price * item.qty, 0) * 0.10);
+      alert("Coupon applied: 10% discount");
+    }else{
+      discount = 0;
+      alert("Coupon not found.");
+    }
+    renderCheckoutSummary();
+  };
+
+  // Payment selection
+  document.querySelectorAll(".paymentOption").forEach(function(option){
+    option.style.width = "100%";
+    option.style.padding = "14px";
+    option.style.border = "0";
+    option.style.borderBottom = "1px solid #eee";
+    option.style.background = "#fff";
+    option.style.textAlign = "left";
+    option.style.fontSize = "16px";
+
+    option.onclick = function(){
+      const method = option.dataset.payment;
+      const details = document.getElementById("paymentDetails");
+
+      paymentButton.innerHTML = "💳 " + method;
+      selectedPayment.textContent = "Selected: " + method;
+      selectedPayment.style.display = "block";
+      paymentOptions.style.display = "none";
+
+      if(method === "Cash on Delivery"){
+        details.style.display = "none";
+        details.innerHTML = "";
+        return;
+      }
+
+      if(method === "Online Payment"){
+        details.style.display = "block";
+        details.innerHTML = `
+          <strong style="color:#42145F;">Online Payment</strong>
+          <p style="margin:8px 0;color:#666;font-size:13px;">
+            Secure payment gateway পরে এখানে যুক্ত করা হবে।
+          </p>
+          <button type="button" style="
+            width:100%;padding:14px;border:0;border-radius:10px;
+            background:#42145F;color:white;font-size:16px;font-weight:bold;">
+            🔒 Continue to Secure Payment
+          </button>
+        `;
+        return;
+      }
+
+      if(["bKash","Nagad","Rocket"].includes(method)){
+        details.style.display = "block";
+        details.innerHTML = `
+          <strong style="color:#42145F;">${method} Payment</strong>
+          <div style="margin:8px 0;padding:10px;border-radius:9px;background:#fff;border:1px dashed #d9c6e2;color:#555;font-size:13px;">
+            Merchant Number: <strong>এখানে পরে আপনার নম্বর বসাবেন</strong>
+          </div>
+          <input id="mobileWalletNumber" type="tel"
+            placeholder="Customer ${method} নম্বর"
+            inputmode="numeric"
+            style="width:100%;padding:13px;border:1px solid #ddd;border-radius:10px;box-sizing:border-box;font-size:16px;">
+          <input id="walletTransactionId" type="text"
+            placeholder="Transaction ID"
+            style="width:100%;padding:13px;margin-top:10px;border:1px solid #ddd;border-radius:10px;box-sizing:border-box;font-size:16px;">
+        `;
+        return;
+      }
+
+      // Card UI only. Do not collect card number/CVC on this site.
+      details.style.display = "block";
+      details.innerHTML = `
+        <strong style="color:#42145F;">${method}</strong>
+        <p style="margin:8px 0;color:#666;font-size:13px;">
+          Card payment will open through a secure payment gateway when one is connected.
+        </p>
+        <button type="button" style="
+          width:100%;padding:14px;border:0;border-radius:10px;
+          background:#42145F;color:white;font-size:16px;font-weight:bold;">
+          🔒 Continue to Secure Card Payment
+        </button>
+      `;
+    };
+  });
+
+  // Place order
+  document.getElementById("placeOrderButton").onclick = function(){
+    const name = document.getElementById("customerName").value.trim();
+    const phone = document.getElementById("customerPhone").value.trim();
+    const email = document.getElementById("customerEmail").value.trim();
+    const address = document.getElementById("customerAddress").value.trim();
+    const orderNote = document.getElementById("orderNote").value.trim();
+    const payment = selectedPayment.textContent.replace("Selected: ","").trim();
+
+    if(!name || !phone || !address){
+      alert("দয়া করে নাম, মোবাইল নম্বর ও সম্পূর্ণ ঠিকানা পূরণ করুন।");
+      return;
+    }
+
+    const district = districtSelect.value;
+    const thana = thanaSelect.value;
+
+    if(!district || !thana){
+      alert("দয়া করে District এবং Thana / Upazila নির্বাচন করুন।");
+      return;
+    }
+
+    if(!payment){
+      alert("দয়া করে একটি Payment Method নির্বাচন করুন।");
+      return;
+    }
+
+    if(selectedPlan === "0" && payment !== "Cash on Delivery"){
+      alert("No Advance / COD নির্বাচন করলে Payment Method হিসেবে Cash on Delivery নির্বাচন করুন।");
+      return;
+    }
+
+    if(["bKash","Nagad","Rocket"].includes(payment)){
+      const walletNumber = document.getElementById("mobileWalletNumber")?.value.trim();
+      const transactionId = document.getElementById("walletTransactionId")?.value.trim();
+      if(!walletNumber || !transactionId){
+        alert("দয়া করে আপনার Wallet নম্বর ও Transaction ID দিন।");
+        return;
+      }
+    }
+
+    if(["Online Payment","Visa Card","Mastercard","American Express","International Card"].includes(payment)){
+      alert("আসল Online/Card Payment চালু করতে Secure Payment Gateway যুক্ত করতে হবে। এখন Payment UI প্রস্তুত আছে।");
+      return;
+    }
+
+    const subtotalForOrder = cart.reduce((sum,item) => sum + item.price * item.qty, 0);
+    const orderTotal = Math.max(0, subtotalForOrder + deliveryCharge - discount);
+
+    let planLabel = "No Advance / COD";
+    let payNow = 0;
+    if(selectedPlan === "delivery"){
+      planLabel = "শুধু Delivery Charge";
+      payNow = deliveryCharge;
+    }else if(selectedPlan === "50"){
+      planLabel = "50% Advance";
+      payNow = Math.round(orderTotal * 0.50);
+    }else if(selectedPlan === "100"){
+      planLabel = "100% Full Payment";
+      payNow = orderTotal;
+    }
+    alert(
+      "Order Confirmed!\\n\\n" +
+      "নাম: " + name + "\\n" +
+      "মোবাইল: " + phone + "\\n" +
+      (email ? "ইমেইল: " + email + "\\n" : "") +
+      "District: " + district + "\\n" +
+      "Thana/Upazila: " + thana + "\\n" +
+      "ঠিকানা: " + address + "\\n" +
+      "Delivery Charge: ৳" + deliveryCharge.toLocaleString() + "\\n" +
+      "Payment: " + payment + "\\n" +
+      "Payment Plan: " + planLabel + "\\n" +
+      "Pay Now: ৳" + payNow.toLocaleString() + "\\n" +
+      "Order Total: ৳" + orderTotal.toLocaleString() +
+      (orderNote ? "\\nNote: " + orderNote : "")
+    );
+
+    cart = [];
+    discount = 0;
+    updateCart();
+    checkoutBox.style.display = "none";
+  };
+
+  updateCart();
+
+})();
+</script>
+
+<script>
+(function(){
+  const $ = (s, root=document) => root.querySelector(s);
+  const $$ = (s, root=document) => Array.from(root.querySelectorAll(s));
+
+  function goTo(id){
+    const el = document.getElementById(id);
+    if(el){
+      el.scrollIntoView({behavior:"smooth", block:"start"});
+      return true;
+    }
+    return false;
+  }
+
+  // Search button
+  const searchInput = document.querySelector('input[placeholder*="Search"]');
+  const searchButton = document.querySelector('header button, .header button, button');
+  if(searchInput){
+    searchInput.addEventListener("keydown", e => {
+      if(e.key === "Enter"){
+        const q = searchInput.value.trim().toLowerCase();
+        if(!q){ goTo("products"); return; }
+        let found = 0;
+        $$(".product-card, .product").forEach(card => {
+          const match = card.textContent.toLowerCase().includes(q);
+          card.style.display = match ? "" : "none";
+          if(match) found++;
+        });
+        goTo("products");
+        if(!found) alert("এই নামে কোনো পণ্য পাওয়া যায়নি।");
+      }
+    });
+  }
+
+  // Generic "#" links: make the major buttons useful.
+  $$('a[href="#"]').forEach(a => {
+    a.addEventListener("click", function(e){
+      e.preventDefault();
+      const label = this.textContent.replace(/\s+/g," ").trim().toLowerCase();
+
+      if(label.includes("cart")){
+        const cart = document.getElementById("rifah-cart-box");
+        if(cart){ cart.scrollIntoView({behavior:"smooth",block:"center"}); return; }
+      }
+      if(label.includes("shop") || label.includes("browse") || label.includes("hot deals") ||
+         label.includes("new arrivals") || label.includes("view all") || label.includes("shop offers") ||
+         label.includes("view deals") || label.includes("explore now")){
+        goTo("products"); return;
+      }
+      if(label.includes("contact")){ alert("Contact Us: আমাদের customer support section শীঘ্রই এখানে যুক্ত হবে।"); return; }
+      if(label.includes("account") || label.includes("my orders")){
+        alert("My Account / My Orders: এই single-file version-এ UI প্রস্তুত আছে; পরে login/backend যুক্ত করা যাবে।"); return;
+      }
+      if(label.includes("wishlist")){
+        alert("Wishlist: পছন্দের পণ্য যোগ করার ফিচার পরের ধাপে যুক্ত করা যাবে।"); return;
+      }
+      alert("এই অপশনটি এই মুহূর্তে UI হিসেবে প্রস্তুত আছে।");
+    });
+  });
+
+  // Category buttons filter the visible product cards when possible.
+  const categoryMap = [
+    ["women", ["women","dress"]],
+    ["men", ["men","shirt"]],
+    ["kids", ["kids","baby","dress"]],
+    ["electronics", ["electronics","bulb","led"]],
+    ["toys", ["toy","teddy"]],
+  ];
+  $$('a[href="#"]').forEach(a => {
+    const label = a.textContent.replace(/\s+/g," ").trim().toLowerCase();
+    const pair = categoryMap.find(([key, words]) => words.some(w => label.includes(w)));
+    if(pair){
+      a.addEventListener("click", function(e){
+        e.preventDefault();
+        const cards = $$(".product-card, .product");
+        let found=0;
+        cards.forEach(card=>{
+          const t=card.textContent.toLowerCase();
+          const match=pair[1].some(w=>t.includes(w));
+          card.style.display=match?"":"none";
+          if(match) found++;
+        });
+        goTo("products");
+        if(!found) alert("এই ক্যাটাগরির পণ্য এখনো যোগ করা হয়নি।");
+      }, true);
+    }
+  });
+
+  // Make the "Close Checkout" button return to the cart cleanly.
+  const closeCheckout = document.getElementById("closeCheckout");
+  if(closeCheckout){
+    closeCheckout.addEventListener("click", function(){
+      const checkout = document.getElementById("rifah-checkout-box");
+      if(checkout) checkout.style.display="none";
+      const cart = document.getElementById("rifah-cart-box");
+      if(cart) cart.style.display="block";
+    });
+  }
+
+  // Full payment is the default. Update the amount immediately.
+  setTimeout(function(){
+    const full = document.querySelector('.rifah-plan[data-plan="100"]');
+    if(full) full.click();
+  }, 50);
+})();
+</script>
+
+</body>
+</html>
