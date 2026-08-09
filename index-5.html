@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Rifah Online Shop | Shop Everything You Love</title>
+
+<meta name="description" content="Rifah Online Shop - Fashion, Kids, Electronics, Toys and more.">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap');
+
+:root{
+  --primary:#42145F;
+  --secondary:#6B2589;
+  --accent:#C72C8A;
+  --gold:#D6A84F;
+  --bg:#FAF9F7;
+  --white:#FFFFFF;
+  --text:#18151C;
+  --muted:#77717C;
+  --border:#EDE7EF;
+  --shadow:0 8px 30px rgba(66,20,95,.08);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Inter,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+button{
+  font-family:inherit;
+  cursor:pointer;
+  border:0;
+}
+
+.container{
+  width:min(1200px,92%);
+  margin:auto;
+}
+
+/* TOP BAR */
+.topbar{
+  background:var(--primary);
+  color:white;
+  font-size:13px;
+  padding:9px 0;
+}
+
+.topbar-inner{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.topbar span{
+  opacity:.95;
+}
+
+/* HEADER */
+.header{
+  background:white;
+  border-bottom:1px solid var(--border);
+  position:sticky;
+  top:0;
+  z-index:50;
+}
+
+.header-main{
+  min-height:82px;
+  display:flex;
+  align-items:center;
+  gap:25px;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  min-width:190px;
+}
+
+.logo-mark{
+  width:48px;
+  height:48px;
+  border-radius:14px;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  font-family:Poppins;
+  font-size:26px;
+  font-weight:800;
+}
+
+.logo-text{
+  margin-left:10px;
+  line-height:1;
+}
+
+.logo-text strong{
+  font-family:Poppins;
+  color:var(--primary);
+  font-size:23px;
+}
+
+.logo-text small{
+  display:block;
+  color:var(--accent);
+  font-weight:700;
+  margin-top:5px;
+}
+
+/* SEARCH */
+.search{
+  flex:1;
+  max-width:600px;
+  height:48px;
+  display:flex;
+  border:1px solid var(--border);
+  border-radius:12px;
+  overflow:hidden;
+  background:#fff;
+}
+
+.search select{
+  border:0;
+  padding:0 12px;
+  outline:0;
+  background:white;
+  color:var(--text);
+}
+
+.search input{
+  flex:1;
+  border:0;
+  outline:0;
+  padding:0 10px;
+  font-size:14px;
+}
+
+.search button{
+  width:52px;
+  background:var(--accent);
+  color:white;
+  font-size:19px;
+}
+
+/* HEADER ACTIONS */
+.actions{
+  display:flex;
+  gap:18px;
+  align-items:center;
+}
+
+.action{
+  text-align:center;
+  font-size:12px;
+  color:var(--text);
+  position:relative;
+}
+
+.action-icon{
+  font-size:21px;
+  display:block;
+  margin-bottom:3px;
+}
+
+.badge{
+  position:absolute;
+  top:-5px;
+  right:-8px;
+  width:18px;
+  height:18px;
+  background:var(--accent);
+  color:white;
+  border-radius:50%;
+  font-size:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* NAV */
+.nav{
+  background:var(--primary);
+  color:white;
+}
+
+.nav-inner{
+  display:flex;
+  align-items:center;
+  gap:30px;
+  min-height:47px;
+}
+
+.nav a{
+  font-size:14px;
+  font-weight:600;
+}
+
+.category-btn{
+  background:var(--secondary);
+  padding:14px 20px;
+  font-weight:700;
+}
+
+/* HERO */
+.hero{
+  padding:28px 0;
+}
+
+.hero-box{
+  min-height:410px;
+  border-radius:22px;
+  overflow:hidden;
+  background:
+  radial-gradient(circle at 85% 25%,rgba(199,44,138,.25),transparent 25%),
+  linear-gradient(115deg,#f5e8f8,#fff7fb);
+  display:flex;
+  align-items:center;
+  position:relative;
+}
+
+.hero-content{
+  width:52%;
+  padding:55px;
+}
+
+.hero-label{
+  color:var(--accent);
+  font-weight:800;
+  font-size:14px;
+  margin-bottom:12px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+
+.hero h1{
+  font-family:Poppins;
+  color:var(--primary);
+  font-size:48px;
+  line-height:1.1;
+  margin-bottom:15px;
+}
+
+.hero p{
+  color:var(--muted);
+  line-height:1.7;
+  margin-bottom:25px;
+}
+
+.primary-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:var(--primary);
+  color:white;
+  padding:14px 23px;
+  border-radius:10px;
+  font-weight:700;
+}
+
+.primary-btn:hover{
+  background:var(--accent);
+}
+
+.hero-art{
+  flex:1;
+  height:100%;
+  min-height:410px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.hero-circle{
+  width:280px;
+  height:280px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:white;
+  font-family:Poppins;
+  font-size:80px;
+  font-weight:800;
+  box-shadow:0 25px 60px rgba(66,20,95,.25);
+}
+
+/* SECTION */
+.section{
+  padding:35px 0;
+}
+
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.section-head h2{
+  font-family:Poppins;
+  color:var(--primary);
+  font-size:25px;
+}
+
+.view{
+  color:var(--accent);
+  font-weight:700;
+  font-size:14px;
+}
+
+/* CATEGORIES */
+.categories{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:14px;
+}
+
+.category{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px 10px;
+  text-align:center;
+  transition:.2s;
+}
+
+.category:hover{
+  transform:translateY(-4px);
+  box-shadow:var(--shadow);
+}
+
+.cat-icon{
+  width:60px;
+  height:60px;
+  margin:auto auto 10px;
+  border-radius:50%;
+  background:#f5eaf8;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+}
+
+.category strong{
+  font-size:13px;
+}
+
+/* PRODUCTS */
+.products{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:16px;
+}
+
+.product{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:16px;
+  overflow:hidden;
+  transition:.2s;
+}
+
+.product:hover{
+  transform:translateY(-4px);
+  box-shadow:var(--shadow);
+}
+
+.product-image{
+  height:210px;
+  background:linear-gradient(145deg,#f4e9f7,#fff);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:70px;
+  position:relative;
+}
+
+.sale{
+  position:absolute;
+  top:10px;
+  left:10px;
+  background:var(--accent);
+  color:white;
+  padding:5px 8px;
+  border-radius:6px;
+  font-size:11px;
+  font-weight:700;
+}
+
+.product-info{
+  padding:14px;
+}
+
+.product-name{
+  font-weight:600;
+  font-size:14px;
+  min-height:38px;
+}
+
+.rating{
+  color:#E0A72E;
+  font-size:13px;
+  margin:7px 0;
+}
+
+.price{
+  font-family:Poppins;
+  color:var(--primary);
+  font-weight:800;
+  font-size:18px;
+}
+
+.old-price{
+  color:#aaa;
+  text-decoration:line-through;
+  font-size:12px;
+  margin-left:5px;
+}
+
+.add{
+  width:100%;
+  margin-top:10px;
+  padding:10px;
+  background:var(--accent);
+  color:white;
+  border-radius:8px;
+  font-weight:700;
+}
+
+/* PROMO */
+.promo-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+
+.promo{
+  border-radius:18px;
+  padding:28px;
+  min-height:150px;
+  background:linear-gradient(135deg,#f3e6f8,#fff);
+}
+
+.promo:nth-child(2){
+  background:linear-gradient(135deg,#fff0f7,#fff);
+}
+
+.promo h3{
+  font-family:Poppins;
+  color:var(--primary);
+  margin-bottom:7px;
+}
+
+.promo a{
+  display:inline-block;
+  margin-top:15px;
+  color:var(--accent);
+  font-weight:700;
+  font-size:13px;
+}
+
+/* TRUST */
+.trust{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:25px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+}
+
+.trust-item{
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+
+.trust-icon{
+  width:45px;
+  height:45px;
+  background:#f4eaf7;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+}
+
+.trust strong{
+  display:block;
+  font-size:13px;
+}
+
+.trust small{
+  color:var(--muted);
+  font-size:11px;
+}
+
+/* FOOTER */
+footer{
+  margin-top:45px;
+  background:#24102f;
+  color:#eee;
+}
+
+.footer{
+  padding:45px 0 25px;
+  display:grid;
+  grid-template-columns:1.5fr 1fr 1fr 1fr;
+  gap:40px;
+}
+
+.footer h3{
+  font-family:Poppins;
+  margin-bottom:15px;
+}
+
+.footer p,.footer a{
+  display:block;
+  color:#cfc5d3;
+  font-size:13px;
+  line-height:2;
+}
+
+.copyright{
+  border-top:1px solid #432d4e;
+  padding:18px 0;
+  text-align:center;
+  color:#aaa;
+  font-size:12px;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+
+  .header-main{
+    flex-wrap:wrap;
+    padding:12px 0;
+    gap:12px;
+  }
+
+  .logo{
+    min-width:auto;
+  }
+
+  .search{
+    order:3;
+    flex-basis:100%;
+    max-width:none;
+  }
+
+  .actions{
+    margin-left:auto;
+    gap:12px;
+  }
+
+  .nav-inner{
+    overflow-x:auto;
+    gap:20px;
+    white-space:nowrap;
+  }
+
+  .hero-content{
+    width:100%;
+    padding:35px 25px;
+  }
+
+  .hero h1{
+    font-size:36px;
+  }
+
+  .hero-art{
+    display:none;
+  }
+
+  .categories{
+    grid-template-columns:repeat(4,1fr);
+  }
+
+  .products{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .promo-grid{
+    grid-template-columns:1fr;
+  }
+
+  .trust{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .footer{
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+@media(max-width:500px){
+
+  .topbar-inner{
+    justify-content:center;
+    text-align:center;
+  }
+
+  .topbar-inner span:last-child{
+    display:none;
+  }
+
+  .logo-text strong{
+    font-size:20px;
+  }
+
+  .logo-mark{
+    width:42px;
+    height:42px;
+  }
+
+  .actions .action span:last-child{
+    display:none;
+  }
+
+  .categories{
+    grid-template-columns:repeat(4,1fr);
+    gap:8px;
+  }
+
+  .category{
+    padding:12px 5px;
+  }
+
+  .cat-icon{
+    width:45px;
+    height:45px;
+    font-size:21px;
+  }
+
+  .category strong{
+    font-size:10px;
+  }
+
+  .products{
+    gap:10px;
+  }
+
+  .product-image{
+    height:150px;
+    font-size:50px;
+  }
+
+  .product-info{
+    padding:10px;
+  }
+
+  .product-name{
+    font-size:12px;
+  }
+
+  .price{
+    font-size:15px;
+  }
+
+  .footer{
+    grid-template-columns:1fr;
+  }
+
+  .trust{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+  <div class="container topbar-inner">
+    <span>🚚 Fast & Reliable Delivery Across Bangladesh</span>
+    <span>✨ Special Offers Available Today</span>
+  </div>
+</div>
+
+<header class="header">
+  <div class="container header-main">
+
+<a href="#" class="logo">
+    <img src="logo.png" alt="Rifah Online Shop" style="width:180px;height:auto;display:block;">
+</a>
+
+    <div class="search">
+      <select>
+        <option>All Categories</option>
+        <option>Women's Fashion</option>
+        <option>Men's Fashion</option>
+        <option>Kids & Baby</option>
+        <option>Electronics</option>
+        <option>Toys</option>
+      </select>
+      <input type="search" placeholder="Search for products...">
+      <button>⌕</button>
+    </div>
+
+    <div class="actions">
+
+      <a class="action" href="#">
+        <span class="action-icon">👤</span>
+        <span>Account</span>
+      </a>
+
+      <a class="action" href="#">
+        <span class="action-icon">♡</span>
+        <span>Wishlist</span>
+      </a>
+
+      <a class="action" href="#">
+        <span class="action-icon">🛒</span>
+        <span>Cart</span>
+        <b class="badge">0</b>
+      </a>
+
+    </div>
+  </div>
+</header>
+
+<nav class="nav">
+  <div class="container nav-inner">
+    <a class="category-btn" href="#">☰ Browse Categories</a>
+    <a href="#">Home</a>
+    <a href="#">Shop</a>
+    <a href="#">Hot Deals</a>
+    <a href="#">New Arrivals</a>
+    <a href="#">About Us</a>
+    <a href="#">Contact</a>
+  </div>
+</nav>
+
+<main>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-box">
+
+      <div class="hero-content">
+        <div class="hero-label">Biggest Sale of the Year</div>
+
+        <h1>Everything You Love, In One Place.</h1>
+
+        <p>
+          Discover fashion, kids products, electronics, toys
+          and more at Rifah Online Shop.
+        </p>
+
+        <a href="#products" class="primary-btn">
+          Shop Now →
+        </a>
+      </div>
+
+      <div class="hero-art">
+        <div class="hero-circle">R</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+
+    <div class="section-head">
+      <h2>Shop by Category</h2>
+      <a href="#" class="view">View All →</a>
+    </div>
+
+    <div class="categories">
+
+      <a class="category" href="#">
+        <div class="cat-icon">👗</div>
+        <strong>Women's Fashion</strong>
+      </a>
+
+      <a class="category" href="#">
+        <div class="cat-icon">👔</div>
+        <strong>Men's Fashion</strong>
+      </a>
+
+      <a class="category" href="#">
+        <div class="cat-icon">👶</div>
+        <strong>Kids & Baby</strong>
+      </a>
+
+      <a class="category" href="#">
+        <div class="cat-icon">⚡</div>
+        <strong>Electronics</strong>
+      </a>
+
+      <a class="category" href="#">
+        <div class="cat-icon">🧸</div>
+        <strong>Toys</strong>
+      </a>
+
+      <a class="category" href="#">
+        <div class="cat-icon">🏠</div>
+        <strong>Home</strong>
+      </a>
+
+      <a class="category" href="#">
+        <div class="cat-icon">＋</div>
+        <strong>More</strong>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<section class="section" id="products">
+  <div class="container">
+
+    <div class="section-head">
+      <h2>Best Selling Products</h2>
+      <a href="#" class="view">View All →</a>
+    </div>
+
+    <div class="products">
+
+      <article class="product">
+        <div class="product-image">
+          <span class="sale">-20%</span>👗
+        </div>
+        <div class="product-info">
+          <div class="product-name">Premium Women's Dress</div>
+          <div class="rating">★★★★★ (12)</div>
+          <span class="price">৳1,250</span>
+          <span class="old-price">৳1,550</span>
+          <button class="add">Add to Cart</button>
+        </div>
+      </article>
+
+      <article class="product">
+        <div class="product-image">
+          <span class="sale">NEW</span>👔
+        </div>
+        <div class="product-info">
+          <div class="product-name">Men's Premium Casual Shirt</div>
+          <div class="rating">★★★★★ (8)</div>
+          <span class="price">৳880</span>
+          <span class="old-price">৳1,100</span>
+          <button class="add">Add to Cart</button>
+        </div>
+      </article>
+
+      <article class="product">
+        <div class="product-image">👧</div>
+        <div class="product-info">
+          <div class="product-name">Kids Party Dress</div>
+          <div class="rating">★★★★★ (15)</div>
+          <span class="price">৳750</span>
+          <span class="old-price">৳950</span>
+          <button class="add">Add to Cart</button>
+        </div>
+      </article>
+
+      <article class="product">
+        <div class="product-image">
+          <span class="sale">-15%</span>💡
+        </div>
+        <div class="product-info">
+          <div class="product-name">LED Smart Bulb</div>
+          <div class="rating">★★★★☆ (9)</div>
+          <span class="price">৳350</span>
+          <span class="old-price">৳420</span>
+          <button class="add">Add to Cart</button>
+        </div>
+      </article>
+
+      <article class="product">
+        <div class="product-image">🧸</div>
+        <div class="product-info">
+          <div class="product-name">Soft Teddy Bear</div>
+          <div class="rating">★★★★★ (20)</div>
+          <span class="price">৳420</span>
+          <span class="old-price">৳550</span>
+          <button class="add">Add to Cart</button>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+
+    <div class="promo-grid">
+
+      <div class="promo">
+        <h3>Combo Offers</h3>
+        <p>Save more when you buy together.</p>
+        <a href="#">Shop Offers →</a>
+      </div>
+
+      <div class="promo">
+        <h3>Deals of the Day</h3>
+        <p>Limited-time discounts on selected products.</p>
+        <a href="#">View Deals →</a>
+      </div>
+
+      <div class="promo">
+        <h3>New Arrivals</h3>
+        <p>Discover the latest products.</p>
+        <a href="#">Explore Now →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+
+    <div class="section-head">
+      <h2>Why Choose Rifah Online Shop?</h2>
+    </div>
+
+    <div class="trust">
+
+      <div class="trust-item">
+        <div class="trust-icon">🛡️</div>
+        <div>
+          <strong>Quality Products</strong>
+          <small>Selected with care</small>
+        </div>
+      </div>
+
+      <div class="trust-item">
+        <div class="trust-icon">🚚</div>
+        <div>
+          <strong>Fast Delivery</strong>
+          <small>Reliable delivery service</small>
+        </div>
+      </div>
+
+      <div class="trust-item">
+        <div class="trust-icon">💳</div>
+        <div>
+          <strong>Secure Payment</strong>
+          <small>COD & Online Payment</small>
+        </div>
+      </div>
+
+      <div class="trust-item">
+        <div class="trust-icon">🎧</div>
+        <div>
+          <strong>Customer Support</strong>
+          <small>We're here to help</small>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container footer">
+
+    <div>
+      <h3>Rifah Online Shop</h3>
+      <p>
+        Your trusted online shopping destination for
+        fashion, lifestyle, electronics and more.
+      </p>
+    </div>
+
+    <div>
+      <h3>Customer Service</h3>
+      <a href="#">Contact Us</a>
+      <a href="#">Shipping Policy</a>
+      <a href="#">Return Policy</a>
+      <a href="#">Terms & Conditions</a>
+    </div>
+
+    <div>
+      <h3>My Account</h3>
+      <a href="#">My Orders</a>
+      <a href="#">Wishlist</a>
+      <a href="#">Track Order</a>
+      <a href="#">Login / Register</a>
+    </div>
+
+    <div>
+      <h3>Payment</h3>
+      <p>Cash on Delivery</p>
+      <p>Online Payment</p>
+      <p>bKash • Nagad • Card</p>
+    </div>
+
+  </div>
+
+  <div class="copyright">
+    © 2026 Rifah Online Shop. All Rights Reserved.
+  </div>
+</footer>
+<style>
+#rifah-cart-box{
+position:fixed;
+right:15px;
+bottom:15px;
+z-index:9999;
+background:#42145F;
+color:white;
+padding:12px 18px;
+border-radius:30px;
+font-weight:bold;
+box-shadow:0 5px 20px rgba(0,0,0,.25);
+cursor:pointer;
+}
+#rifah-cart-panel{
+display:none;
+position:fixed;
+right:15px;
+bottom:75px;
+width:320px;
+max-width:90%;
+background:white;
+color:#222;
+z-index:10000;
+border-radius:15px;
+padding:18px;
+box-shadow:0 5px 30px rgba(0,0,0,.3);
+}
+#rifah-cart-panel h3{
+margin-top:0;
+color:#42145F;
+}
+.rifah-cart-item{
+border-bottom:1px solid #ddd;
+padding:10px 0;
+}
+.rifah-cart-total{
+font-weight:bold;
+font-size:18px;
+margin-top:15px;
+}
+#rifah-checkout{
+width:100%;
+margin-top:15px;
+padding:12px;
+border:0;
+border-radius:8px;
+background:#C72C8A;
+color:white;
+font-weight:bold;
+}
+</style>
+
+<div id="rifah-cart-box">🛒 Cart (<span id="rifah-cart-count">0</span>)</div>
+
+<div id="rifah-cart-panel">
+<h3>Your Cart</h3>
+<div id="rifah-cart-items">Your cart is empty.</div>
+<div class="rifah-cart-total">
+Total: ৳<span id="rifah-cart-total">0</span>
+</div>
+<button id="rifah-checkout">Checkout</button>
+</div>
+
+<script>
+(function(){
+  let cart = JSON.parse(localStorage.getItem("rifahCart") || "[]");
+
+  function updateCart(){
+    const count = cart.reduce((sum,item)=>sum + item.qty, 0);
+    document.getElementById("rifah-cart-count").textContent = count;
+
+    const items = document.getElementById("rifah-cart-items");
+    let total = 0;
+
+    if(cart.length === 0){
+      items.innerHTML = "Your cart is empty.";
+      document.getElementById("rifah-cart-total").textContent = "0";
+      localStorage.setItem("rifahCart", JSON.stringify(cart));
+      return;
+    }
+
+    items.innerHTML = "";
+    cart.forEach((item,index)=>{
+      total += item.price * item.qty;
+      const div = document.createElement("div");
+      div.className = "rifah-cart-item";
+      div.innerHTML = "<b>" + item.name + "</b><br>৳" + item.price + " × " + item.qty +
+        " <button type='button' data-remove='" + index + "' style='float:right'>Remove</button>";
+      items.appendChild(div);
+    });
+
+    document.getElementById("rifah-cart-total").textContent = total;
+    localStorage.setItem("rifahCart", JSON.stringify(cart));
+  }
+
+  document.querySelectorAll(".add").forEach(function(btn){
+    btn.addEventListener("click", function(e){
+      e.preventDefault();
+
+      const card = btn.closest(".product");
+      if(!card) return;
+
+      const nameEl = card.querySelector(".product-name");
+      const priceEl = card.querySelector(".price");
+      const name = nameEl ? nameEl.textContent.trim() : "Rifah Product";
+      const priceText = priceEl ? priceEl.textContent : "0";
+      const match = priceText.match(/[0-9,]+/);
+      const price = match ? parseInt(match[0].replace(/,/g,""),10) : 0;
+
+      const existing = cart.find(item => item.name === name);
+      if(existing){
+        existing.qty += 1;
+      }else{
+        cart.push({name:name, price:price, qty:1});
+      }
+
+      updateCart();
+      alert(name + " added to cart!");
+    });
+  });
+
+  document.getElementById("rifah-cart-box").onclick = function(){
+    const panel = document.getElementById("rifah-cart-panel");
+    panel.style.display = panel.style.display === "block" ? "none" : "block";
+  };
+
+  document.getElementById("rifah-cart-items").addEventListener("click", function(e){
+    if(e.target.dataset.remove !== undefined){
+      cart.splice(parseInt(e.target.dataset.remove,10),1);
+      updateCart();
+    }
+  });
+
+  const checkoutHTML = `
+    <div id="rifah-checkout-box" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:99999;overflow-y:auto;padding:20px 12px;font-family:Arial,sans-serif;">
+      <div style="max-width:520px;margin:20px auto;background:#fff;border-radius:20px;padding:22px;box-shadow:0 10px 40px rgba(0,0,0,.25);">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+          <h2 style="margin:0;color:#42145F;">Checkout</h2>
+          <button type="button" id="closeCheckout" style="border:0;background:#f1f1f1;border-radius:50%;width:38px;height:38px;font-size:22px;">×</button>
+        </div>
+
+        <h3 style="color:#42145F;margin-bottom:12px;">Customer Information</h3>
+        <div style="border:1px solid #ddd;border-radius:14px;padding:15px;">
+          <input id="customerName" type="text" placeholder="আপনার নাম" style="width:100%;padding:14px;margin-bottom:12px;border:1px solid #ddd;border-radius:10px;box-sizing:border-box;font-size:16px;">
+          <input id="customerPhone" type="tel" placeholder="মোবাইল নম্বর" style="width:100%;padding:14px;margin-bottom:12px;border:1px solid #ddd;border-radius:10px;box-sizing:border-box;font-size:16px;">
+          <textarea id="customerAddress" placeholder="সম্পূর্ণ ঠিকানা" style="width:100%;height:90px;padding:14px;border:1px solid #ddd;border-radius:10px;box-sizing:border-box;font-size:16px;resize:none;"></textarea>
+        </div>
+
+        <h3 style="color:#42145F;margin:22px 0 12px;">Payment Method</h3>
+        <button type="button" id="paymentButton" style="width:100%;padding:15px;background:#42145F;color:white;border:0;border-radius:12px;font-size:17px;font-weight:bold;text-align:left;">💳 Select Payment Method</button>
+
+        <div id="paymentOptions" style="display:none;margin-top:10px;border:1px solid #ddd;border-radius:12px;overflow:hidden;">
+          <button type="button" class="paymentOption" data-payment="Cash on Delivery">🏠 Cash on Delivery</button>
+          <button type="button" class="paymentOption" data-payment="bKash">🟣 bKash</button>
+          <button type="button" class="paymentOption" data-payment="Nagad">🟠 Nagad</button>
+          <button type="button" class="paymentOption" data-payment="Rocket">🔵 Rocket</button>
+          <button type="button" class="paymentOption" data-payment="Visa Card">💳 Visa Card</button>
+          <button type="button" class="paymentOption" data-payment="Mastercard">💳 Mastercard</button>
+          <button type="button" class="paymentOption" data-payment="American Express">💳 American Express</button>
+          <button type="button" class="paymentOption" data-payment="International Card">🌐 International Card</button>
+        </div>
+
+        <div id="selectedPayment" style="margin-top:12px;padding:12px;background:#f7f1fa;border-radius:10px;display:none;color:#42145F;font-weight:bold;"></div>
+        <button type="button" id="placeOrderButton" style="width:100%;margin-top:22px;padding:16px;background:#b00068;color:white;border:0;border-radius:12px;font-size:18px;font-weight:bold;">Place Order</button>
+      </div>
+    </div>`;
+
+  document.body.insertAdjacentHTML("beforeend", checkoutHTML);
+
+  const checkoutBox = document.getElementById("rifah-checkout-box");
+  const paymentButton = document.getElementById("paymentButton");
+  const paymentOptions = document.getElementById("paymentOptions");
+  const selectedPayment = document.getElementById("selectedPayment");
+
+  document.getElementById("rifah-checkout").onclick = function(){
+    if(cart.length === 0){
+      alert("আপনার Cart এখনো খালি। আগে Add to Cart করুন।");
+      return;
+    }
+    document.getElementById("rifah-cart-panel").style.display = "none";
+    checkoutBox.style.display = "block";
+  };
+
+  document.getElementById("closeCheckout").onclick = function(){
+    checkoutBox.style.display = "none";
+  };
+
+  paymentButton.onclick = function(){
+    paymentOptions.style.display = paymentOptions.style.display === "block" ? "none" : "block";
+  };
+
+  document.querySelectorAll(".paymentOption").forEach(function(option){
+    option.style.width = "100%";
+    option.style.padding = "14px";
+    option.style.border = "0";
+    option.style.borderBottom = "1px solid #eee";
+    option.style.background = "#fff";
+    option.style.textAlign = "left";
+    option.style.fontSize = "16px";
+
+    option.onclick = function(){
+      const method = option.dataset.payment;
+      paymentButton.innerHTML = "💳 " + method;
+      selectedPayment.textContent = "Selected: " + method;
+      selectedPayment.style.display = "block";
+      paymentOptions.style.display = "none";
+    };
+  });
+
+  document.getElementById("placeOrderButton").onclick = function(){
+    const name = document.getElementById("customerName").value.trim();
+    const phone = document.getElementById("customerPhone").value.trim();
+    const address = document.getElementById("customerAddress").value.trim();
+    const payment = selectedPayment.textContent.replace("Selected: ","").trim();
+
+    if(!name || !phone || !address){
+      alert("দয়া করে নাম, মোবাইল নম্বর ও সম্পূর্ণ ঠিকানা পূরণ করুন।");
+      return;
+    }
+
+    if(!payment){
+      alert("দয়া করে একটি Payment Method নির্বাচন করুন।");
+      return;
+    }
+
+    alert("Order Confirmed!\n\nনাম: " + name + "\nমোবাইল: " + phone + "\nঠিকানা: " + address + "\nPayment: " + payment);
+    cart = [];
+    updateCart();
+    checkoutBox.style.display = "none";
+  };
+
+  updateCart();
+})();
+</script>
+</body>
+</html>
