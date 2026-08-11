@@ -1,0 +1,2905 @@
+<!DOCTYPE html>
+<!-- Rifah Online Shop: frontend-complete storefront + cart + checkout + customer features + admin bridge -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Rifah Online Shop | Shop Everything You Love</title>
+
+<meta name="description" content="Rifah Online Shop - Fashion, Kids, Electronics, Toys and more.">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap');
+
+:root{
+  --primary:#42145F;
+  --secondary:#6B2589;
+  --accent:#C72C8A;
+  --gold:#D6A84F;
+  --bg:#FAF9F7;
+  --white:#FFFFFF;
+  --text:#18151C;
+  --muted:#77717C;
+  --border:#EDE7EF;
+  --shadow:0 8px 30px rgba(66,20,95,.08);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Inter,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+button{
+  font-family:inherit;
+  cursor:pointer;
+  border:0;
+}
+
+.container{
+  width:min(1200px,92%);
+  margin:auto;
+}
+
+/* TOP BAR */
+.topbar{
+  background:var(--primary);
+  color:white;
+  font-size:13px;
+  padding:9px 0;
+}
+
+.topbar-inner{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.topbar span{
+  opacity:.95;
+}
+
+/* HEADER */
+.header{
+  background:white;
+  border-bottom:1px solid var(--border);
+  position:sticky;
+  top:0;
+  z-index:50;
+}
+
+.header-main{
+  min-height:82px;
+  display:flex;
+  align-items:center;
+  gap:25px;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  min-width:190px;
+}
+
+.logo-mark{
+  width:48px;
+  height:48px;
+  border-radius:14px;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  font-family:Poppins;
+  font-size:26px;
+  font-weight:800;
+}
+
+.logo-text{
+  margin-left:10px;
+  line-height:1;
+}
+
+.logo-text strong{
+  font-family:Poppins;
+  color:var(--primary);
+  font-size:23px;
+}
+
+.logo-text small{
+  display:block;
+  color:var(--accent);
+  font-weight:700;
+  margin-top:5px;
+}
+
+/* SEARCH */
+.search{
+  flex:1;
+  max-width:600px;
+  height:48px;
+  display:flex;
+  border:1px solid var(--border);
+  border-radius:12px;
+  overflow:hidden;
+  background:#fff;
+}
+
+.search select{
+  border:0;
+  padding:0 12px;
+  outline:0;
+  background:white;
+  color:var(--text);
+}
+
+.search input{
+  flex:1;
+  border:0;
+  outline:0;
+  padding:0 10px;
+  font-size:14px;
+}
+
+.search button{
+  width:52px;
+  background:var(--accent);
+  color:white;
+  font-size:19px;
+}
+
+/* HEADER ACTIONS */
+.actions{
+  display:flex;
+  gap:18px;
+  align-items:center;
+}
+
+.action{
+  text-align:center;
+  font-size:12px;
+  color:var(--text);
+  position:relative;
+}
+
+.action-icon{
+  font-size:21px;
+  display:block;
+  margin-bottom:3px;
+}
+
+.badge{
+  position:absolute;
+  top:-5px;
+  right:-8px;
+  width:18px;
+  height:18px;
+  background:var(--accent);
+  color:white;
+  border-radius:50%;
+  font-size:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* NAV */
+.nav{
+  background:var(--primary);
+  color:white;
+}
+
+.nav-inner{
+  display:flex;
+  align-items:center;
+  gap:30px;
+  min-height:47px;
+}
+
+.nav a{
+  font-size:14px;
+  font-weight:600;
+}
+
+.category-btn{
+  background:var(--secondary);
+  padding:14px 20px;
+  font-weight:700;
+}
+
+/* HERO */
+.hero{
+  padding:28px 0;
+}
+
+.hero-box{
+  min-height:410px;
+  border-radius:22px;
+  overflow:hidden;
+  background:
+  radial-gradient(circle at 85% 25%,rgba(199,44,138,.25),transparent 25%),
+  linear-gradient(115deg,#f5e8f8,#fff7fb);
+  display:flex;
+  align-items:center;
+  position:relative;
+}
+
+.hero-content{
+  width:52%;
+  padding:55px;
+}
+
+.hero-label{
+  color:var(--accent);
+  font-weight:800;
+  font-size:14px;
+  margin-bottom:12px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+
+.hero h1{
+  font-family:Poppins;
+  color:var(--primary);
+  font-size:48px;
+  line-height:1.1;
+  margin-bottom:15px;
+}
+
+.hero p{
+  color:var(--muted);
+  line-height:1.7;
+  margin-bottom:25px;
+}
+
+.primary-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:var(--primary);
+  color:white;
+  padding:14px 23px;
+  border-radius:10px;
+  font-weight:700;
+}
+
+.primary-btn:hover{
+  background:var(--accent);
+}
+
+.hero-art{
+  flex:1;
+  height:100%;
+  min-height:410px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.hero-circle{
+  width:280px;
+  height:280px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:white;
+  font-family:Poppins;
+  font-size:80px;
+  font-weight:800;
+  box-shadow:0 25px 60px rgba(66,20,95,.25);
+}
+
+/* SECTION */
+.section{
+  padding:35px 0;
+}
+
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.section-head h2{
+  font-family:Poppins;
+  color:var(--primary);
+  font-size:25px;
+}
+
+.view{
+  color:var(--accent);
+  font-weight:700;
+  font-size:14px;
+}
+
+/* CATEGORIES */
+.categories{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:14px;
+}
+
+.category{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px 10px;
+  text-align:center;
+  transition:.2s;
+}
+
+.category:hover{
+  transform:translateY(-4px);
+  box-shadow:var(--shadow);
+}
+
+.cat-icon{
+  width:60px;
+  height:60px;
+  margin:auto auto 10px;
+  border-radius:50%;
+  background:#f5eaf8;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+}
+
+.category strong{
+  font-size:13px;
+}
+
+/* PRODUCTS */
+.products{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:16px;
+}
+
+.product{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:16px;
+  overflow:hidden;
+  transition:.2s;
+}
+
+.product:hover{
+  transform:translateY(-4px);
+  box-shadow:var(--shadow);
+}
+
+.product-image{
+  height:210px;
+  background:linear-gradient(145deg,#f4e9f7,#fff);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:70px;
+  position:relative;
+}
+
+.sale{
+  position:absolute;
+  top:10px;
+  left:10px;
+  background:var(--accent);
+  color:white;
+  padding:5px 8px;
+  border-radius:6px;
+  font-size:11px;
+  font-weight:700;
+}
+
+.product-info{
+  padding:14px;
+}
+
+.product-name{
+  font-weight:600;
+  font-size:14px;
+  min-height:38px;
+}
+
+.rating{
+  color:#E0A72E;
+  font-size:13px;
+  margin:7px 0;
+}
+
+.price{
+  font-family:Poppins;
+  color:var(--primary);
+  font-weight:800;
+  font-size:18px;
+}
+
+.old-price{
+  color:#aaa;
+  text-decoration:line-through;
+  font-size:12px;
+  margin-left:5px;
+}
+
+.add{
+  width:100%;
+  margin-top:10px;
+  padding:10px;
+  background:var(--accent);
+  color:white;
+  border-radius:8px;
+  font-weight:700;
+}
+
+/* PROMO */
+.promo-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+
+.promo{
+  border-radius:18px;
+  padding:28px;
+  min-height:150px;
+  background:linear-gradient(135deg,#f3e6f8,#fff);
+}
+
+.promo:nth-child(2){
+  background:linear-gradient(135deg,#fff0f7,#fff);
+}
+
+.promo h3{
+  font-family:Poppins;
+  color:var(--primary);
+  margin-bottom:7px;
+}
+
+.promo a{
+  display:inline-block;
+  margin-top:15px;
+  color:var(--accent);
+  font-weight:700;
+  font-size:13px;
+}
+
+/* TRUST */
+.trust{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:25px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+}
+
+.trust-item{
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+
+.trust-icon{
+  width:45px;
+  height:45px;
+  background:#f4eaf7;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+}
+
+.trust strong{
+  display:block;
+  font-size:13px;
+}
+
+.trust small{
+  color:var(--muted);
+  font-size:11px;
+}
+
+/* FOOTER */
+footer{
+  margin-top:45px;
+  background:#24102f;
+  color:#eee;
+}
+
+.footer{
+  padding:45px 0 25px;
+  display:grid;
+  grid-template-columns:1.5fr 1fr 1fr 1fr;
+  gap:40px;
+}
+
+.footer h3{
+  font-family:Poppins;
+  margin-bottom:15px;
+}
+
+.footer p,.footer a{
+  display:block;
+  color:#cfc5d3;
+  font-size:13px;
+  line-height:2;
+}
+
+.copyright{
+  border-top:1px solid #432d4e;
+  padding:18px 0;
+  text-align:center;
+  color:#aaa;
+  font-size:12px;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+
+  .header-main{
+    flex-wrap:wrap;
+    padding:12px 0;
+    gap:12px;
+  }
+
+  .logo{
+    min-width:auto;
+  }
+
+  .search{
+    order:3;
+    flex-basis:100%;
+    max-width:none;
+  }
+
+  .actions{
+    margin-left:auto;
+    gap:12px;
+  }
+
+  .nav-inner{
+    overflow-x:auto;
+    gap:20px;
+    white-space:nowrap;
+  }
+
+  .hero-content{
+    width:100%;
+    padding:35px 25px;
+  }
+
+  .hero h1{
+    font-size:36px;
+  }
+
+  .hero-art{
+    display:none;
+  }
+
+  .categories{
+    grid-template-columns:repeat(4,1fr);
+  }
+
+  .products{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .promo-grid{
+    grid-template-columns:1fr;
+  }
+
+  .trust{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .footer{
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+@media(max-width:500px){
+
+  .topbar-inner{
+    justify-content:center;
+    text-align:center;
+  }
+
+  .topbar-inner span:last-child{
+    display:none;
+  }
+
+  .logo-text strong{
+    font-size:20px;
+  }
+
+  .logo-mark{
+    width:42px;
+    height:42px;
+  }
+
+  .actions .action span:last-child{
+    display:none;
+  }
+
+  .categories{
+    grid-template-columns:repeat(4,1fr);
+    gap:8px;
+  }
+
+  .category{
+    padding:12px 5px;
+  }
+
+  .cat-icon{
+    width:45px;
+    height:45px;
+    font-size:21px;
+  }
+
+  .category strong{
+    font-size:10px;
+  }
+
+  .products{
+    gap:10px;
+  }
+
+  .product-image{
+    height:150px;
+    font-size:50px;
+  }
+
+  .product-info{
+    padding:10px;
+  }
+
+  .product-name{
+    font-size:12px;
+  }
+
+  .price{
+    font-size:15px;
+  }
+
+  .footer{
+    grid-template-columns:1fr;
+  }
+
+  .trust{
+    grid-template-columns:1fr;
+  }
+}
+
+/* RIFAH V3 UX + ACCOUNT + SUPPORT + MODELS */
+.hero-models{display:flex!important;align-items:flex-end;justify-content:center;gap:10px;padding:20px 25px 0;min-height:330px}
+.model-card{position:relative;width:48%;height:315px;border-radius:28px 28px 8px 8px;overflow:hidden;background:#f4eaf7;box-shadow:0 15px 35px rgba(66,20,95,.18)}
+.model-card img{width:100%;height:100%;object-fit:cover;display:block}
+.owner-model img{object-position:center 18%}
+.female-model img{object-position:center 18%}
+.model-card span{position:absolute;left:12px;bottom:12px;background:rgba(66,20,95,.9);color:#fff;padding:7px 12px;border-radius:999px;font-size:11px;font-weight:800}
+.rifah-service-strip{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center;padding:12px;background:#fff;border-bottom:1px solid #eadff0}
+.rifah-service-strip a{padding:9px 13px;border-radius:999px;background:#faf3fb;color:#42145F;text-decoration:none;font-weight:700;font-size:12px}
+.rifah-service-strip a:hover{background:#42145F;color:#fff}
+.rifah-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:100000;padding:18px;overflow:auto}
+.rifah-modal-card{max-width:560px;margin:35px auto;background:#fff;border-radius:22px;padding:22px;box-shadow:0 20px 60px rgba(0,0,0,.3);position:relative}
+.rifah-modal-card h2{color:#42145F;margin:0 0 8px}
+.rifah-close{position:absolute;right:15px;top:12px;border:0;background:#f2edf4;border-radius:50%;width:36px;height:36px;font-size:20px;cursor:pointer}
+.rifah-form{display:grid;gap:10px;margin-top:15px}
+.rifah-form input,.rifah-form textarea,.rifah-form select{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;box-sizing:border-box;font:inherit}
+.rifah-form button,.rifah-primary{border:0;background:#C72C8A;color:#fff;padding:12px 16px;border-radius:10px;font-weight:800;cursor:pointer}
+.rifah-link-btn{border:1px solid #42145F;background:#fff;color:#42145F;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer}
+.rifah-order{border:1px solid #eadff0;border-radius:12px;padding:12px;margin:8px 0;background:#faf7fc}
+.rifah-admin{border:2px solid #42145F}
+.rifah-admin .danger{background:#b42318!important}
+.admin-product-row{display:grid;grid-template-columns:1fr 110px 100px;gap:8px;align-items:center;border-bottom:1px solid #eee;padding:8px 0}
+.admin-product-row img{width:70px;height:70px;object-fit:cover;border-radius:10px}
+@media(max-width:700px){.hero-models{min-height:250px;padding:12px 8px 0}.model-card{height:240px}.model-card span{font-size:9px;padding:5px 8px}.rifah-service-strip{justify-content:flex-start;overflow:auto;flex-wrap:nowrap}.admin-product-row{grid-template-columns:1fr 75px}}
+
+/* ===== RIFAH PROFESSIONAL FINAL PATCH ===== */
+html,body{width:100%;min-width:0;overflow-x:hidden}
+body{background:#faf9f7}
+.container{width:94%;max-width:1400px;margin-inline:auto}
+.header-main{gap:18px;width:100%}
+.logo{min-width:205px;flex:0 0 auto}
+.search{max-width:none;min-width:260px;flex:1 1 auto}
+.actions{gap:12px;flex:0 0 auto}
+.action{min-width:58px}
+.action-icon{font-size:29px;line-height:1.05}
+.action>span:last-of-type{font-size:12px;font-weight:700}
+.badge{width:22px;height:22px;font-size:11px;right:-5px;top:-7px;font-weight:800}
+.rifah-header-cart{min-width:76px;padding:5px 7px;border-radius:12px;background:#fff7fc}
+.rifah-header-cart .action-icon{font-size:31px}
+.nav-inner{gap:24px;flex-wrap:wrap}
+.nav-inner a{white-space:nowrap}
+.category-btn{border-radius:8px}
+.rifah-service-strip{gap:8px;padding:12px 10px;box-shadow:0 3px 12px rgba(66,20,95,.05)}
+.rifah-service-strip a{font-size:13px;padding:10px 14px}
+.hero-box{min-height:440px}
+.hero-content{z-index:3}
+.hero-art.hero-models{position:relative;min-height:410px;flex:1;gap:14px;padding:18px 28px 0}
+.model-card{height:380px;border-radius:32px 32px 12px 12px;background:linear-gradient(145deg,#fff,#f7eafa);border:1px solid rgba(66,20,95,.08)}
+.model-card img{object-fit:cover}
+.owner-model img{object-position:center 18%}
+.female-model img{object-position:center 18%}
+.model-card:after{content:"";position:absolute;inset:auto 0 0;height:45%;background:linear-gradient(transparent,rgba(36,9,48,.48));pointer-events:none}
+.model-card span{z-index:2;left:14px;bottom:14px;font-size:12px;padding:8px 13px}
+.hero-models:before{content:"RIFAH FASHION";position:absolute;top:18px;right:28px;background:rgba(255,255,255,.78);backdrop-filter:blur(8px);color:#42145F;padding:8px 13px;border-radius:999px;font-size:11px;font-weight:900;letter-spacing:.8px;z-index:5}
+.hero-models:after{content:"Style • Trust • For Everyone";position:absolute;bottom:12px;right:35px;color:#42145F;background:rgba(255,255,255,.82);padding:7px 12px;border-radius:999px;font-weight:800;font-size:11px;z-index:5}
+.rifah-modal-card{max-width:640px}
+.rifah-account-tabs{display:flex;gap:8px;background:#faf5fb;border-radius:12px;padding:5px;margin:12px 0}
+.rifah-account-tabs button{flex:1;border:0;padding:10px;border-radius:9px;background:transparent;color:#42145F;font-weight:800;cursor:pointer}
+.rifah-account-tabs button.active{background:#42145F;color:#fff}
+.rifah-dashboard{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
+.rifah-dashboard button{border:1px solid #eadff0;background:#fff;border-radius:14px;padding:14px;text-align:left;font-weight:800;color:#42145F;cursor:pointer}
+.rifah-profile-box{background:linear-gradient(135deg,#42145F,#C72C8A);color:#fff;padding:16px;border-radius:16px;margin-top:12px}
+.rifah-profile-box small{opacity:.86}
+.rifah-hidden-contact{display:none!important}
+.rifah-support-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:15px}
+.rifah-support-actions a{display:inline-flex;align-items:center;justify-content:center;padding:11px 14px;border-radius:10px;background:#f8eff9;color:#42145F;font-weight:800;text-decoration:none}
+.rifah-support-actions a.primary{background:#C72C8A;color:#fff}
+.footer .contact-direct{display:none!important}
+.footer .support-launch{display:inline-flex!important;margin-top:6px;padding:9px 12px;background:#f8eff9;border-radius:9px;color:#42145F;font-weight:800}
+@media (min-width:1100px){
+  .header-main{min-height:94px}
+  .logo img{max-width:205px!important}
+  .action-icon{font-size:31px}
+  .rifah-header-cart .action-icon{font-size:34px}
+  .badge{width:24px;height:24px;font-size:12px}
+}
+@media (max-width:900px){
+  .container{width:94%}
+  .header-main{flex-wrap:wrap;padding:10px 0}
+  .logo{min-width:170px}
+  .search{order:3;width:100%;flex-basis:100%}
+  .actions{margin-left:auto}
+  .hero-box{flex-direction:column}
+  .hero-content{width:100%;padding:35px 28px 10px}
+  .hero h1{font-size:36px}
+  .hero-art.hero-models{width:100%;padding:12px 18px 18px}
+  .model-card{height:330px}
+}
+@media (max-width:600px){
+  .container{width:92%}
+  .actions{gap:5px}
+  .action{min-width:48px}
+  .action-icon{font-size:24px}
+  .rifah-header-cart .action-icon{font-size:27px}
+  .action>span:last-of-type{font-size:10px}
+  .hero-models{gap:8px!important}
+  .model-card{height:270px;border-radius:22px 22px 8px 8px}
+  .hero-models:before,.hero-models:after{display:none}
+  .rifah-dashboard{grid-template-columns:1fr}
+}
+
+
+/* ===== RIFAH EASY PRODUCT MANAGER V3 ===== */
+.rifah-product-manager{background:linear-gradient(135deg,#fff,#faf5fc);border:1px solid #eadff0;border-radius:18px;padding:16px;margin:12px 0 18px}
+.rifah-manager-title{font-size:20px;font-weight:900;color:#42145F;margin:0 0 4px}
+.rifah-manager-help{font-size:12px;color:#666;margin:0 0 14px}
+.rifah-product-grid-form{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.rifah-product-grid-form .full{grid-column:1/-1}
+.rifah-product-grid-form input,.rifah-product-grid-form select,.rifah-product-grid-form textarea{width:100%;box-sizing:border-box;padding:12px;border:1px solid #d9cfe0;border-radius:11px;background:#fff;font:inherit}
+.rifah-product-grid-form textarea{min-height:95px;resize:vertical}
+.rifah-upload-box{border:2px dashed #cdb5d8;background:#fff;border-radius:13px;padding:13px;text-align:center;color:#42145F;font-weight:800}
+.rifah-upload-box input{border:0;padding:8px;width:100%;box-sizing:border-box}
+.rifah-preview{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.rifah-preview img{width:72px;height:72px;object-fit:cover;border-radius:10px;border:1px solid #eadff0}
+.rifah-product-detail{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+.rifah-detail-main{width:100%;height:360px;object-fit:contain;background:#faf7fc;border-radius:16px}
+.rifah-detail-thumbs{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.rifah-detail-thumbs img{width:62px;height:62px;object-fit:cover;border-radius:8px;border:2px solid transparent;cursor:pointer}
+.rifah-detail-thumbs img.active{border-color:#C72C8A}
+.rifah-detail-title{font-size:24px;font-weight:900;color:#42145F;margin:0 0 8px}
+.rifah-detail-price{font-size:24px;font-weight:900;color:#C72C8A}
+.rifah-detail-old{color:#999;text-decoration:line-through;margin-left:8px}
+.rifah-detail-meta{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.rifah-chip{background:#f5eafa;color:#42145F;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:800}
+.rifah-detail-description{white-space:pre-line;color:#555;line-height:1.65;margin:12px 0}
+@media(max-width:700px){.rifah-product-grid-form,.rifah-product-detail{grid-template-columns:1fr}.rifah-product-grid-form .full{grid-column:auto}.rifah-detail-main{height:280px}}
+
+</style>
+
+<style id="rifah-frontend-fixes">
+.rifah-support-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}.rifah-support-actions a,.rifah-support-actions button{display:flex;align-items:center;justify-content:center;gap:7px;text-decoration:none;border:0;border-radius:11px;padding:12px;font-weight:800;cursor:pointer;background:#f7eef9;color:#42145F}.rifah-support-actions a.primary,.rifah-support-actions button.primary{background:#C72C8A;color:#fff}.rifah-support-info{background:#faf7fc;border:1px solid #eadff0;border-radius:13px;padding:13px;line-height:1.8}.rifah-feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}.rifah-feature-card{background:#fff;border:1px solid #eadff0;border-radius:12px;padding:14px;text-align:center;cursor:pointer;font-weight:800;color:#42145F}.rifah-feature-card:hover{box-shadow:0 8px 25px rgba(66,20,95,.1);transform:translateY(-2px)}.rifah-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.rifah-detail-grid img{width:100%;max-height:330px;object-fit:contain;border-radius:14px;background:#faf7fc}.rifah-variant{display:inline-block;border:1px solid #ddd;border-radius:8px;padding:7px 10px;margin:4px;cursor:pointer}.rifah-variant.active{border-color:#C72C8A;background:#fff1fa;color:#C72C8A}.rifah-search-empty{display:none;text-align:center;padding:20px;color:#777}.rifah-user-status{font-size:12px;color:#42145F;margin:8px 0;font-weight:700}
+@media(max-width:700px){.rifah-support-actions{grid-template-columns:1fr}.rifah-feature-grid{grid-template-columns:1fr 1fr}.rifah-detail-grid{grid-template-columns:1fr}}
+</style>
+
+
+<style id="rifah-layout-final-fix">
+/* Final desktop/mobile layout refinement */
+@media (min-width:901px){
+  .container{width:min(94%,1320px)}
+  .products{grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+  .product-image{height:205px}
+  .product-info{padding:12px 13px}
+  .product-name{font-size:13px;min-height:20px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.35}
+  .rating{white-space:nowrap;margin:6px 0}
+  .price{font-size:17px;white-space:nowrap}
+  .add{white-space:nowrap;padding:9px 8px}
+  .promo-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+  .promo{min-height:145px;padding:24px}
+  .promo h3{font-size:21px;white-space:nowrap}
+  .promo p{font-size:14px;line-height:1.55}
+  .footer{grid-template-columns:1.45fr 1fr 1fr 1fr;gap:28px}
+  .footer h3{font-size:17px;white-space:nowrap}
+  .footer p,.footer a{font-size:12px;line-height:1.9;white-space:nowrap}
+}
+
+/* One unified fashion advertisement, not two separate boxes */
+.hero-box{overflow:hidden}
+.hero-art.hero-models{
+  position:relative!important;
+  display:flex!important;
+  align-items:flex-end!important;
+  justify-content:center!important;
+  gap:0!important;
+  min-height:410px!important;
+  padding:10px 18px 0!important;
+  background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(199,44,138,.10));
+}
+.model-card{
+  position:relative!important;
+  width:50%!important;
+  height:395px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  overflow:hidden!important;
+}
+.model-card img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  display:block!important;
+  border:0!important;
+}
+.owner-model img{object-position:center bottom!important;object-fit:contain!important;transform:scale(1.08);transform-origin:center bottom}
+.female-model img{object-position:center 18%!important}
+.model-card:after{display:none!important}
+.model-card span{display:none!important}
+.hero-models:before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:2!important;
+  pointer-events:none!important;
+  background:linear-gradient(90deg,rgba(255,247,251,.05),rgba(255,247,251,0) 48%,rgba(255,247,251,.10))!important;
+}
+.hero-models:after{
+  content:""!important;
+  position:absolute!important;
+  left:50%!important;
+  bottom:20px!important;
+  transform:translateX(-50%)!important;
+  width:max-content!important;
+  max-width:90%!important;
+  padding:8px 16px!important;
+  border-radius:999px!important;
+  background:rgba(66,20,95,.90)!important;
+  color:#fff!important;
+  font-size:12px!important;
+  font-weight:800!important;
+  letter-spacing:.2px!important;
+  z-index:6!important;
+  content:"Style • Trust • For Everyone"!important;
+}
+.hero-ad-copy{
+  position:absolute!important;
+  top:20px!important;
+  right:20px!important;
+  z-index:7!important;
+  text-align:right!important;
+  color:#42145F!important;
+  display:flex!important;
+  flex-direction:column!important;
+  gap:2px!important;
+  pointer-events:none!important;
+}
+.hero-ad-copy strong{font-family:Poppins,sans-serif;font-size:18px;line-height:1.1}
+.hero-ad-copy span{font-size:12px;font-weight:800;color:#C72C8A}
+.hero-ad-copy small{font-size:11px;color:#6d5a74;font-weight:700}
+
+/* Prevent desktop-mode cards and footer text from becoming tall vertical columns */
+@media (min-width:901px) and (max-width:1100px){
+  .products{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+  .product-image{height:175px}
+  .product-name{font-size:12px}
+  .footer{gap:16px}
+  .footer p,.footer a{font-size:11px}
+  .footer h3{font-size:15px}
+}
+
+@media (max-width:900px){
+  .products{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .product-name{white-space:normal;min-height:38px}
+  .hero-art.hero-models{min-height:335px!important}
+  .model-card{height:320px!important}
+  .hero-ad-copy{top:10px;right:12px}
+  .hero-ad-copy strong{font-size:15px}
+  .hero-ad-copy span{font-size:10px}
+  .hero-ad-copy small{font-size:9px}
+  .footer{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+  .footer p,.footer a{white-space:normal}
+}
+</style>
+
+
+<style id="rifah-v2-clarity-fix">
+/* V2: sharper model photos on desktop mode */
+.hero-art.hero-models{image-rendering:auto!important;}
+.model-card{isolation:isolate!important;}
+.model-card img{image-rendering:auto!important;filter:none!important;backface-visibility:hidden;transform:none;}
+.owner-model img{object-fit:contain!important;object-position:center bottom!important;transform:scale(1.02)!important;transform-origin:center bottom!important;}
+.female-model img{object-fit:cover!important;object-position:center 18%!important;}
+@media (min-width:901px){
+  .hero-art.hero-models{min-height:430px!important;padding:10px 24px 0!important;gap:8px!important;}
+  .model-card{height:415px!important;}
+  .owner-model img{object-fit:contain!important;}
+  .female-model img{object-fit:cover!important;}
+}
+/* Clear cart quantity badges */
+#headerCartBadge{min-width:30px!important;width:30px!important;height:30px!important;border-radius:50%!important;font-size:14px!important;font-weight:900!important;line-height:30px!important;box-shadow:0 3px 10px rgba(0,0,0,.22)!important;border:2px solid #fff!important;z-index:20!important;}
+#rifah-cart-count{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-width:28px!important;height:28px!important;padding:0 8px!important;border-radius:999px!important;background:#C72C8A!important;color:#fff!important;font-size:15px!important;font-weight:900!important;line-height:1!important;margin-left:4px!important;box-shadow:0 2px 8px rgba(0,0,0,.18)!important;}
+#rifah-cart-box{font-size:16px!important;padding:13px 18px!important;white-space:nowrap!important;}
+@media(max-width:700px){#headerCartBadge{width:26px!important;height:26px!important;min-width:26px!important;font-size:12px!important;}#rifah-cart-count{min-width:25px!important;height:25px!important;font-size:13px!important;}}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+  <div class="container topbar-inner">
+    <span>🚚 Fast & Reliable Delivery Across Bangladesh</span>
+    <span>✨ Special Offers Available Today</span>
+  </div>
+</div>
+
+<header class="header">
+  <div class="container header-main">
+
+<a href="#" class="logo">
+    <img src="logo.png" alt="Rifah Online Shop" style="width:180px;height:auto;display:block;">
+</a>
+
+    <div class="search">
+      <select>
+        <option>All Categories</option>
+        <option>Women's Fashion</option>
+        <option>Men's Fashion</option>
+        <option>Kids & Baby</option>
+        <option>Electronics</option>
+        <option>Toys</option>
+      </select>
+      <input id="rifahSearchInput" type="search" placeholder="Search for products...">
+      <button id="rifahSearchBtn" type="button">⌕</button>
+    </div>
+
+    <div class="actions">
+
+      <a class="action rifah-account-link" href="#account">
+        <span class="action-icon">👤</span><span>My Account</span>
+      </a>
+
+      <a class="action rifah-wishlist-link" href="#wishlist">
+        <span class="action-icon">♡</span><span>Wishlist</span>
+      </a>
+
+      <a class="action rifah-header-cart" href="#cart">
+        <span class="action-icon">🛒</span><span>Cart</span><b class="badge" id="headerCartBadge">0</b>
+      </a>
+
+    </div>
+  </div>
+</header>
+
+<nav class="nav">
+  <div class="container nav-inner">
+    <a class="category-btn" href="#">☰ Browse Categories</a>
+    <a href="#">Home</a>
+    <a href="#">Shop</a>
+    <a href="#">Hot Deals</a>
+    <a href="#">New Arrivals</a>
+    <a href="#">About Us</a>
+    <a href="#">Contact</a>
+  </div>
+</nav>
+
+<div class="rifah-service-strip">
+  <a href="#products" class="rifah-all-products">🛍️ All Products</a>
+  <a href="#account" data-rifah-modal="orders">📦 My Orders</a>
+  <a href="#wishlist" data-rifah-modal="wishlist">♡ Wishlist</a>
+  <a href="#track" data-rifah-modal="track">🚚 Track Order</a>
+  <a href="#account" data-rifah-modal="account">👤 Login / Register</a>
+  <a href="#support" data-rifah-modal="contact">📞 Customer Support</a>
+</div>
+
+<div class="container">
+  <div class="rifah-feature-grid" aria-label="Customer shortcuts">
+    <button class="rifah-feature-card" type="button" data-rifah-modal="orders">📦<br>My Orders</button>
+    <button class="rifah-feature-card" type="button" data-rifah-modal="wishlist">♡<br>Wishlist</button>
+    <button class="rifah-feature-card" type="button" data-rifah-modal="track">🚚<br>Track Order</button>
+    <button class="rifah-feature-card" type="button" data-rifah-modal="account">👤<br>Login / Register</button>
+  </div>
+</div>
+
+
+<section id="rifahCategorySection" style="margin:18px auto;max-width:1200px;padding:0 14px">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+    <button id="rifahAllProductsBtn" class="rifah-primary" type="button" style="white-space:nowrap">🛍️ All Products</button>
+    <div id="rifahCategoryScroller" style="display:flex;gap:8px;overflow-x:auto;scroll-behavior:smooth;touch-action:pan-x;padding:4px 2px;flex:1;scrollbar-width:none">
+    </div>
+  </div>
+</section>
+
+<main>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-box">
+
+      <div class="hero-content">
+        <div class="hero-label">Biggest Sale of the Year</div>
+
+        <h1>Everything You Love, In One Place.</h1>
+
+        <p>
+          Discover fashion, kids products, electronics, toys
+          and more at Rifah Online Shop.
+        </p>
+
+        <a href="#products" class="primary-btn">
+          Shop Now →
+        </a>
+      </div>
+
+      <div class="hero-art hero-models">
+        <div class="hero-ad-copy"><strong>Rifah Online Shop</strong><span>Fashion • Style • Confidence</span><small>Made for Everyone</small></div>
+        <div class="model-card owner-model">
+          <img src="data:image/webp;base64,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" alt="Rifah Online Shop Owner">
+          
+        </div>
+        <div class="model-card female-model">
+          <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1400&q=95" alt="Rifah Fashion Model">
+          
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+
+    <div class="section-head">
+      <h2>Shop by Category</h2>
+      <a href="#products" class="view rifah-all-products">View All Products →</a>
+    </div>
+
+    <div class="categories">
+
+      <a class="category" href="#">
+        <div class="cat-icon">👗</div>
+        <strong>Women's Fashion</strong>
+      </a>
+
+      <a class="category" href="#">
+        <div class="cat-icon">👔</div>
+        <strong>Men's Fashion</strong>
+      </a>
+
+      <a class="category" href="#">
+        <div class="cat-icon">👶</div>
+        <strong>Kids & Baby</strong>
+      </a>
+
+      <a class="category" href="#">
+        <div class="cat-icon">⚡</div>
+        <strong>Electronics</strong>
+      </a>
+
+      <a class="category" href="#">
+        <div class="cat-icon">🧸</div>
+        <strong>Toys</strong>
+      </a>
+
+      <a class="category" href="#">
+        <div class="cat-icon">🏠</div>
+        <strong>Home</strong>
+      </a>
+
+      <a class="category" href="#">
+        <div class="cat-icon">＋</div>
+        <strong>More</strong>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<section class="section" id="products">
+  <div class="container">
+
+    <div class="section-head">
+      <h2>Best Selling Products</h2>
+      <a href="#" class="view">View All →</a>
+    </div>
+
+    <div class="products">
+
+      <article class="product">
+        <div class="product-image">
+          <span class="sale">-20%</span>👗
+        </div>
+        <div class="product-info">
+          <div class="product-name">Premium Women's Dress</div>
+          <div class="rating">★★★★★ (12)</div>
+          <span class="price">৳1,250</span>
+          <span class="old-price">৳1,550</span>
+          <button class="add">Add to Cart</button>
+        </div>
+      </article>
+
+      <article class="product">
+        <div class="product-image">
+          <span class="sale">NEW</span>👔
+        </div>
+        <div class="product-info">
+          <div class="product-name">Men's Premium Casual Shirt</div>
+          <div class="rating">★★★★★ (8)</div>
+          <span class="price">৳880</span>
+          <span class="old-price">৳1,100</span>
+          <button class="add">Add to Cart</button>
+        </div>
+      </article>
+
+      <article class="product">
+        <div class="product-image">👧</div>
+        <div class="product-info">
+          <div class="product-name">Kids Party Dress</div>
+          <div class="rating">★★★★★ (15)</div>
+          <span class="price">৳750</span>
+          <span class="old-price">৳950</span>
+          <button class="add">Add to Cart</button>
+        </div>
+      </article>
+
+      <article class="product">
+        <div class="product-image">
+          <span class="sale">-15%</span>💡
+        </div>
+        <div class="product-info">
+          <div class="product-name">LED Smart Bulb</div>
+          <div class="rating">★★★★☆ (9)</div>
+          <span class="price">৳350</span>
+          <span class="old-price">৳420</span>
+          <button class="add">Add to Cart</button>
+        </div>
+      </article>
+
+      <article class="product">
+        <div class="product-image">🧸</div>
+        <div class="product-info">
+          <div class="product-name">Soft Teddy Bear</div>
+          <div class="rating">★★★★★ (20)</div>
+          <span class="price">৳420</span>
+          <span class="old-price">৳550</span>
+          <button class="add">Add to Cart</button>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="section" id="deals">
+  <div class="container">
+
+    <div class="promo-grid">
+
+      <div class="promo">
+        <h3>Combo Offers</h3>
+        <p>Save more when you buy together.</p>
+        <a href="#">Shop Offers →</a>
+      </div>
+
+      <div class="promo">
+        <h3>Deals of the Day</h3>
+        <p>Limited-time discounts on selected products.</p>
+        <a href="#">View Deals →</a>
+      </div>
+
+      <div class="promo">
+        <h3>New Arrivals</h3>
+        <p>Discover the latest products.</p>
+        <a href="#">Explore Now →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+
+    <div class="section-head">
+      <h2>Why Choose Rifah Online Shop?</h2>
+    </div>
+
+    <div class="trust">
+
+      <div class="trust-item">
+        <div class="trust-icon">🛡️</div>
+        <div>
+          <strong>Quality Products</strong>
+          <small>Selected with care</small>
+        </div>
+      </div>
+
+      <div class="trust-item">
+        <div class="trust-icon">🚚</div>
+        <div>
+          <strong>Fast Delivery</strong>
+          <small>Reliable delivery service</small>
+        </div>
+      </div>
+
+      <div class="trust-item">
+        <div class="trust-icon">💳</div>
+        <div>
+          <strong>Secure Payment</strong>
+          <small>COD & Online Payment</small>
+        </div>
+      </div>
+
+      <div class="trust-item">
+        <div class="trust-icon">🎧</div>
+        <div>
+          <strong>Customer Support</strong>
+          <small>We're here to help</small>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container footer">
+
+    <div>
+      <h3>Rifah Online Shop</h3>
+      <p>
+        Your trusted online shopping destination for
+        fashion, lifestyle, electronics and more.
+      </p>
+    </div>
+
+    <div>
+      <h3>Customer Service</h3>
+      <a href="#support" data-rifah-modal="contact">📞 Contact Us</a>
+      <a href="#support" data-rifah-modal="shipping">🚚 Shipping Policy</a>
+      <a href="#support" data-rifah-modal="return">↩️ Return & Refund Policy</a>
+      <a href="#support" data-rifah-modal="privacy">🔒 Privacy Policy</a>
+      <a href="#support" data-rifah-modal="terms">📄 Terms & Conditions</a>
+    </div>
+
+    <div>
+      <h3>My Account</h3>
+      <a href="#account" data-rifah-modal="orders">📦 My Orders</a>
+      <a href="#wishlist" data-rifah-modal="wishlist">♡ Wishlist</a>
+      <a href="#track" data-rifah-modal="track">🚚 Track Order</a>
+      <a href="#account" data-rifah-modal="account">👤 Login / Register</a>
+    </div>
+
+    <div>
+      <h3>Payment</h3>
+      <p>Cash on Delivery</p>
+      <p>Online Payment</p>
+      <p>bKash • Nagad • Card</p>
+      <p class="contact-direct">📞 01837786320</p>
+      <p class="contact-direct">💬 WhatsApp: 01837786320</p>
+      <p class="contact-direct">✉️ Ahmeddidarhridoy@gmail.com</p>
+      <a href="#support" data-rifah-modal="contact" class="support-launch">📞 Contact Support</a>
+    </div>
+
+  </div>
+
+  <div class="copyright">
+    © 2026 Rifah Online Shop. All Rights Reserved.
+  </div>
+</footer>
+<style>
+#rifah-cart-box{
+position:fixed;
+right:15px;
+bottom:15px;
+z-index:9999;
+background:#42145F;
+color:white;
+padding:12px 18px;
+border-radius:30px;
+font-weight:bold;
+box-shadow:0 5px 20px rgba(0,0,0,.25);
+cursor:pointer;
+}
+#rifah-cart-panel{
+display:none;
+position:fixed;
+right:15px;
+bottom:75px;
+width:320px;
+max-width:90%;
+background:white;
+color:#222;
+z-index:10000;
+border-radius:15px;
+padding:18px;
+box-shadow:0 5px 30px rgba(0,0,0,.3);
+}
+#rifah-cart-panel h3{
+margin-top:0;
+color:#42145F;
+}
+.rifah-cart-item{
+border-bottom:1px solid #ddd;
+padding:10px 0;
+}
+.rifah-cart-total{
+font-weight:bold;
+font-size:18px;
+margin-top:15px;
+}
+#rifah-checkout{
+width:100%;
+margin-top:15px;
+padding:12px;
+border:0;
+border-radius:8px;
+background:#C72C8A;
+color:white;
+font-weight:bold;
+}
+
+/* Enhanced checkout */
+.rifah-checkout-summary{
+  background:#faf7fc;border:1px solid #eadff0;border-radius:14px;
+  padding:15px;margin:18px 0;
+}
+.rifah-summary-row{
+  display:flex;justify-content:space-between;gap:12px;
+  padding:6px 0;font-size:14px;color:#555;
+}
+.rifah-summary-row.total{
+  border-top:1px solid #ddd;margin-top:8px;padding-top:12px;
+  font-size:18px;font-weight:800;color:#42145F;
+}
+.rifah-plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.rifah-plan{
+  border:1px solid #ddd;background:#fff;border-radius:10px;
+  padding:11px 6px;text-align:center;font-size:13px;font-weight:700;
+}
+.rifah-plan.active{border:2px solid #42145F;background:#f7f1fa;color:#42145F}
+.rifah-coupon{display:flex;gap:8px;margin-top:10px}
+.rifah-coupon input{flex:1;padding:12px;border:1px solid #ddd;border-radius:9px}
+.rifah-coupon button{padding:12px 15px;border:0;border-radius:9px;background:#42145F;color:#fff;font-weight:700}
+.rifah-note{
+  width:100%;min-height:75px;padding:12px;border:1px solid #ddd;
+  border-radius:10px;box-sizing:border-box;font-size:14px;resize:vertical;
+}
+@media(max-width:500px){.rifah-plan-grid{grid-template-columns:1fr}.rifah-coupon{flex-direction:column}}
+
+</style>
+
+<div id="rifah-cart-box">🛒 Cart (<span id="rifah-cart-count">0</span>)</div>
+
+<div id="rifah-cart-panel">
+<h3>Your Cart</h3>
+<div id="rifah-cart-items">Your cart is empty.</div>
+<div class="rifah-cart-total">
+Total: ৳<span id="rifah-cart-total">0</span>
+</div>
+<button id="rifah-checkout">Checkout</button>
+</div>
+
+<script>
+(function(){
+
+  let cart = JSON.parse(localStorage.getItem("rifahCart") || "[]");
+
+  function updateCart(){
+    const count = cart.reduce((sum,item) => sum + item.qty, 0);
+    document.getElementById("rifah-cart-count").textContent = count;
+
+    const items = document.getElementById("rifah-cart-items");
+    let total = 0;
+
+    if(cart.length === 0){
+      items.innerHTML = "Your cart is empty.";
+      document.getElementById("rifah-cart-total").textContent = "0";
+      localStorage.setItem("rifahCart", JSON.stringify(cart));
+      return;
+    }
+
+    items.innerHTML = "";
+
+    cart.forEach((item,index) => {
+      total += item.price * item.qty;
+
+      const div = document.createElement("div");
+      div.className = "rifah-cart-item";
+      div.innerHTML =
+        "<b>" + item.name + "</b><br>" +
+        "৳" + item.price.toLocaleString() + " × " + item.qty +
+        " <button data-remove='" + index + "' style='float:right'>Remove</button>";
+
+      items.appendChild(div);
+    });
+
+    document.getElementById("rifah-cart-total").textContent = total.toLocaleString();
+    localStorage.setItem("rifahCart", JSON.stringify(cart));
+  }
+
+  // Add to Cart
+  document.querySelectorAll(".add").forEach(function(btn){
+    btn.addEventListener("click", function(e){
+      e.preventDefault();
+
+      const card = btn.closest(".product");
+      if(!card) return;
+
+      const nameEl = card.querySelector(".product-name");
+      const priceEl = card.querySelector(".price");
+
+      const name = nameEl ? nameEl.textContent.trim() : "Rifah Product";
+      const priceText = priceEl ? priceEl.textContent.replace(/[^\d]/g,"") : "0";
+      const price = parseInt(priceText, 10) || 0;
+
+      const existing = cart.find(item => item.name === name);
+
+      if(existing){
+        existing.qty += 1;
+      }else{
+        cart.push({
+          name: name,
+          price: price,
+          qty: 1
+        });
+      }
+
+      updateCart();
+      alert(name + " added to cart!");
+    });
+  });
+
+  // Open/close cart
+  document.getElementById("rifah-cart-box").onclick = function(){
+    const panel = document.getElementById("rifah-cart-panel");
+    panel.style.display = panel.style.display === "block" ? "none" : "block";
+  };
+
+  // Remove item
+  document.getElementById("rifah-cart-items").addEventListener("click", function(e){
+    if(e.target.dataset.remove !== undefined){
+      cart.splice(parseInt(e.target.dataset.remove,10), 1);
+      updateCart();
+    }
+  });
+
+  // Checkout modal
+  document.body.insertAdjacentHTML("beforeend", `
+    <div id="rifah-checkout-box" style="
+      display:none;
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.55);
+      z-index:99999;
+      overflow-y:auto;
+      padding:20px 12px;
+      font-family:Arial,sans-serif;
+    ">
+      <div style="
+        max-width:520px;
+        margin:20px auto;
+        background:#fff;
+        border-radius:20px;
+        padding:22px;
+        box-shadow:0 10px 40px rgba(0,0,0,.25);
+      ">
+        <div style="
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+          margin-bottom:20px;
+        ">
+          <h2 style="margin:0;color:#42145F;">Checkout</h2>
+
+          <button id="closeCheckout" type="button" style="
+            border:0;
+            background:#f1f1f1;
+            border-radius:50%;
+            width:38px;
+            height:38px;
+            font-size:22px;
+          ">×</button>
+        </div>
+
+        <h3 style="color:#42145F;margin-bottom:12px;">Customer Information</h3>
+
+        <div style="
+          border:1px solid #ddd;
+          border-radius:14px;
+          padding:15px;
+        ">
+          <input id="customerName" type="text" placeholder="আপনার নাম" style="
+            width:100%;
+            padding:14px;
+            margin-bottom:12px;
+            border:1px solid #ddd;
+            border-radius:10px;
+            box-sizing:border-box;
+            font-size:16px;
+          ">
+
+          <input id="customerEmail" type="email" placeholder="ইমেইল (Optional)" style="
+            width:100%;
+            padding:14px;
+            margin-bottom:12px;
+            border:1px solid #ddd;
+            border-radius:10px;
+            box-sizing:border-box;
+            font-size:16px;
+          ">
+
+          <input id="customerPhone" type="tel" placeholder="মোবাইল নম্বর" style="
+            width:100%;
+            padding:14px;
+            margin-bottom:12px;
+            border:1px solid #ddd;
+            border-radius:10px;
+            box-sizing:border-box;
+            font-size:16px;
+          ">
+
+          <textarea id="customerAddress" placeholder="সম্পূর্ণ ঠিকানা" style="
+            width:100%;
+            height:90px;
+            padding:14px;
+            border:1px solid #ddd;
+            border-radius:10px;
+            box-sizing:border-box;
+            font-size:16px;
+            resize:none;
+          "></textarea>
+        </div>
+
+        
+
+
+<div style="margin:0 0 18px;padding:15px;border:1px solid #eadff0;border-radius:14px;background:#faf7fc;">
+  <h3 style="color:#42145F;margin:0 0 12px;">Delivery Address</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+    <div>
+      <label style="display:block;font-size:13px;font-weight:700;color:#555;margin-bottom:6px;">District</label>
+      <select id="deliveryDistrict" style="width:100%;height:50px;padding:0 12px;border:1px solid #ddd;border-radius:10px;background:#fff;font-size:15px;appearance:auto;">
+        <option value="">Select District</option>
+      </select>
+    </div>
+    <div>
+      <label style="display:block;font-size:13px;font-weight:700;color:#555;margin-bottom:6px;">Thana / Upazila</label>
+      <select id="deliveryThana" disabled style="width:100%;height:50px;padding:0 12px;border:1px solid #ddd;border-radius:10px;background:#fff;font-size:15px;appearance:auto;">
+        <option value="">Select Thana</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div style="margin:0 0 18px;padding:15px;border:1px solid #eadff0;border-radius:14px;background:#faf7fc;">
+  <h3 style="color:#42145F;margin:0 0 8px;">Delivery Charge</h3>
+  <div id="deliveryChargeMessage" style="color:#555;font-size:14px;">District নির্বাচন করলে Delivery Charge অটোমেটিক নির্ধারণ হবে।</div>
+</div>
+
+<div class="rifah-checkout-summary">
+  <h3 style="color:#42145F;margin:0 0 10px;">Order Summary</h3>
+  <div id="checkoutItems"></div>
+  <div class="rifah-summary-row"><span>Subtotal</span><strong>৳<span id="checkoutSubtotal">0</span></strong></div>
+  <div class="rifah-summary-row"><span>Delivery Charge</span><strong>৳<span id="checkoutDelivery">0</span></strong></div>
+  <div class="rifah-summary-row"><span>Discount</span><strong>− ৳<span id="checkoutDiscount">0</span></strong></div>
+  <div class="rifah-summary-row total"><span>Total</span><strong>৳<span id="checkoutTotal">0</span></strong></div>
+
+  <div style="margin-top:15px;font-weight:700;color:#42145F;">Payment Plan <span style="font-size:12px;color:#777;font-weight:500;">(Choose how much to pay now)</span></div>
+  <div class="rifah-plan-grid">
+    <button type="button" class="rifah-plan active" data-plan="100">100% Full Payment</button>
+    <button type="button" class="rifah-plan" data-plan="75">75% Advance Payment</button>
+    <button type="button" class="rifah-plan" data-plan="50">50% Advance Payment</button>
+  </div>
+
+  <div style="margin-top:9px;font-size:12px;color:#666;">
+    Full Payment = 100% advance. Customer can choose 75% or 50% advance when applicable.
+  </div>
+  <div id="paymentPlanAmount" style="margin-top:10px;padding:11px;border-radius:10px;background:#fff;border:1px solid #e7d9ee;color:#42145F;font-size:14px;">
+    Pay Now: <strong>৳0</strong> · Remaining: <strong>৳0</strong>
+  </div>
+
+  <div style="margin-top:16px;font-weight:700;color:#42145F;">Coupon / Gift Voucher</div>
+  <div class="rifah-coupon">
+    <input id="couponCode" type="text" placeholder="Coupon code">
+    <button id="applyCoupon" type="button">Apply</button>
+  </div>
+
+  <div style="margin-top:16px;font-weight:700;color:#42145F;">Special Notes</div>
+  <textarea id="orderNote" class="rifah-note" placeholder="কোনো বিশেষ নির্দেশনা থাকলে লিখুন..."></textarea>
+</div>
+
+<h3 style="color:#42145F;margin:22px 0 12px;">Payment Method</h3>
+
+        <button id="paymentButton" type="button" style="
+          width:100%;
+          padding:15px;
+          background:#42145F;
+          color:white;
+          border:0;
+          border-radius:12px;
+          font-size:17px;
+          font-weight:bold;
+          text-align:left;
+        ">💳 Select Payment Method</button>
+
+        <div id="paymentOptions" style="
+          display:none;
+          margin-top:10px;
+          border:1px solid #ddd;
+          border-radius:12px;
+          overflow:hidden;
+        ">
+          <button type="button" class="paymentOption" data-payment="Cash on Delivery">🏠 Cash on Delivery</button>
+          <button type="button" class="paymentOption" data-payment="Online Payment">💳 Online Payment</button>
+          <button type="button" class="paymentOption" data-payment="bKash">🟣 bKash</button>
+          <button type="button" class="paymentOption" data-payment="Nagad">🟠 Nagad</button>
+          <button type="button" class="paymentOption" data-payment="Rocket">🔵 Rocket</button>
+          <button type="button" class="paymentOption" data-payment="Visa Card">💳 Visa Card</button>
+          <button type="button" class="paymentOption" data-payment="Mastercard">💳 Mastercard</button>
+          <button type="button" class="paymentOption" data-payment="American Express">💳 American Express</button>
+          <button type="button" class="paymentOption" data-payment="International Card">🌐 International Card</button>
+        </div>
+
+        <div id="paymentDetails" style="display:none;margin-top:12px;padding:14px;background:#faf7fc;border:1px solid #eadff0;border-radius:12px;"></div>
+
+        <div id="selectedPayment" style="
+          margin-top:12px;
+          padding:12px;
+          background:#f7f1fa;
+          border-radius:10px;
+          display:none;
+          color:#42145F;
+          font-weight:bold;
+        "></div>
+
+        <button id="placeOrderButton" type="button" style="
+          width:100%;
+          margin-top:22px;
+          padding:16px;
+          background:#b00068;
+          color:white;
+          border:0;
+          border-radius:12px;
+          font-size:18px;
+          font-weight:bold;
+        ">PLACE ORDER</button>
+      </div>
+    </div>
+  `);
+
+  const checkoutBox = document.getElementById("rifah-checkout-box");
+  const paymentButton = document.getElementById("paymentButton");
+  const paymentOptions = document.getElementById("paymentOptions");
+  const selectedPayment = document.getElementById("selectedPayment");
+
+  // Checkout button
+  document.getElementById("rifah-checkout").onclick = function(){
+    if(cart.length === 0){
+      alert("আপনার Cart খালি। আগে একটি Product Add to Cart করুন।");
+      return;
+    }
+    document.getElementById("rifah-cart-panel").style.display = "none";
+    renderCheckoutSummary();
+    checkoutBox.style.display = "block";
+  };
+
+  // Close checkout
+  document.getElementById("closeCheckout").onclick = function(){
+    checkoutBox.style.display = "none";
+  };
+
+  // Payment menu
+  paymentButton.onclick = function(){
+    paymentOptions.style.display =
+      paymentOptions.style.display === "block" ? "none" : "block";
+  };
+
+
+
+  // Bangladesh District + Thana/Upazila dropdowns
+  const bangladeshDistricts = {"ঢাকা": ["ধামরাই", "দোহার", "কেরানীগঞ্জ", "নবাবগঞ্জ", "সাভার"], "ফরিদপুর": ["আলফাডাঙ্গা", "ভাঙ্গা", "বোয়ালমারী", "চরভদ্রাসন", "ফরিদপুর সদর", "মধুখালী", "নগরকান্দা", "সদরপুর", "সালথা"], "গাজীপুর": ["গাজীপুর সদর", "কালিয়াকৈর", "কালীগঞ্জ", "কাপাসিয়া", "শ্রীপুর"], "গোপালগঞ্জ": ["গোপালগঞ্জ সদর", "কাশিয়ানী", "কোটালীপাড়া", "মুকসুদপুর", "টুঙ্গিপাড়া"], "কিশোরগঞ্জ": ["অষ্টগ্রাম", "বাজিতপুর", "ভৈরব", "হোসেনপুর", "ইটনা", "করিমগঞ্জ", "কটিয়াদী", "কিশোরগঞ্জ সদর", "কুলিয়ারচর", "মিঠামইন", "নিকলী", "পাকুন্দিয়া", "তাড়াইল"], "মাদারীপুর": ["কালকিনি", "মাদারীপুর সদর", "রাজৈর", "শিবচর", "ডাসার"], "মানিকগঞ্জ": ["দৌলতপুর", "ঘিওর", "হরিরামপুর", "মানিকগঞ্জ সদর", "সাটুরিয়া", "শিবালয়", "সিংগাইর"], "মুন্সীগঞ্জ": ["গজারিয়া", "লৌহজং", "মুন্সীগঞ্জ সদর", "সিরাজদিখান", "শ্রীনগর", "টংগীবাড়ী"], "নারায়ণগঞ্জ": ["আড়াইহাজার", "বন্দর", "নারায়ণগঞ্জ সদর", "রূপগঞ্জ", "সোনারগাঁ"], "নরসিংদী": ["বেলাব", "মনোহরদী", "নরসিংদী সদর", "পলাশ", "রায়পুরা", "শিবপুর"], "রাজবাড়ী": ["বালিয়াকান্দি", "কালুখালী", "পাংশা", "রাজবাড়ী সদর", "গোয়ালন্দ"], "শরীয়তপুর": ["ভেদরগঞ্জ", "ডামুড্যা", "গোসাইরহাট", "নড়িয়া", "শরীয়তপুর সদর", "জাজিরা"], "টাঙ্গাইল": ["বাসাইল", "ভূঞাপুর", "দেলদুয়ার", "ধনবাড়ী", "ঘাটাইল", "গোপালপুর", "কালিহাতী", "মধুপুর", "মির্জাপুর", "নাগরপুর", "সখীপুর", "টাঙ্গাইল সদর"], "বাগেরহাট": ["বাগেরহাট সদর", "চিতলমারী", "ফকিরহাট", "কচুয়া", "মোল্লাহাট", "মোংলা", "মোড়েলগঞ্জ", "রামপাল", "শরণখোলা"], "চুয়াডাঙ্গা": ["আলমডাঙ্গা", "চুয়াডাঙ্গা সদর", "দামুড়হুদা", "জীবননগর"], "যশোর": ["অভয়নগর", "বাঘারপাড়া", "চৌগাছা", "ঝিকরগাছা", "কেশবপুর", "মনিরামপুর", "শার্শা", "যশোর সদর"], "ঝিনাইদহ": ["ঝিনাইদহ সদর", "কালীগঞ্জ", "কোটচাঁদপুর", "মহেশপুর", "শৈলকুপা", "হরিণাকুন্ডু"], "খুলনা": ["বটিয়াঘাটা", "দাকোপ", "ডুমুরিয়া", "দিঘলিয়া", "কয়রা", "পাইকগাছা", "ফুলতলা", "রূপসা", "তেরখাদা", "খুলনা সদর"], "কুষ্টিয়া": ["ভেড়ামারা", "দৌলতপুর", "খোকসা", "কুমারখালী", "কুষ্টিয়া সদর", "মিরপুর"], "মাগুরা": ["মাগুরা সদর", "মহম্মদপুর", "শালিখা", "শ্রীপুর"], "মেহেরপুর": ["গাংনী", "মেহেরপুর সদর", "মুজিবনগর"], "নড়াইল": ["কালিয়া", "লোহাগড়া", "নড়াইল সদর"], "সাতক্ষীরা": ["আশাশুনি", "দেবহাটা", "কলারোয়া", "কালিগঞ্জ", "সাতক্ষীরা সদর", "শ্যামনগর", "তালা"], "বরগুনা": ["আমতলী", "বামনা", "বরগুনা সদর", "বেতাগী", "পাথরঘাটা", "তালতলী"], "বরিশাল": ["আগৈলঝাড়া", "বাবুগঞ্জ", "বাকেরগঞ্জ", "বানারীপাড়া", "বরিশাল সদর", "গৌরনদী", "হিজলা", "মেহেন্দিগঞ্জ", "মুলাদী", "উজিরপুর"], "ভোলা": ["ভোলা সদর", "বোরহানউদ্দিন", "চরফ্যাশন", "দৌলতখান", "লালমোহন", "মনপুরা", "তজুমদ্দিন"], "ঝালকাঠি": ["ঝালকাঠি সদর", "কাঁঠালিয়া", "নলছিটি", "রাজাপুর"], "পটুয়াখালী": ["বাউফল", "দশমিনা", "দুমকি", "গলাচিপা", "কলাপাড়া", "মির্জাগঞ্জ", "পটুয়াখালী সদর", "রাঙ্গাবালী"], "পিরোজপুর": ["ভান্ডারিয়া", "কাউখালী", "মঠবাড়িয়া", "নাজিরপুর", "নেছারাবাদ", "পিরোজপুর সদর", "ইন্দুরকানী"], "চট্টগ্রাম": ["আনোয়ারা", "বাঁশখালী", "বন্দর", "বোয়ালখালী", "চন্দনাইশ", "ফটিকছড়ি", "হাটহাজারী", "কর্ণফুলী", "লোহাগাড়া", "মীরসরাই", "পটিয়া", "রাঙ্গুনিয়া", "রাউজান", "সন্দ্বীপ", "সাতকানিয়া", "সীতাকুণ্ড"], "কক্সবাজার": ["চকরিয়া", "কক্সবাজার সদর", "কুতুবদিয়া", "মহেশখালী", "পেকুয়া", "রামু", "টেকনাফ", "উখিয়া", "ঈদগাঁও"], "খাগড়াছড়ি": ["দীঘিনালা", "খাগড়াছড়ি সদর", "লক্ষ্মীছড়ি", "মহালছড়ি", "মানিকছড়ি", "মাটিরাঙ্গা", "পানছড়ি", "রামগড়"], "রাঙ্গামাটি": ["বাঘাইছড়ি", "বরকল", "বেলাইছড়ি", "জুরাছড়ি", "কাপ্তাই", "কাউখালী", "লংগদু", "নানিয়ারচর", "রাজস্থলী", "রাঙ্গামাটি সদর"], "বান্দরবান": ["আলীকদম", "বান্দরবান সদর", "লামা", "নাইক্ষ্যংছড়ি", "রোয়াংছড়ি", "রুমা", "থানচি"], "সিলেট": ["বালাগঞ্জ", "বিয়ানীবাজার", "বিশ্বনাথ", "কোম্পানীগঞ্জ", "ফেঞ্চুগঞ্জ", "গোলাপগঞ্জ", "গোয়াইনঘাট", "জৈন্তাপুর", "কানাইঘাট", "সিলেট সদর", "জকিগঞ্জ", "দক্ষিণ সুরমা", "ওসমানীনগর"], "হবিগঞ্জ": ["আজমিরীগঞ্জ", "বাহুবল", "বানিয়াচং", "চুনারুঘাট", "হবিগঞ্জ সদর", "লাখাই", "মাধবপুর", "নবীগঞ্জ", "শায়েস্তাগঞ্জ"], "মৌলভীবাজার": ["বড়লেখা", "জুড়ী", "কমলগঞ্জ", "কুলাউড়া", "মৌলভীবাজার সদর", "রাজনগর", "শ্রীমঙ্গল"], "সুনামগঞ্জ": ["বিশ্বম্ভরপুর", "ছাতক", "দিরাই", "ধর্মপাশা", "দোয়ারাবাজার", "জামালগঞ্জ", "জগন্নাথপুর", "শান্তিগঞ্জ", "সুনামগঞ্জ সদর", "তাহিরপুর", "মধ্যনগর", "শাল্লা"], "বগুড়া": ["আদমদীঘি", "বগুড়া সদর", "ধুনট", "দুপচাঁচিয়া", "গাবতলী", "কাহালু", "নন্দীগ্রাম", "সারিয়াকান্দি", "শাজাহানপুর", "শেরপুর", "শিবগঞ্জ", "সোনাতলা"], "জয়পুরহাট": ["আক্কেলপুর", "জয়পুরহাট সদর", "কালাই", "ক্ষেতলাল", "পাঁচবিবি"], "নওগাঁ": ["আত্রাই", "বদলগাছী", "ধামইরহাট", "মান্দা", "মহাদেবপুর", "নওগাঁ সদর", "নিয়ামতপুর", "পত্নীতলা", "পোরশা", "রাণীনগর", "সাপাহার"], "নাটোর": ["বাগাতিপাড়া", "বড়াইগ্রাম", "গুরুদাসপুর", "লালপুর", "নাটোর সদর", "সিংড়া", "নলডাঙ্গা"], "চাঁপাইনবাবগঞ্জ": ["ভোলাহাট", "গোমস্তাপুর", "নাচোল", "চাঁপাইনবাবগঞ্জ সদর", "শিবগঞ্জ"], "পাবনা": ["আটঘরিয়া", "বেড়া", "ভাঙ্গুড়া", "চাটমোহর", "ফরিদপুর", "ঈশ্বরদী", "পাবনা সদর", "সাঁথিয়া", "সুজানগর"], "রাজশাহী": ["বাঘা", "বাগমারা", "চারঘাট", "দুর্গাপুর", "গোদাগাড়ী", "মোহনপুর", "পবা", "পুঠিয়া", "তানোর", "রাজশাহী সদর"], "সিরাজগঞ্জ": ["বেলকুচি", "চৌহালী", "কামারখন্দ", "কাজীপুর", "রায়গঞ্জ", "শাহজাদপুর", "সিরাজগঞ্জ সদর", "তাড়াশ", "উল্লাপাড়া"], "দিনাজপুর": ["বিরল", "বীরগঞ্জ", "বিরামপুর", "বোচাগঞ্জ", "চিরিরবন্দর", "দিনাজপুর সদর", "ফুলবাড়ী", "ঘোড়াঘাট", "হাকিমপুর", "কাহারোল", "খানসামা", "নবাবগঞ্জ", "পার্বতীপুর"], "গাইবান্ধা": ["ফুলছড়ি", "গাইবান্ধা সদর", "গোবিন্দগঞ্জ", "পলাশবাড়ী", "সাদুল্লাপুর", "সাঘাটা", "সুন্দরগঞ্জ"], "কুড়িগ্রাম": ["ভুরুঙ্গামারী", "চর রাজিবপুর", "চিলমারী", "ফুলবাড়ী", "কুড়িগ্রাম সদর", "নাগেশ্বরী", "রাজারহাট", "রৌমারী", "উলিপুর"], "লালমনিরহাট": ["আদিতমারী", "হাতীবান্ধা", "কালীগঞ্জ", "লালমনিরহাট সদর", "পাটগ্রাম"], "নীলফামারী": ["ডিমলা", "ডোমার", "জলঢাকা", "কিশোরগঞ্জ", "নীলফামারী সদর", "সৈয়দপুর"], "পঞ্চগড়": ["আটোয়ারী", "বোদা", "দেবীগঞ্জ", "পঞ্চগড় সদর", "তেঁতুলিয়া"], "রংপুর": ["বদরগঞ্জ", "গঙ্গাচড়া", "কাউনিয়া", "মিঠাপুকুর", "পীরগাছা", "পীরগঞ্জ", "রংপুর সদর", "তারাগঞ্জ"], "ঠাকুরগাঁও": ["বালিয়াডাঙ্গী", "হরিপুর", "পীরগঞ্জ", "রাণীশংকৈল", "ঠাকুরগাঁও সদর"], "ময়মনসিংহ": ["ভালুকা", "ধোবাউড়া", "ফুলবাড়ীয়া", "গফরগাঁও", "গৌরীপুর", "হালুয়াঘাট", "ঈশ্বরগঞ্জ", "ময়মনসিংহ সদর", "মুক্তাগাছা", "নান্দাইল", "ফুলপুর", "ত্রিশাল", "তারাকান্দা"], "নেত্রকোণা": ["আটপাড়া", "বারহাট্টা", "দুর্গাপুর", "খালিয়াজুড়ী", "কলমাকান্দা", "কেন্দুয়া", "মদন", "মোহনগঞ্জ", "নেত্রকোণা সদর", "পূর্বধলা"], "শেরপুর": ["ঝিনাইগাতী", "নকলা", "নালিতাবাড়ী", "শেরপুর সদর", "শ্রীবরদী"], "জামালপুর": ["বকশীগঞ্জ", "দেওয়ানগঞ্জ", "ইসলামপুর", "জামালপুর সদর", "মাদারগঞ্জ", "মেলান্দহ", "সরিষাবাড়ী"], "ব্রাহ্মণবাড়িয়া": ["আখাউড়া", "আশুগঞ্জ", "বাঞ্ছারামপুর", "ব্রাহ্মণবাড়িয়া সদর", "কসবা", "নবীনগর", "নাসিরনগর", "সরাইল", "বিজয়নগর"], "কুমিল্লা": ["বরুড়া", "ব্রাহ্মণপাড়া", "বুড়িচং", "চান্দিনা", "চৌদ্দগ্রাম", "দাউদকান্দি", "দেবিদ্বার", "হোমনা", "লাকসাম", "লালমাই", "মেঘনা", "মনোহরগঞ্জ", "মুরাদনগর", "নাঙ্গলকোট", "সদর দক্ষিণ", "তিতাস", "কুমিল্লা আদর্শ সদর"], "চাঁদপুর": ["চাঁদপুর সদর", "ফরিদগঞ্জ", "হাইমচর", "হাজীগঞ্জ", "কচুয়া", "মতলব দক্ষিণ", "মতলব উত্তর", "শাহরাস্তি"], "ফেনী": ["ছাগলনাইয়া", "দাগনভূঞা", "ফেনী সদর", "ফুলগাজী", "পরশুরাম", "সোনাগাজী"], "লক্ষ্মীপুর": ["কমলনগর", "লক্ষ্মীপুর সদর", "রামগঞ্জ", "রামগতি", "রায়পুর"], "নোয়াখালী": ["বেগমগঞ্জ", "চাটখিল", "কোম্পানীগঞ্জ", "হাতিয়া", "কবিরহাট", "সেনবাগ", "সুবর্ণচর", "নোয়াখালী সদর", "সোনাইমুড়ী"]};
+
+
+  const districtSelect = document.getElementById("deliveryDistrict");
+  const thanaSelect = document.getElementById("deliveryThana");
+
+  Object.keys(bangladeshDistricts).sort((a,b)=>a.localeCompare(b,"bn")).forEach(function(district){
+    const option = document.createElement("option");
+    option.value = district;
+    option.textContent = district;
+    districtSelect.appendChild(option);
+  });
+
+  districtSelect.addEventListener("change", function(){
+    const district = this.value;
+    thanaSelect.innerHTML = '<option value="">Select Thana</option>';
+    thanaSelect.disabled = !district;
+    updateDeliveryCharge();
+
+    if(district){
+      bangladeshDistricts[district].forEach(function(thana){
+        const option = document.createElement("option");
+        option.value = thana;
+        option.textContent = thana;
+        thanaSelect.appendChild(option);
+      });
+    }
+  });
+
+  // Delivery charge: Dhaka = ৳80, all other districts = ৳120
+  let deliveryCharge = 0;
+
+  function updateDeliveryCharge(){
+    const district = document.getElementById("deliveryDistrict").value;
+    if(!district){
+      deliveryCharge = 0;
+      document.getElementById("deliveryChargeMessage").textContent =
+        "District নির্বাচন করলে Delivery Charge অটোমেটিক নির্ধারণ হবে।";
+    }else if(district === "ঢাকা"){
+      deliveryCharge = 80;
+      document.getElementById("deliveryChargeMessage").innerHTML =
+        "ঢাকার ভিতরে Delivery Charge: <strong>৳80</strong>";
+    }else{
+      deliveryCharge = 120;
+      document.getElementById("deliveryChargeMessage").innerHTML =
+        "ঢাকার বাইরে Delivery Charge: <strong>৳120</strong>";
+    }
+    renderCheckoutSummary();
+  }
+
+  // Checkout summary
+  let selectedPlan = "full";
+  let discount = 0;
+
+  function renderCheckoutSummary(){
+    const list = document.getElementById("checkoutItems");
+    const subtotal = cart.reduce((sum,item) => sum + item.price * item.qty, 0);
+    const total = Math.max(0, subtotal + (cart.length ? deliveryCharge : 0) - discount);
+
+    list.innerHTML = cart.map(item =>
+      `<div class="rifah-summary-row"><span>${item.name} × ${item.qty}</span><strong>৳${(item.price * item.qty).toLocaleString()}</strong></div>`
+    ).join("");
+
+    document.getElementById("checkoutSubtotal").textContent = subtotal.toLocaleString();
+    document.getElementById("checkoutDelivery").textContent = cart.length ? deliveryCharge.toLocaleString() : "0";
+    document.getElementById("checkoutDiscount").textContent = discount.toLocaleString();
+    document.getElementById("checkoutTotal").textContent = total.toLocaleString();
+    updatePaymentPlanAmount();
+  }
+
+  function updatePaymentPlanAmount(){
+    const subtotal = cart.reduce((sum,item) => sum + item.price * item.qty, 0);
+    const total = Math.max(0, subtotal + (cart.length ? deliveryCharge : 0) - discount);
+    const percent = Number(selectedPlan);
+    const payNow = Math.round(total * percent / 100);
+    const remaining = Math.max(0, total - payNow);
+    document.getElementById("paymentPlanAmount").innerHTML =
+      "Pay Now: <strong>৳" + payNow.toLocaleString() +
+      "</strong> · Remaining: <strong>৳" + remaining.toLocaleString() + "</strong>";
+  }
+
+  document.querySelectorAll(".rifah-plan").forEach(function(plan){
+    plan.onclick = function(){
+      document.querySelectorAll(".rifah-plan").forEach(p => p.classList.remove("active"));
+      plan.classList.add("active");
+      selectedPlan = plan.dataset.plan;
+      updatePaymentPlanAmount();
+    };
+  });
+
+  document.getElementById("applyCoupon").onclick = function(){
+    const code = document.getElementById("couponCode").value.trim().toUpperCase();
+
+    if(code === "RIFAH10"){
+      discount = Math.round(cart.reduce((sum,item) => sum + item.price * item.qty, 0) * 0.10);
+      alert("Coupon applied: 10% discount");
+    }else{
+      discount = 0;
+      alert("Coupon not found.");
+    }
+    renderCheckoutSummary();
+  };
+
+  // Payment selection
+  document.querySelectorAll(".paymentOption").forEach(function(option){
+    option.style.width = "100%";
+    option.style.padding = "14px";
+    option.style.border = "0";
+    option.style.borderBottom = "1px solid #eee";
+    option.style.background = "#fff";
+    option.style.textAlign = "left";
+    option.style.fontSize = "16px";
+
+    option.onclick = function(){
+      const method = option.dataset.payment;
+      const details = document.getElementById("paymentDetails");
+
+      paymentButton.innerHTML = "💳 " + method;
+      selectedPayment.textContent = "Selected: " + method;
+      selectedPayment.style.display = "block";
+      paymentOptions.style.display = "none";
+
+      if(method === "Cash on Delivery"){
+        details.style.display = "none";
+        details.innerHTML = "";
+        return;
+      }
+
+      if(method === "Online Payment"){
+        details.style.display = "block";
+        details.innerHTML = `
+          <strong style="color:#42145F;">Online Payment</strong>
+          <p style="margin:8px 0;color:#666;font-size:13px;">
+            Secure payment gateway পরে এখানে যুক্ত করা হবে।
+          </p>
+          <button type="button" style="
+            width:100%;padding:14px;border:0;border-radius:10px;
+            background:#42145F;color:white;font-size:16px;font-weight:bold;">
+            🔒 Continue to Secure Payment
+          </button>
+        `;
+        return;
+      }
+
+      if(["bKash","Nagad","Rocket"].includes(method)){
+        details.style.display = "block";
+        details.innerHTML = `
+          <strong style="color:#42145F;">${method} Payment</strong>
+          <div style="margin:8px 0;padding:10px;border-radius:9px;background:#fff;border:1px dashed #d9c6e2;color:#555;font-size:13px;">
+            Merchant Number: <strong>এখানে পরে আপনার নম্বর বসাবেন</strong>
+          </div>
+          <input id="mobileWalletNumber" type="tel"
+            placeholder="Customer ${method} নম্বর"
+            inputmode="numeric"
+            style="width:100%;padding:13px;border:1px solid #ddd;border-radius:10px;box-sizing:border-box;font-size:16px;">
+          <input id="walletTransactionId" type="text"
+            placeholder="Transaction ID"
+            style="width:100%;padding:13px;margin-top:10px;border:1px solid #ddd;border-radius:10px;box-sizing:border-box;font-size:16px;">
+        `;
+        return;
+      }
+
+      // Card UI only. Do not collect card number/CVC on this site.
+      details.style.display = "block";
+      details.innerHTML = `
+        <strong style="color:#42145F;">${method}</strong>
+        <p style="margin:8px 0;color:#666;font-size:13px;">
+          Card payment will open through a secure payment gateway when one is connected.
+        </p>
+        <button type="button" style="
+          width:100%;padding:14px;border:0;border-radius:10px;
+          background:#42145F;color:white;font-size:16px;font-weight:bold;">
+          🔒 Continue to Secure Card Payment
+        </button>
+      `;
+    };
+  });
+
+  // Place order
+  document.getElementById("placeOrderButton").onclick = function(){
+    const name = document.getElementById("customerName").value.trim();
+    const phone = document.getElementById("customerPhone").value.trim();
+    const email = document.getElementById("customerEmail").value.trim();
+    const address = document.getElementById("customerAddress").value.trim();
+    const orderNote = document.getElementById("orderNote").value.trim();
+    const payment = selectedPayment.textContent.replace("Selected: ","").trim();
+
+    if(!name || !phone || !address){
+      alert("দয়া করে নাম, মোবাইল নম্বর ও সম্পূর্ণ ঠিকানা পূরণ করুন।");
+      return;
+    }
+
+    const district = districtSelect.value;
+    const thana = thanaSelect.value;
+
+    if(!district || !thana){
+      alert("দয়া করে District এবং Thana / Upazila নির্বাচন করুন।");
+      return;
+    }
+
+    if(!payment){
+      alert("দয়া করে একটি Payment Method নির্বাচন করুন।");
+      return;
+    }
+
+    if(["bKash","Nagad","Rocket"].includes(payment)){
+      const walletNumber = document.getElementById("mobileWalletNumber")?.value.trim();
+      const transactionId = document.getElementById("walletTransactionId")?.value.trim();
+      if(!walletNumber || !transactionId){
+        alert("দয়া করে আপনার Wallet নম্বর ও Transaction ID দিন।");
+        return;
+      }
+    }
+
+    if(["Online Payment","Visa Card","Mastercard","American Express","International Card"].includes(payment)){
+      alert("আসল Online/Card Payment চালু করতে Secure Payment Gateway যুক্ত করতে হবে। এখন Payment UI প্রস্তুত আছে।");
+      return;
+    }
+
+    const subtotalForOrder = cart.reduce((sum,item) => sum + item.price * item.qty, 0);
+    const orderTotal = Math.max(0, subtotalForOrder + deliveryCharge - discount);
+
+    const planLabel = selectedPlan === "100" ? "Full Payment" : selectedPlan + "% Advance";
+    const payNow = Math.round(orderTotal * Number(selectedPlan) / 100);
+    alert(
+      "Order Confirmed!\\n\\n" +
+      "নাম: " + name + "\\n" +
+      "মোবাইল: " + phone + "\\n" +
+      (email ? "ইমেইল: " + email + "\\n" : "") +
+      "District: " + district + "\\n" +
+      "Thana/Upazila: " + thana + "\\n" +
+      "ঠিকানা: " + address + "\\n" +
+      "Delivery Charge: ৳" + deliveryCharge.toLocaleString() + "\\n" +
+      "Payment: " + payment + "\\n" +
+      "Payment Plan: " + planLabel + "\\n" +
+      "Pay Now: ৳" + payNow.toLocaleString() + "\\n" +
+      "Order Total: ৳" + orderTotal.toLocaleString() +
+      (orderNote ? "\\nNote: " + orderNote : "")
+    );
+
+    cart = [];
+    discount = 0;
+    updateCart();
+    checkoutBox.style.display = "none";
+  };
+
+  updateCart();
+
+})();
+</script>
+
+<script>
+(function(){
+  const $ = (s, root=document) => root.querySelector(s);
+  const $$ = (s, root=document) => Array.from(root.querySelectorAll(s));
+
+  function goTo(id){
+    const el = document.getElementById(id);
+    if(el){
+      el.scrollIntoView({behavior:"smooth", block:"start"});
+      return true;
+    }
+    return false;
+  }
+
+  // Search button
+  const searchInput = document.querySelector('input[placeholder*="Search"]');
+  const searchButton = document.querySelector('header button, .header button, button');
+  if(searchInput){
+    searchInput.addEventListener("keydown", e => {
+      if(e.key === "Enter"){
+        const q = searchInput.value.trim().toLowerCase();
+        if(!q){ goTo("products"); return; }
+        let found = 0;
+        $$(".product-card, .product").forEach(card => {
+          const match = card.textContent.toLowerCase().includes(q);
+          card.style.display = match ? "" : "none";
+          if(match) found++;
+        });
+        goTo("products");
+        if(!found) alert("এই নামে কোনো পণ্য পাওয়া যায়নি।");
+      }
+    });
+  }
+
+  // Generic "#" links: make the major buttons useful.
+  $$('a[href="#"]').forEach(a => {
+    a.addEventListener("click", function(e){
+      e.preventDefault();
+      if(this.hasAttribute("data-rifah-modal")) return;
+      const label = this.textContent.replace(/\s+/g," ").trim().toLowerCase();
+
+      if(label.includes("cart")){
+        const cart = document.getElementById("rifah-cart-box");
+        if(cart){ cart.scrollIntoView({behavior:"smooth",block:"center"}); return; }
+      }
+      if(label.includes("shop") || label.includes("browse") || label.includes("hot deals") ||
+         label.includes("new arrivals") || label.includes("view all") || label.includes("shop offers") ||
+         label.includes("view deals") || label.includes("explore now")){
+        goTo("products"); return;
+      }
+      if(label.includes("contact") || label.includes("account") || label.includes("my orders") || label.includes("wishlist") || label.includes("track")){ return; }
+      alert("এই অপশনটি এই মুহূর্তে UI হিসেবে প্রস্তুত আছে।");
+    });
+  });
+
+  // Category buttons filter the visible product cards when possible.
+  const categoryMap = [
+    ["women", ["women","dress"]],
+    ["men", ["men","shirt"]],
+    ["kids", ["kids","baby","dress"]],
+    ["electronics", ["electronics","bulb","led"]],
+    ["toys", ["toy","teddy"]],
+  ];
+  $$('a[href="#"]').forEach(a => {
+    const label = a.textContent.replace(/\s+/g," ").trim().toLowerCase();
+    const pair = categoryMap.find(([key, words]) => words.some(w => label.includes(w)));
+    if(pair){
+      a.addEventListener("click", function(e){
+        e.preventDefault();
+        const cards = $$(".product-card, .product");
+        let found=0;
+        cards.forEach(card=>{
+          const t=card.textContent.toLowerCase();
+          const match=pair[1].some(w=>t.includes(w));
+          card.style.display=match?"":"none";
+          if(match) found++;
+        });
+        goTo("products");
+        if(!found) alert("এই ক্যাটাগরির পণ্য এখনো যোগ করা হয়নি।");
+      }, true);
+    }
+  });
+
+
+  // Category selector
+  const catSelect=document.querySelector('.search select');
+  if(catSelect){catSelect.addEventListener('change',()=>{
+    const q=catSelect.value.trim().toLowerCase();
+    const cards=document.querySelectorAll('.product'); let found=0;
+    cards.forEach(card=>{
+      if(!q || q==='all categories'){card.style.display='';found++;return;}
+      const t=card.textContent.toLowerCase(); const ok=t.includes(q) || (q.includes('fashion') && (t.includes('dress')||t.includes('shirt'))) || (q.includes('kids')&&t.includes('kid'));
+      card.style.display=ok?'':'none'; if(ok)found++;
+    });
+    document.getElementById('products')?.scrollIntoView({behavior:'smooth'});
+    if(!found) alert('এই ক্যাটাগরির পণ্য এখনো যোগ করা হয়নি।');
+  });
+  }
+
+  // Make the "Close Checkout" button return to the cart cleanly.
+  const closeCheckout = document.getElementById("closeCheckout");
+  if(closeCheckout){
+    closeCheckout.addEventListener("click", function(){
+      const checkout = document.getElementById("rifah-checkout-box");
+      if(checkout) checkout.style.display="none";
+      const cart = document.getElementById("rifah-cart-box");
+      if(cart) cart.style.display="block";
+    });
+  }
+
+  // Full payment is the default. Update the amount immediately.
+  setTimeout(function(){
+    const full = document.querySelector('.rifah-plan[data-plan="100"]');
+    if(full) full.click();
+  }, 50);
+})();
+</script>
+
+
+<!-- RIFAH ACCOUNT / SUPPORT / ADMIN MODALS -->
+<div id="rifahModal" class="rifah-modal">
+  <div class="rifah-modal-card">
+    <button class="rifah-close" id="rifahModalClose">×</button>
+    <div id="rifahModalContent"></div>
+  </div>
+</div>
+
+<div id="rifahAdminModal" class="rifah-modal">
+  <div class="rifah-modal-card rifah-admin">
+    <button class="rifah-close" id="rifahAdminClose">×</button>
+    <h2>⚙️ Rifah Admin Panel</h2>
+    <p style="color:#666">☁️ Firebase Connected: Product, Customer Account ও Orders Cloud Database-এ থাকবে। Admin Login করে Product Manager ব্যবহার করুন।</p>
+    <div id="rifahAdminBody"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const OWNER_PHONE = "01837786320";
+  const WHATSAPP = "01837786320";
+  const EMAIL = "Ahmeddidarhridoy@gmail.com";
+  const ADMIN_PASSWORD = "1234"; // Change this before public launch.
+
+  const modal = document.getElementById("rifahModal");
+  const content = document.getElementById("rifahModalContent");
+  const adminModal = document.getElementById("rifahAdminModal");
+  const adminBody = document.getElementById("rifahAdminBody");
+
+  function openModal(html){
+    content.innerHTML = html;
+    modal.style.display="block";
+  }
+  function closeModal(){ modal.style.display="none"; }
+  document.getElementById("rifahModalClose").onclick=closeModal;
+  modal.addEventListener("click",e=>{if(e.target===modal)closeModal()});
+  document.getElementById("rifahAdminClose").onclick=()=>adminModal.style.display="none";
+  adminModal.addEventListener("click",e=>{if(e.target===adminModal)adminModal.style.display="none"});
+
+  function orders(){
+    return JSON.parse(localStorage.getItem("rifahOrders")||"[]");
+  }
+  function wishlist(){
+    return JSON.parse(localStorage.getItem("rifahWishlist")||"[]");
+  }
+
+  function support(type){
+    const pages={
+      contact:`<h2>📞 Customer Support</h2>
+        <div class="rifah-support-info">
+          <div><b>📞 Phone:</b> ${OWNER_PHONE}</div>
+          <div><b>💬 WhatsApp:</b> ${WHATSAPP}</div>
+          <div><b>✉️ Email:</b> ${EMAIL}</div>
+          <div style="margin-top:6px">অর্ডার, পেমেন্ট, ডেলিভারি, রিটার্ন বা যেকোনো সমস্যায় আমাদের সঙ্গে যোগাযোগ করুন।</div>
+        </div>
+        <div class="rifah-support-actions">
+          <a class="primary" href="tel:${OWNER_PHONE}">📞 Call</a>
+          <a class="primary" href="https://wa.me/88${WHATSAPP.replace(/^0/,'')}" target="_blank" rel="noopener">💬 WhatsApp</a>
+          <a href="mailto:${EMAIL}">✉️ Email</a>
+        </div>`,
+      shipping:`<h2>🚚 Shipping Policy</h2><p>বাংলাদেশের ঠিকানায় কুরিয়ার/ডেলিভারির মাধ্যমে পণ্য পাঠানো হবে। Delivery charge checkout-এ দেখানো হবে। দূরবর্তী এলাকায় অতিরিক্ত চার্জ প্রযোজ্য হতে পারে।</p>`,
+      return:`<h2>↩️ Return & Refund Policy</h2><p>পণ্য হাতে পাওয়ার পর সমস্যা থাকলে দ্রুত Customer Support-এ যোগাযোগ করুন। ব্যবহার করা বা ক্ষতিগ্রস্ত পণ্যের ক্ষেত্রে রিটার্ন শর্ত প্রযোজ্য হবে। Refund পদ্ধতি অর্ডারের Payment Method অনুযায়ী নির্ধারিত হবে।</p>`,
+      privacy:`<h2>🔒 Privacy Policy</h2><p>অর্ডারের জন্য দেওয়া নাম, ফোন, ঠিকানা ও ইমেইল শুধু অর্ডার প্রসেসিং, ডেলিভারি ও Customer Support-এর কাজে ব্যবহার করা হবে।</p>`,
+      terms:`<h2>📄 Terms & Conditions</h2><p>অর্ডার করার সময় সঠিক নাম, ফোন ও ঠিকানা দিতে হবে। COD অর্ডারে ডেলিভারি গ্রহণের সময় মূল্য পরিশোধ করতে হবে। পণ্যের stock, price ও delivery availability পরিবর্তন হতে পারে।</p>`
+    };
+    openModal(pages[type]||pages.contact);
+  }
+
+  function showOrders(){
+    const os=orders();
+    let html=`<h2>📦 My Orders</h2>`;
+    if(!os.length) html+=`<p>এখনো কোনো অর্ডার নেই।</p>`;
+    os.slice().reverse().forEach(o=>{
+      html+=`<div class="rifah-order"><b>Order #${o.id}</b><br>${o.name} • ${o.phone}<br>${o.address}<br><b>Payment:</b> ${o.payment}<br><b>Total:</b> ৳${Number(o.total||0).toLocaleString()}<br><small>${o.date}</small></div>`;
+    });
+    openModal(html);
+  }
+
+  function showWishlist(){
+    const ws=wishlist();
+    let html=`<h2>♡ Wishlist</h2>`;
+    if(!ws.length) html+=`<p>Wishlist এখন খালি। Product-এর “♡ Add to Wishlist” ব্যবহার করুন।</p>`;
+    ws.forEach((p,i)=>html+=`<div class="rifah-order"><b>${p.name}</b> — ৳${Number(p.price||0).toLocaleString()} <button class="rifah-link-btn" data-wremove="${i}">Remove</button></div>`);
+    openModal(html);
+    content.querySelectorAll("[data-wremove]").forEach(btn=>btn.onclick=()=>{
+      const a=wishlist(); a.splice(Number(btn.dataset.wremove),1); localStorage.setItem("rifahWishlist",JSON.stringify(a)); showWishlist();
+    });
+  }
+
+  function showTrack(){
+    openModal(`<h2>🚚 Track Order</h2>
+      <form class="rifah-form" id="trackForm">
+        <input id="trackId" placeholder="Order ID যেমন: RF123456" required>
+        <input id="trackPhone" placeholder="মোবাইল নম্বর" required>
+        <button>Track Order</button>
+      </form>
+      <div id="trackResult"></div>`);
+    document.getElementById("trackForm").onsubmit=e=>{
+      e.preventDefault();
+      const id=document.getElementById("trackId").value.trim();
+      const phone=document.getElementById("trackPhone").value.trim();
+      const o=orders().find(x=>String(x.id)===id && x.phone===phone);
+      document.getElementById("trackResult").innerHTML=o
+        ? `<div class="rifah-order"><b>Status:</b> ${o.status||"Order Received"}<br>Order #${o.id}<br>Customer: ${o.name}</div>`
+        : `<p style="color:#b00068">Order পাওয়া যায়নি। Order ID ও ফোন নম্বর আবার দেখুন।</p>`;
+    };
+  }
+
+  function getUser(){
+    try{return JSON.parse(localStorage.getItem("rifahUser")||"null")}catch(e){return null}
+  }
+  function saveUser(u){localStorage.setItem("rifahUser",JSON.stringify(u))}
+  function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]))}
+
+  function showAccount(tab="login"){
+    const u=getUser();
+    if(u){
+      openModal(`<h2>👤 My Account</h2>
+        <div class="rifah-profile-box"><b>${esc(u.name||"Customer")}</b><br><small>${esc(u.phone||"")} ${u.email?"• "+esc(u.email):""}</small></div>
+        <div class="rifah-dashboard">
+          <button id="dashOrders">📦 My Orders<br><small>আপনার অর্ডার দেখুন</small></button>
+          <button id="dashWishlist">♡ Wishlist<br><small>পছন্দের পণ্য দেখুন</small></button>
+          <button id="dashTrack">🚚 Track Order<br><small>অর্ডারের স্ট্যাটাস দেখুন</small></button>
+          <button id="dashProfile">📝 My Information<br><small>নাম, ফোন, ইমেইল</small></button>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px">
+          <button class="rifah-link-btn" id="dashLogout">Logout</button>
+        </div>`);
+      document.getElementById("dashOrders").onclick=showOrders;
+      document.getElementById("dashWishlist").onclick=showWishlist;
+      document.getElementById("dashTrack").onclick=showTrack;
+      document.getElementById("dashProfile").onclick=()=>showAccount("profile");
+      document.getElementById("dashLogout").onclick=()=>{localStorage.removeItem("rifahUser");showAccount("login")};
+      return;
+    }
+    openModal(`<h2>👤 Login / Register</h2>
+      <div class="rifah-account-tabs">
+        <button id="tabRegister" class="${tab==="register"?"active":""}">Create Account</button>
+        <button id="tabLogin" class="${tab==="login"?"active":""}">Login</button>
+      </div>
+      <div id="accountPane"></div>`);
+    const pane=document.getElementById("accountPane");
+    function renderRegister(){
+      pane.innerHTML=`<form class="rifah-form" id="registerForm">
+        <input id="regName" placeholder="আপনার পূর্ণ নাম" required>
+        <input id="regPhone" placeholder="মোবাইল নম্বর" required>
+        <input id="regEmail" type="email" placeholder="Email address">
+        <input id="regPass" type="password" minlength="4" placeholder="Password (কমপক্ষে ৪ অক্ষর)" required>
+        <input id="regAddress" placeholder="ডেলিভারি ঠিকানা">
+        <button class="rifah-primary">Create Account</button>
+      </form><p id="accountMsg"></p>`;
+      document.getElementById("registerForm").onsubmit=e=>{
+        e.preventDefault();
+        const u={name:regName.value.trim(),phone:regPhone.value.trim(),email:regEmail.value.trim(),password:regPass.value,address:regAddress.value.trim(),createdAt:new Date().toLocaleString()};
+        saveUser(u);
+        showAccount();
+      };
+    }
+    function renderLogin(){
+      pane.innerHTML=`<form class="rifah-form" id="loginForm">
+        <input id="loginPhone" placeholder="মোবাইল নম্বর" required>
+        <input id="loginPass" type="password" placeholder="Password" required>
+        <button class="rifah-primary">Login</button>
+      </form><p style="color:#777;font-size:13px">এই demo account এই browser-এ নিরাপদভাবে localStorage-এ থাকবে। Firebase পরে যোগ করলে একই account cloud database-এ যাবে।</p><p id="loginMsg"></p>`;
+      document.getElementById("loginForm").onsubmit=e=>{
+        e.preventDefault();
+        const u=getUser();
+        if(u && u.phone===loginPhone.value.trim() && u.password===loginPass.value){showAccount();}
+        else document.getElementById("loginMsg").innerHTML='<span style="color:#b00068">Login তথ্য মিলেনি। এই browser-এ আগে account তৈরি করুন।</span>';
+      };
+    }
+    document.getElementById("tabRegister").onclick=()=>{document.getElementById("tabRegister").classList.add("active");document.getElementById("tabLogin").classList.remove("active");renderRegister()};
+    document.getElementById("tabLogin").onclick=()=>{document.getElementById("tabLogin").classList.add("active");document.getElementById("tabRegister").classList.remove("active");renderLogin()};
+    tab==="register"?renderRegister():renderLogin();
+  }
+
+  function openAdmin(){
+    const pass=prompt("Admin Password দিন:");
+    if(pass!==ADMIN_PASSWORD){ alert("ভুল Admin Password."); return; }
+    adminModal.style.display="block"; renderAdmin();
+  }
+
+  function renderAdmin(){
+    const products=JSON.parse(localStorage.getItem("rifahProducts")||"[]");
+    const os=orders();
+    adminBody.innerHTML=`
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin:12px 0">
+        <button class="rifah-primary" id="adminAddProduct">➕ Add Product</button> <button id="rifahManageCategoriesBtn" type="button" class="rifah-primary">📂 Categories</button>
+        <button class="rifah-link-btn" id="adminOrders">📦 Orders (${os.length})</button>
+      </div>
+      <div id="adminProductForm"></div>
+      <div style="margin:10px 0;padding:10px;border-radius:10px;background:#f7eef9;color:#42145F;font-size:12px;font-weight:700">☁️ Firebase Public Product System: Connected. Publish করলে সব Customer-এর কাছে Product দেখা যাবে.</div><h3>Products (${products.length})</h3>
+      <div>${products.length?products.map((p,i)=>`
+        <div class="admin-product-row">
+          <div><b>${escapeHtml(p.name)}</b><br>৳${Number(p.price||0).toLocaleString()} • ${escapeHtml(p.category||"")}<br><small>${escapeHtml(p.sizes||"No size")} • ${escapeHtml(p.colors||"No color")}</small></div>
+          <img src="${escapeHtml(p.image||"")}" onerror="this.style.display='none'">
+          <div style="display:flex;gap:6px;flex-direction:column"><button class="rifah-link-btn" data-pview="${i}">View</button><button class="rifah-link-btn danger" data-pdel="${i}">Delete</button></div>
+        </div>`).join(""):"<p>এখনো Admin থেকে নতুন Product যোগ করা হয়নি।</p>"}</div>
+    `;
+    document.getElementById("adminAddProduct").onclick=()=>showProductForm();
+    document.getElementById("adminOrders").onclick=()=>{
+      const list=orders();
+      adminBody.innerHTML=`<h3>Customer Orders</h3>${list.length?list.slice().reverse().map(o=>`<div class="rifah-order"><b>#${o.id}</b> ${escapeHtml(o.name)}<br>📞 ${escapeHtml(o.phone)}<br>📍 ${escapeHtml(o.address)}<br>💳 ${escapeHtml(o.payment)} • ৳${Number(o.total||0).toLocaleString()}<br>Status: <select data-status="${o.id}"><option ${o.status==="Order Received"?"selected":""}>Order Received</option><option ${o.status==="Confirmed"?"selected":""}>Confirmed</option><option ${o.status==="Shipped"?"selected":""}>Shipped</option><option ${o.status==="Delivered"?"selected":""}>Delivered</option><option ${o.status==="Cancelled"?"selected":""}>Cancelled</option></select></div>`).join(""):"<p>No orders yet.</p>"}<button class="rifah-link-btn" id="backAdmin">← Back</button>`;
+      adminBody.querySelectorAll("[data-status]").forEach(s=>s.onchange=async()=>{const a=orders();const o=a.find(x=>String(x.id)===String(s.dataset.status));if(o){o.status=s.value;localStorage.setItem("rifahOrders",JSON.stringify(a));try{if(window.rifahCloudSetOrderStatus) await window.rifahCloudSetOrderStatus(o.id,s.value);alert("✅ Order status cloud database-এ update হয়েছে।");}catch(err){console.error(err);alert("Cloud update হয়নি। Firebase Admin login/rules চেক করুন।");}}});
+      document.getElementById("backAdmin").onclick=renderAdmin;
+    };
+    adminBody.querySelectorAll("[data-pdel]").forEach(btn=>btn.onclick=async()=>{const a=JSON.parse(localStorage.getItem("rifahProducts")||"[]");const p=a[Number(btn.dataset.pdel)];a.splice(Number(btn.dataset.pdel),1);localStorage.setItem("rifahProducts",JSON.stringify(a));if(p?.id) document.dispatchEvent(new CustomEvent("rifah:product-delete",{detail:{id:p.id}}));renderAdmin();});
+    adminBody.querySelectorAll('[data-pview]').forEach(btn=>btn.onclick=()=>{const a=JSON.parse(localStorage.getItem('rifahProducts')||'[]');const p=a[Number(btn.dataset.pview)];if(p)openProductDetails(p);});
+  }
+
+  // Firebase Admin login bridge: the real Admin UI is inside this IIFE.
+  window.rifahRenderAdmin = renderAdmin;
+
+  function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));}
+
+  function imageToDataURL(file,maxSize=1200,quality=.82){
+    return new Promise((resolve,reject)=>{
+      if(!file){resolve('');return;}
+      if(!file.type.startsWith('image/')){reject(new Error('শুধু ছবি ফাইল দিন।'));return;}
+      const reader=new FileReader();
+      reader.onload=()=>{
+        const img=new Image();
+        img.onload=()=>{
+          const scale=Math.min(1,maxSize/Math.max(img.width,img.height));
+          const w=Math.max(1,Math.round(img.width*scale)),h=Math.max(1,Math.round(img.height*scale));
+          const c=document.createElement('canvas'); c.width=w;c.height=h;
+          const ctx=c.getContext('2d'); ctx.drawImage(img,0,0,w,h);
+          resolve(c.toDataURL('image/jpeg',quality));
+        };
+        img.onerror=()=>reject(new Error('ছবিটি পড়া যায়নি।')); img.src=reader.result;
+      };
+      reader.onerror=()=>reject(new Error('ছবি আপলোড হয়নি।')); reader.readAsDataURL(file);
+    });
+  }
+
+  function showProductForm(){
+    const box=document.getElementById('adminProductForm');
+    box.innerHTML=`<div class="rifah-product-manager">
+      <h3 class="rifah-manager-title">➕ নতুন Product যোগ করুন</h3>
+      <p class="rifah-manager-help">শুধু তথ্য লিখুন ও ছবি নির্বাচন করুন। ছবি নিজে থেকেই web-friendly size-এ ছোট হবে।</p>
+      <form class="rifah-product-grid-form" id="newProductForm">
+        <input id="pName" placeholder="Product Name *" required>
+        <select id="pCategory" required>
+          <option value="">Category নির্বাচন করুন *</option>
+          <option>Women's Fashion</option><option>Men's Fashion</option><option>Kids & Baby</option><option>Electronics</option><option>Toys & Games</option><option>Home & Lifestyle</option><option>Beauty & Care</option><option>Other</option>
+        </select>
+        <input id="pPrice" type="number" min="0" placeholder="Selling Price (৳) *" required>
+        <input id="pOld" type="number" min="0" placeholder="Old Price (৳) optional">
+        <input id="pColors" placeholder="Colors: Black, Red, Blue">
+        <input id="pSizes" placeholder="Sizes: S, M, L, XL">
+        <textarea id="pDesc" class="full" placeholder="Product Description লিখুন... যেমন: Premium fabric, comfortable fit, suitable for... "></textarea>
+        <div class="rifah-upload-box full">📸 Main Product Photo *<input id="pImageFile" type="file" accept="image/*" required><div id="pImagePreview" class="rifah-preview"></div></div>
+        <div class="rifah-upload-box full">🖼️ Additional Photos (optional)<input id="pMoreFiles" type="file" accept="image/*" multiple><div id="pMorePreview" class="rifah-preview"></div></div>
+        <div class="full" style="display:flex;gap:8px;flex-wrap:wrap"><button class="rifah-primary" type="submit">✅ Publish Product</button><button class="rifah-link-btn" type="button" id="cancelProductForm">Cancel</button></div>
+      </form>
+    </div>`;
+    if(window.rifahCategoryTools?.syncCategoryOptions) window.rifahCategoryTools.syncCategoryOptions();
+    const mainInput=document.getElementById('pImageFile'), moreInput=document.getElementById('pMoreFiles');
+    const preview=(input,el)=>{el.innerHTML=''; [...input.files].slice(0,8).forEach(f=>{const u=URL.createObjectURL(f);el.insertAdjacentHTML('beforeend',`<img src="${u}" alt="preview">`)})};
+    mainInput.onchange=()=>preview(mainInput,document.getElementById('pImagePreview'));
+    moreInput.onchange=()=>preview(moreInput,document.getElementById('pMorePreview'));
+    document.getElementById('cancelProductForm').onclick=renderAdmin;
+    document.getElementById('newProductForm').onsubmit=async e=>{
+      e.preventDefault();
+      const btn=e.submitter; btn.disabled=true; btn.textContent='Saving...';
+      try{
+        const main=await imageToDataURL(mainInput.files[0]);
+        const more=[]; for(const f of [...moreInput.files].slice(0,8)) more.push(await imageToDataURL(f));
+        const productData={name:pName.value.trim(),price:Number(pPrice.value||0),oldPrice:Number(pOld.value||0),category:pCategory.value,image:main,images:[main,...more],colors:pColors.value.trim(),sizes:pSizes.value.trim(),description:pDesc.value.trim(),createdAt:new Date().toISOString()};
+        const backend=window.RifahBackend;
+        const isAdmin=backend?.configured && backend?.user?.email?.toLowerCase()==='Ahmeddidarhridoy@gmail.com'.toLowerCase();
+
+        if(isAdmin && backend.addProduct){
+          const ref=await backend.addProduct(productData);
+          productData.id=ref.id;
+          const a=JSON.parse(localStorage.getItem('rifahProducts')||'[]');
+          a.push(productData);
+          localStorage.setItem('rifahProducts',JSON.stringify(a));
+          alert('✅ Product Firebase-এ Publish হয়েছে। এখন সব Customer দেখতে পারবে।');
+        }else{
+          productData.id='P'+Date.now();
+          const a=JSON.parse(localStorage.getItem('rifahProducts')||'[]');
+          a.push(productData);
+          localStorage.setItem('rifahProducts',JSON.stringify(a));
+          alert('⚠️ Product এই browser-এ রাখা হয়েছে। Firebase Admin login না থাকায় Public Cloud-এ Publish হয়নি।');
+        }
+        renderAdminProducts(); renderAdmin();
+      }catch(err){alert('ছবি/তথ্য সংরক্ষণ করা যায়নি: '+err.message);btn.disabled=false;btn.textContent='✅ Publish Product';}
+    };
+  }
+
+  function openProductDetails(p){
+    const imgs=(p.images&&p.images.length?p.images:[p.image]).filter(Boolean);
+    document.body.insertAdjacentHTML('beforeend',`<div class="rifah-modal" id="rifahProductDetailModal" style="display:block"><div class="rifah-modal-card"><button class="rifah-close" id="closeProductDetail">×</button><div class="rifah-product-detail"><div><img id="detailMainImage" class="rifah-detail-main" src="${escapeHtml(imgs[0]||'')}" alt="${escapeHtml(p.name)}"><div class="rifah-detail-thumbs">${imgs.map((x,i)=>`<img class="${i===0?'active':''}" data-detail-img="${escapeHtml(x)}" src="${escapeHtml(x)}" alt="">`).join('')}</div></div><div><h2 class="rifah-detail-title">${escapeHtml(p.name)}</h2><div><span class="rifah-detail-price">৳${Number(p.price||0).toLocaleString()}</span>${p.oldPrice?`<span class="rifah-detail-old">৳${Number(p.oldPrice).toLocaleString()}</span>`:''}</div><div class="rifah-detail-meta"><span class="rifah-chip">${escapeHtml(p.category||'Product')}</span>${p.colors?`<span class="rifah-chip">🎨 ${escapeHtml(p.colors)}</span>`:''}${p.sizes?`<span class="rifah-chip">📏 ${escapeHtml(p.sizes)}</span>`:''}</div><div class="rifah-detail-description">${escapeHtml(p.description||'এই Product সম্পর্কে বিস্তারিত তথ্য শীঘ্রই যোগ করা হবে।')}</div><button class="rifah-primary" id="detailAddCart">🛒 Add to Cart</button></div></div></div></div>`);
+    document.getElementById('closeProductDetail').onclick=()=>document.getElementById('rifahProductDetailModal')?.remove();
+    document.querySelectorAll('[data-detail-img]').forEach(t=>t.onclick=()=>{document.getElementById('detailMainImage').src=t.dataset.detailImg;document.querySelectorAll('[data-detail-img]').forEach(x=>x.classList.remove('active'));t.classList.add('active')});
+    document.getElementById('detailAddCart').onclick=()=>{const c=JSON.parse(localStorage.getItem('rifahCart')||'[]');const f=c.find(x=>x.name===p.name);if(f)f.qty=(Number(f.qty)||0)+1;else c.push({name:p.name,price:Number(p.price)||0,qty:1});localStorage.setItem('rifahCart',JSON.stringify(c));syncBadges();alert('✅ '+p.name+' cart-এ যোগ হয়েছে।');};
+  }
+
+  // Open service/account features before the old generic # link handler.
+  document.addEventListener("click",function(e){
+    const target=e.target.closest("[data-rifah-modal]");
+    if(!target)return;
+    e.preventDefault(); e.stopImmediatePropagation();
+    const type=target.dataset.rifahModal;
+    if(type==="contact"||type==="shipping"||type==="return"||type==="privacy"||type==="terms")support(type);
+    else if(type==="orders")showOrders();
+    else if(type==="wishlist")showWishlist();
+    else if(type==="track")showTrack();
+    else if(type==="account")showAccount();
+  },true);
+
+  // Header account/wishlist/cart
+  document.addEventListener("click",function(e){
+    const a=e.target.closest(".rifah-account-link,.rifah-wishlist-link,.rifah-header-cart");
+    if(!a)return;
+    e.preventDefault(); e.stopImmediatePropagation();
+    if(a.classList.contains("rifah-account-link"))showAccount();
+    else if(a.classList.contains("rifah-wishlist-link"))showWishlist();
+    else document.getElementById("rifah-cart-box")?.click();
+  },true);
+
+  // Search
+  document.addEventListener("click",function(e){
+    if(e.target.closest("#rifahSearchBtn")){
+      e.preventDefault();
+      const q=(document.getElementById("rifahSearchInput")?.value||"").trim().toLowerCase();
+      document.querySelectorAll(".product").forEach(c=>c.style.display=(!q||c.textContent.toLowerCase().includes(q))?"":"none");
+      document.getElementById("products")?.scrollIntoView({behavior:"smooth"});
+    }
+  },true);
+
+  // Keep both cart badges synchronized with the existing cart system.
+  function syncBadges(){
+    let c=0;
+    try{c=JSON.parse(localStorage.getItem("rifahCart")||"[]").reduce((s,x)=>s+(Number(x.qty)||0),0)}catch(e){}
+    const hb=document.getElementById("headerCartBadge"); if(hb) hb.textContent=c;
+    const cb=document.getElementById("rifah-cart-count"); if(cb) cb.textContent=c;
+    document.querySelectorAll(".badge").forEach(b=>{if(b.id!=="headerCartBadge")b.textContent=c});
+  }
+  setInterval(syncBadges,500);
+  syncBadges();
+
+  // Capture order details before the original checkout code clears the cart.
+  document.addEventListener("click",function(e){
+    if(e.target.id!=="placeOrderButton")return;
+    const name=document.getElementById("customerName")?.value.trim()||"";
+    const phone=document.getElementById("customerPhone")?.value.trim()||"";
+    const email=document.getElementById("customerEmail")?.value.trim()||"";
+    const address=document.getElementById("customerAddress")?.value.trim()||"";
+    const payment=(document.getElementById("selectedPayment")?.textContent||"").replace("Selected:","").trim();
+    const total=(document.getElementById("rifah-cart-total")?.textContent||"0").replace(/[^\d]/g,"");
+    setTimeout(()=>{
+      if(name&&phone&&address&&payment && document.getElementById("rifah-checkout-box")?.style.display==="none"){
+        const a=orders();
+        a.push({id:"RF"+Date.now().toString().slice(-6),name,phone,email,address,payment,total:Number(total||0),status:"Order Received",date:new Date().toLocaleString()});
+        localStorage.setItem("rifahOrders",JSON.stringify(a));
+        alert("✅ Order saved. আপনার Order ID: "+a[a.length-1].id);
+      }
+      syncBadges();
+    },80);
+  },true);
+
+  // Admin button
+  const strip=document.querySelector(".rifah-service-strip");
+  if(strip){
+    const b=document.createElement("a"); b.href="#admin"; b.textContent="⚙️ Admin Panel";
+    b.onclick=e=>{e.preventDefault();openAdmin()}; strip.appendChild(b);
+  }
+
+
+  // Render products created in Admin Panel into the storefront.
+  function renderAdminProducts(){
+    const list=JSON.parse(localStorage.getItem('rifahProducts')||'[]');
+    const wrap=document.querySelector('.products'); if(!wrap)return;
+    wrap.querySelectorAll('.admin-created-product').forEach(x=>x.remove());
+    list.forEach((p,i)=>{
+      const card=document.createElement('article'); card.className='product admin-created-product';
+      card.innerHTML=`<div class="product-image" style="cursor:pointer">${p.image?`<img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.name)}" style="width:100%;height:100%;object-fit:cover">`:'🛍️'}</div><div class="product-info"><div class="product-name">${escapeHtml(p.name)}</div><div class="rating">★★★★★</div><span class="price">৳${Number(p.price||0).toLocaleString()}</span>${p.oldPrice?`<span class="old-price">৳${Number(p.oldPrice).toLocaleString()}</span>`:''}<small style="display:block;color:#777;margin:5px 0">${escapeHtml(p.category||'')}</small><button class="add admin-add" data-admin-index="${i}">Add to Cart</button><button class="rifah-link-btn" style="width:100%;margin-top:6px" data-admin-view="${i}">View Details</button></div>`;
+      wrap.appendChild(card);
+      card.querySelector('.product-image').onclick=()=>openProductDetails(p);
+      card.querySelector('[data-admin-view]').onclick=()=>openProductDetails(p);
+    });
+  }
+
+  window.renderRifahAdminProducts = renderAdminProducts;
+  document.addEventListener('rifah:products-updated',()=>renderAdminProducts());
+
+  renderAdminProducts();
+
+  // Admin-created product Add to Cart: keep it in the same LocalStorage cart.
+  document.addEventListener("click",function(e){
+    const btn=e.target.closest(".admin-add");
+    if(!btn)return;
+    e.preventDefault(); e.stopImmediatePropagation();
+    const list=JSON.parse(localStorage.getItem("rifahProducts")||"[]");
+    const p=list[Number(btn.dataset.adminIndex)];
+    if(!p)return;
+    const cart=JSON.parse(localStorage.getItem("rifahCart")||"[]");
+    const found=cart.find(x=>x.name===p.name);
+    if(found) found.qty=(Number(found.qty)||0)+1;
+    else cart.push({name:p.name,price:Number(p.price)||0,qty:1});
+    localStorage.setItem("rifahCart",JSON.stringify(cart));
+    syncBadges();
+    alert(p.name+" added to cart!");
+  },true);
+
+  // Add a small wishlist button to each existing product card.
+  document.querySelectorAll(".product").forEach(card=>{
+    if(card.querySelector(".rifah-wish-btn"))return;
+    const b=document.createElement("button");
+    b.className="rifah-wish-btn rifah-link-btn"; b.type="button"; b.textContent="♡ Wishlist";
+    b.style.cssText="margin-top:6px;width:100%;";
+    b.onclick=()=>{
+      const name=card.querySelector(".product-name")?.textContent.trim()||"Product";
+      const price=Number((card.querySelector(".price")?.textContent||"0").replace(/[^\d]/g,""))||0;
+      const a=wishlist(); if(!a.some(x=>x.name===name)){a.push({name,price});localStorage.setItem("rifahWishlist",JSON.stringify(a));alert("Wishlist-এ যোগ হয়েছে।")} else alert("এটি Wishlist-এ আছে।");
+    };
+    card.querySelector(".product-info")?.appendChild(b);
+  });
+})();
+</script>
+
+
+
+<script id="rifah-robust-frontend">
+(function(){
+  function openByType(type){
+    if(type==='contact'||type==='shipping'||type==='return'||type==='privacy'||type==='terms') return window.rifahOpenSupport ? window.rifahOpenSupport(type) : null;
+    if(type==='orders') return window.rifahShowOrders ? window.rifahShowOrders() : null;
+    if(type==='wishlist') return window.rifahShowWishlist ? window.rifahShowWishlist() : null;
+    if(type==='track') return window.rifahShowTrack ? window.rifahShowTrack() : null;
+    if(type==='account') return window.rifahShowAccount ? window.rifahShowAccount() : null;
+  }
+  // Expose the existing functions without changing their logic.
+  window.addEventListener('load',function(){
+    try{
+      if(typeof support==='function') window.rifahOpenSupport=support;
+      if(typeof showOrders==='function') window.rifahShowOrders=showOrders;
+      if(typeof showWishlist==='function') window.rifahShowWishlist=showWishlist;
+      if(typeof showTrack==='function') window.rifahShowTrack=showTrack;
+      if(typeof showAccount==='function') window.rifahShowAccount=showAccount;
+    }catch(e){}
+  });
+  document.addEventListener('click',function(e){
+    const el=e.target.closest('[data-rifah-modal]'); if(!el)return;
+    e.preventDefault();
+    const type=el.getAttribute('data-rifah-modal');
+    if(type==='contact'){
+      const modal=document.getElementById('rifahModal'), content=document.getElementById('rifahModalContent');
+      if(modal&&content){content.innerHTML=`<h2>📞 Customer Support</h2><div class="rifah-support-info"><div><b>📞 Phone:</b> 01837786320</div><div><b>💬 WhatsApp:</b> 01837786320</div><div><b>✉️ Email:</b> Ahmeddidarhridoy@gmail.com</div><div style="margin-top:6px">অর্ডার, পেমেন্ট, ডেলিভারি ও রিটার্ন বিষয়ে সাহায্যের জন্য যোগাযোগ করুন।</div></div><div class="rifah-support-actions"><a class="primary" href="tel:01837786320">📞 Call</a><a class="primary" href="https://wa.me/8801837786320" target="_blank" rel="noopener">💬 WhatsApp</a><a href="mailto:Ahmeddidarhridoy@gmail.com">✉️ Email</a></div>`;modal.style.display='block';}
+      return;
+    }
+    openByType(type);
+  },true);
+})();
+</script>
+
+<!-- RIFAH REAL BACKEND: Firebase Auth + Firestore bridge -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, signOut } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
+import { getFirestore, collection, doc, getDocs, setDoc, addDoc, deleteDoc, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+
+/* =========================================================
+   STEP 1: Paste your Firebase Web App config here.
+   Firebase Console -> Project settings -> Your apps -> Web app
+   ========================================================= */
+const firebaseConfig = {
+  apiKey: "AIzaSyAVz9z6BqsPZKY6FJSSljFxaRdCyJdCbXk",
+  authDomain: "rifah-online-shop.firebaseapp.com",
+  projectId: "rifah-online-shop",
+  storageBucket: "rifah-online-shop.firebasestorage.app",
+  messagingSenderId: "432977559134",
+  appId: "1:432977559134:web:7cc9d697ddbd2611e43ecf",
+  measurementId: "G-3C0Q088Y5D"
+};
+
+const configured = !Object.values(firebaseConfig).some(v => String(v).includes("PASTE_"));
+if (!configured) {
+  console.warn("Rifah Firebase is not configured yet. The website will continue using LocalStorage until you paste the Firebase config.");
+  window.RifahBackend = { configured:false };
+} else {
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+  window.RifahBackend = {configured:true, auth, db, addProduct:null};
+
+  const ADMIN_EMAIL = "Ahmeddidarhridoy@gmail.com";
+  const ls = (k, fallback=[]) => { try { return JSON.parse(localStorage.getItem(k) || JSON.stringify(fallback)); } catch { return fallback; } };
+  const save = (k,v) => localStorage.setItem(k, JSON.stringify(v));
+
+  // Load shared products from Firestore and keep them live across customer devices.
+  let firstProductLoad = true;
+  onSnapshot(collection(db,"products"), snap => {
+    const products = snap.docs.map(d => ({id:d.id, ...d.data()}));
+    save("rifahProducts", products);
+    if (typeof window.renderRifahAdminProducts === "function") window.renderRifahAdminProducts();
+    document.dispatchEvent(new CustomEvent("rifah:products-updated", {detail:products}));
+    firstProductLoad = false;
+  }, err => console.error("Products realtime sync error:", err));
+
+  // Orders are public-create/admin-only-read in the rules. Admin sees all orders live.
+  let unsubscribeOrders = null;
+  function startAdminOrderListener(user){
+    if (unsubscribeOrders) unsubscribeOrders();
+    if (user?.email?.toLowerCase() !== ADMIN_EMAIL.toLowerCase()) return;
+    unsubscribeOrders = onSnapshot(collection(db,"orders"), snap => {
+      const orders = snap.docs.map(d => ({id:d.id, ...d.data()}));
+      save("rifahOrders", orders);
+      document.dispatchEvent(new CustomEvent("rifah:orders-updated", {detail:orders}));
+    }, err => console.error("Orders realtime sync error:", err));
+  }
+
+  onAuthStateChanged(auth, user => {
+    window.RifahBackend.user = user || null;
+    startAdminOrderListener(user);
+    document.dispatchEvent(new CustomEvent("rifah:auth-changed", {detail:user || null}));
+  });
+
+  // Direct cloud product publisher used by the Admin Product Manager.
+  window.RifahBackend.addProduct = async (productData) => {
+    if(auth.currentUser?.email?.toLowerCase() !== ADMIN_EMAIL.toLowerCase()){
+      throw new Error("Admin login required");
+    }
+    return await addDoc(collection(db,"products"), {...productData, createdAt:serverTimestamp(), updatedAt:serverTimestamp()});
+  };
+
+  // Patch product deletion from LocalStorage to Firestore when the admin deletes one.
+  document.addEventListener("rifah:product-delete", async e => {
+    const id=e.detail?.id; if(!id) return;
+    try { await deleteDoc(doc(db,"products",id)); } catch(err) { console.error(err); }
+  });
+
+  // If an order is created by the existing checkout, mirror it to Firestore.
+  let lastOrderHash = "";
+  async function syncOrdersToCloud(){
+    const list = ls("rifahOrders", []);
+    const hash = JSON.stringify(list);
+    if (hash === lastOrderHash) return;
+    lastOrderHash = hash;
+    for (const o of list) {
+      if (o.cloudSaved) continue;
+      try {
+        await setDoc(doc(db,"orders",String(o.id)), {...o, cloudSaved:true, createdAt:serverTimestamp()});
+        o.cloudSaved=true;
+      } catch(err) { console.error("Order upload failed",err); }
+    }
+    save("rifahOrders",list);
+  }
+  setInterval(()=>syncOrdersToCloud().catch(console.error), 1500);
+
+  // Public account registration/login backed by Firebase Authentication.
+  document.addEventListener("click", e => {
+    const admin = e.target.closest("#rifahAdminOpen, a[href='#admin']");
+    if (!admin) return;
+    e.preventDefault(); e.stopImmediatePropagation();
+    openCloudAdmin();
+  }, true);
+
+  async function openCloudAdmin(){
+    let email = prompt("Admin Email:", ADMIN_EMAIL);
+    if (email === null) return;
+    let pass = prompt("Firebase Admin Password:");
+    if (pass === null) return;
+    try {
+      const cred = await signInWithEmailAndPassword(auth,email.trim(),pass);
+      if (cred.user.email.toLowerCase() !== ADMIN_EMAIL.toLowerCase()) { await signOut(auth); alert("এই account-এ Admin permission নেই।"); return; }
+      alert("✅ Admin login সফল। এখন Product/Orders Cloud Database-এ থাকবে।");
+      const old=document.getElementById("rifahAdminModal"); if(old) old.style.display="block";
+      if(typeof window.rifahRenderAdmin === "function") window.rifahRenderAdmin();
+    } catch(err) { alert("Admin login হয়নি: "+friendlyAuthError(err)); }
+  }
+
+  document.addEventListener("submit", async e => {
+    if (e.target.id !== "accountForm") return;
+    e.preventDefault(); e.stopImmediatePropagation();
+    const email=document.getElementById("accEmail")?.value.trim();
+    const pass=document.getElementById("accPass")?.value || "";
+    const name=document.getElementById("accName")?.value.trim() || "Customer";
+    const phone=document.getElementById("accPhone")?.value.trim() || "";
+    const msg=document.getElementById("accMsg");
+    if(!email || !pass){ if(msg) msg.textContent="Email ও Password দিন।"; return; }
+    try{
+      let cred;
+      try { cred=await signInWithEmailAndPassword(auth,email,pass); }
+      catch(err){
+        if(["auth/user-not-found","auth/invalid-credential","auth/invalid-login-credentials"].includes(err.code)){
+          cred=await createUserWithEmailAndPassword(auth,email,pass);
+          await updateProfile(cred.user,{displayName:name});
+          await setDoc(doc(db,"users",cred.user.uid),{name,phone,email,updatedAt:serverTimestamp()},{merge:true});
+        } else throw err;
+      }
+      localStorage.setItem("rifahUser",JSON.stringify({name:cred.user.displayName||name,phone,email:cred.user.email,uid:cred.user.uid}));
+      if(msg) msg.textContent="✅ Login/Register সফল। আপনার account cloud-এ সংরক্ষিত হয়েছে।";
+    }catch(err){ if(msg) msg.textContent="❌ "+friendlyAuthError(err); }
+  }, true);
+
+  function friendlyAuthError(err){
+    const m={
+      "auth/email-already-in-use":"এই Email আগে থেকেই আছে। Login করুন।",
+      "auth/invalid-email":"Email ঠিক নয়।",
+      "auth/weak-password":"Password কমপক্ষে 6 অক্ষরের দিন।",
+      "auth/invalid-credential":"Email অথবা Password ভুল।",
+      "auth/too-many-requests":"অনেকবার চেষ্টা হয়েছে। কিছুক্ষণ পরে চেষ্টা করুন."
+    }; return m[err.code] || err.message || "Unknown error";
+  }
+
+  // Keep the local UI in sync after Firestore updates.
+  document.addEventListener("rifah:products-updated",()=>{
+    if(typeof window.renderRifahAdminProducts === "function") window.renderRifahAdminProducts();
+  });
+
+  // Expose a safe cloud order-status updater for the admin UI.
+  window.rifahCloudSetOrderStatus = async (orderId,status)=>{
+    if(auth.currentUser?.email?.toLowerCase()!==ADMIN_EMAIL.toLowerCase()) throw new Error("Admin login required");
+    await setDoc(doc(db,"orders",String(orderId)),{status,updatedAt:serverTimestamp()},{merge:true});
+  };
+}
+</script>
+
+
+<script id="rifah-cart-badge-fix">
+(function(){
+  function sync(){let n=0;try{n=JSON.parse(localStorage.getItem('rifahCart')||'[]').reduce((s,x)=>s+(Number(x.qty)||0),0)}catch(e){};document.querySelectorAll('#headerCartBadge,#rifah-cart-count,.badge').forEach(x=>x.textContent=n);}
+  document.addEventListener('click',()=>setTimeout(sync,30),true);
+  window.addEventListener('storage',sync); setInterval(sync,250); sync();
+
+  // Professional navigation + category/search behavior
+  document.querySelectorAll('.nav-inner a').forEach(a=>{
+    const t=(a.textContent||'').trim().toLowerCase();
+    if(t.includes('home')) a.href='#top';
+    else if(t==='shop') a.href='#products';
+    else if(t.includes('hot deals')) a.href='#deals';
+    else if(t.includes('new arrivals')) a.href='#new-arrivals';
+    else if(t.includes('about')) a.addEventListener('click',e=>{e.preventDefault();openModal('<h2>✨ About Rifah Online Shop</h2><p>Rifah Online Shop হলো fashion, lifestyle, kids, electronics ও everyday products-এর জন্য একটি trusted online shopping destination.</p><p>আমাদের লক্ষ্য: ভালো পণ্য, পরিষ্কার দাম, সহজ অর্ডার এবং friendly customer support.</p>')});
+    else if(t.includes('contact')) a.addEventListener('click',e=>{e.preventDefault();support('contact')});
+  });
+  document.querySelectorAll('.category').forEach(c=>c.addEventListener('click',e=>{
+    e.preventDefault();
+    const name=(c.querySelector('strong')?.textContent||'').trim();
+    const sel=document.querySelector('.search select');
+    if(sel){sel.value=name;document.getElementById('rifahSearchInput').value='';}
+    document.getElementById('products')?.scrollIntoView({behavior:'smooth'});
+    setTimeout(()=>document.getElementById('rifahSearchBtn')?.click(),150);
+  }));
+  document.querySelectorAll('.promo a').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();document.getElementById('products')?.scrollIntoView({behavior:'smooth'})}));
+  document.querySelectorAll('.trust-item').forEach(x=>{if((x.textContent||'').toLowerCase().includes('customer support'))x.style.cursor='pointer',x.addEventListener('click',()=>support('contact'))});
+  const logo=document.querySelector('.logo'); if(logo) logo.id='top';
+
+})();
+</script>
+
+
+<div id="rifahCategoryManager" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:99999;padding:20px;overflow:auto">
+  <div style="max-width:520px;margin:5vh auto;background:#fff;border-radius:18px;padding:18px;box-shadow:0 20px 60px rgba(0,0,0,.25)">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+      <h3 style="margin:0">📂 Manage Categories</h3>
+      <button id="rifahCloseCategoryManager" type="button">✕</button>
+    </div>
+    <p style="color:#666;font-size:13px">নতুন Category যোগ করলে Add Product-এর Category list-এও সেটি আসবে।</p>
+    <div style="display:flex;gap:8px">
+      <input id="rifahNewCategoryInput" type="text" placeholder="যেমন: Saree" style="flex:1;padding:11px;border:1px solid #ddd;border-radius:10px">
+      <button id="rifahAddCategoryBtn" class="rifah-primary" type="button">➕ Add</button>
+    </div>
+    <div id="rifahCategoryAdminList" style="margin-top:14px;display:grid;gap:8px"></div>
+  </div>
+</div>
+
+
+<script>
+(function(){
+  const DEFAULT_CATS = ["Women","Men","Kids","Saree","T-Shirt","Dress","Shoes","Toys","Electronics"];
+  const CAT_KEY = "rifahCategories";
+
+  function getCats(){
+    try{
+      const saved = JSON.parse(localStorage.getItem(CAT_KEY) || "[]");
+      return [...new Set([...DEFAULT_CATS, ...(Array.isArray(saved)?saved:[])])];
+    }catch(e){ return DEFAULT_CATS.slice(); }
+  }
+  function saveCats(cats){
+    localStorage.setItem(CAT_KEY, JSON.stringify([...new Set(cats)]));
+  }
+
+  function renderStoreCategories(){
+    const wrap = document.getElementById("rifahCategoryScroller");
+    if(!wrap) return;
+    wrap.innerHTML = "";
+    getCats().forEach(cat=>{
+      const b=document.createElement("button");
+      b.type="button";
+      b.textContent=cat;
+      b.style.cssText="white-space:nowrap;border:1px solid #ddd;background:#fff;padding:9px 14px;border-radius:999px;cursor:pointer;font-weight:700";
+      b.onclick=()=>filterRifahProductsByCategory(cat);
+      wrap.appendChild(b);
+    });
+  }
+
+  function filterRifahProductsByCategory(cat){
+    window.__rifahActiveCategory = cat;
+    // Try the existing product renderer with its current local product source.
+    if(typeof window.renderRifahAdminProducts === "function"){
+      window.renderRifahAdminProducts();
+      return;
+    }
+    // Generic fallback: hide product cards whose text doesn't contain the category.
+    const cards=document.querySelectorAll("[data-category], .product-card, .product, .card");
+    cards.forEach(card=>{
+      const c=(card.getAttribute("data-category")||card.textContent||"").toLowerCase();
+      card.style.display=c.includes(String(cat).toLowerCase())?"":"none";
+    });
+  }
+
+  function showAllRifahProducts(){
+    window.__rifahActiveCategory = "";
+    const cards=document.querySelectorAll("[data-category], .product-card, .product, .card");
+    cards.forEach(card=>card.style.display="");
+    if(typeof window.renderRifahAdminProducts === "function") window.renderRifahAdminProducts();
+  }
+
+  function renderAdminCategories(){
+    const list=document.getElementById("rifahCategoryAdminList");
+    if(!list) return;
+    list.innerHTML="";
+    getCats().forEach(cat=>{
+      const row=document.createElement("div");
+      row.style.cssText="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px;border:1px solid #eee;border-radius:10px";
+      row.innerHTML="<strong>"+cat.replace(/[<>&"]/g,"")+"</strong>";
+      const del=document.createElement("button");
+      del.type="button"; del.textContent="Delete";
+      del.onclick=()=>{
+        const next=getCats().filter(x=>x!==cat);
+        saveCats(next);
+        renderAdminCategories();
+        renderStoreCategories();
+        syncCategoryOptions();
+      };
+      row.appendChild(del); list.appendChild(row);
+    });
+  }
+
+  function syncCategoryOptions(){
+    const selects=[...document.querySelectorAll("select")].filter(x=>/category/i.test(x.id||"") || /category/i.test(x.name||""));
+    selects.forEach(sel=>{
+      const current=sel.value;
+      sel.innerHTML='<option value="">Select Category</option>';
+      getCats().forEach(cat=>{
+        const o=document.createElement("option"); o.value=cat; o.textContent=cat; sel.appendChild(o);
+      });
+      if(getCats().includes(current)) sel.value=current;
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded",()=>{
+    renderStoreCategories();
+    const all=document.getElementById("rifahAllProductsBtn");
+    if(all) all.onclick=showAllRifahProducts;
+
+    const manage=document.getElementById("rifahManageCategoriesBtn");
+    const modal=document.getElementById("rifahCategoryManager");
+    const close=document.getElementById("rifahCloseCategoryManager");
+    const add=document.getElementById("rifahAddCategoryBtn");
+    const input=document.getElementById("rifahNewCategoryInput");
+
+    if(manage) manage.onclick=()=>{modal.style.display="block";renderAdminCategories();};
+    if(close) close.onclick=()=>modal.style.display="none";
+    if(add) add.onclick=()=>{
+      const name=(input.value||"").trim();
+      if(!name) return;
+      const cats=getCats(); cats.push(name); saveCats(cats);
+      input.value=""; renderAdminCategories(); renderStoreCategories(); syncCategoryOptions();
+      alert("✅ Category যোগ হয়েছে: "+name);
+    };
+
+    // Swipe/drag the category row horizontally.
+    const sc=document.getElementById("rifahCategoryScroller");
+    if(sc){
+      let down=false,startX=0,scroll=0;
+      sc.addEventListener("pointerdown",e=>{down=true;startX=e.clientX;scroll=sc.scrollLeft;sc.setPointerCapture(e.pointerId);});
+      sc.addEventListener("pointermove",e=>{if(!down)return;sc.scrollLeft=scroll-(e.clientX-startX);});
+      sc.addEventListener("pointerup",()=>down=false);
+      sc.addEventListener("pointercancel",()=>down=false);
+    }
+    syncCategoryOptions();
+  });
+
+  window.rifahCategoryTools={getCats,saveCats,renderStoreCategories,filterRifahProductsByCategory,showAllRifahProducts,syncCategoryOptions};
+})();
+</script>
+
+</body>
+</html>
