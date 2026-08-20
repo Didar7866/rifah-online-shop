@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+
+<!-- Rifah Online Shop: frontend-complete storefront + cart + checkout + customer features + admin bridge -->
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Rifah Online Shop | Shop Everything You Love</title>
+<meta content="Rifah Online Shop - Fashion, Kids, Electronics, Toys and more." name="description"/>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap');
+
+:root{
+  --primary:#42145F;
+  --secondary:#6B2589;
+  --accent:#C72C8A;
+  --gold:#D6A84F;
+  --bg:#FAF9F7;
+  --white:#FFFFFF;
+  --text:#18151C;
+  --muted:#77717C;
+  --border:#EDE7EF;
+  --shadow:0 8px 30px rgba(66,20,95,.08);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Inter,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+button{
+  font-family:inherit;
+  cursor:pointer;
+  border:0;
+}
+
+.container{
+  width:min(1200px,92%);
+  margin:auto;
+}
+
+/* TOP BAR */
+.topbar{
+  background:var(--primary);
+  color:white;
+  font-size:13px;
+  padding:9px 0;
+}
+
+.topbar-inner{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.topbar span{
+  opacity:.95;
+}
+
+/* HEADER */
+.header{
+  background:white;
+  border-bottom:1px solid var(--border);
+  position:sticky;
+  top:0;
+  z-index:50;
+}
+
+.header-main{
+  min-height:82px;
+  display:flex;
+  align-items:center;
+  gap:25px;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  min-width:190px;
+}
+
+.logo-mark{
+  width:48px;
+  height:48px;
+  border-radius:14px;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  font-family:Poppins;
+  font-size:26px;
+  font-weight:800;
+}
+
+.logo-text{
+  margin-left:10px;
+  line-height:1;
+}
+
+.logo-text strong{
+  font-family:Poppins;
+  color:var(--primary);
+  font-size:23px;
+}
+
+.logo-text small{
+  display:block;
+  color:var(--accent);
+  font-weight:700;
+  margin-top:5px;
+}
+
+/* SEARCH */
+.search{
+  flex:1;
+  max-width:600px;
+  height:48px;
+  display:flex;
+  border:1px solid var(--border);
+  border-radius:12px;
+  overflow:hidden;
+  background:#fff;
+}
+
+.search select{
+  border:0;
+  padding:0 12px;
+  outline:0;
+  background:white;
+  color:var(--text);
+}
+
+.search input{
+  flex:1;
+  border:0;
+  outline:0;
+  padding:0 10px;
+  font-size:14px;
+}
+
+.search button{
+  width:52px;
+  background:var(--accent);
+  color:white;
+  font-size:19px;
+}
+
+/* HEADER ACTIONS */
+.actions{
+  display:flex;
+  gap:18px;
+  align-items:center;
+}
+
+.action{
+  text-align:center;
+  font-size:12px;
+  color:var(--text);
+  position:relative;
+}
+
+.action-icon{
+  font-size:21px;
+  display:block;
+  margin-bottom:3px;
+}
+
+.badge{
+  position:absolute;
+  top:-5px;
+  right:-8px;
+  width:18px;
+  height:18px;
+  background:var(--accent);
+  color:white;
+  border-radius:50%;
+  font-size:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* NAV */
+.nav{
+  background:var(--primary);
+  color:white;
+}
+
+.nav-inner{
+  display:flex;
+  align-items:center;
+  gap:30px;
+  min-height:47px;
+}
+
+.nav a{
+  font-size:14px;
+  font-weight:600;
+}
+
+.category-btn{
+  background:var(--secondary);
+  padding:14px 20px;
+  font-weight:700;
+}
+
+/* HERO */
+.hero{
+  padding:28px 0;
+}
+
+.hero-box{
+  min-height:410px;
+  border-radius:22px;
+  overflow:hidden;
+  background:
+  radial-gradient(circle at 85% 25%,rgba(199,44,138,.25),transparent 25%),
+  linear-gradient(115deg,#f5e8f8,#fff7fb);
+  display:flex;
+  align-items:center;
+  position:relative;
+}
+
+.hero-content{
+  width:52%;
+  padding:55px;
+}
+
+.hero-label{
+  color:var(--accent);
+  font-weight:800;
+  font-size:14px;
+  margin-bottom:12px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+
+.hero h1{
+  font-family:Poppins;
+  color:var(--primary);
+  font-size:48px;
+  line-height:1.1;
+  margin-bottom:15px;
+}
+
+.hero p{
+  color:var(--muted);
+  line-height:1.7;
+  margin-bottom:25px;
+}
+
+.primary-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:var(--primary);
+  color:white;
+  padding:14px 23px;
+  border-radius:10px;
+  font-weight:700;
+}
+
+.primary-btn:hover{
+  background:var(--accent);
+}
+
+.hero-art{
+  flex:1;
+  height:100%;
+  min-height:410px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.hero-circle{
+  width:280px;
+  height:280px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:white;
+  font-family:Poppins;
+  font-size:80px;
+  font-weight:800;
+  box-shadow:0 25px 60px rgba(66,20,95,.25);
+}
+
+/* SECTION */
+.section{
+  padding:35px 0;
+}
+
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.section-head h2{
+  font-family:Poppins;
+  color:var(--primary);
+  font-size:25px;
+}
+
+.view{
+  color:var(--accent);
+  font-weight:700;
+  font-size:14px;
+}
+
+/* CATEGORIES */
+.categories{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:14px;
+}
+
+.category{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px 10px;
+  text-align:center;
+  transition:.2s;
+}
+
+.category:hover{
+  transform:translateY(-4px);
+  box-shadow:var(--shadow);
+}
+
+.cat-icon{
+  width:60px;
+  height:60px;
+  margin:auto auto 10px;
+  border-radius:50%;
+  background:#f5eaf8;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+}
+
+.category strong{
+  font-size:13px;
+}
+
+/* PRODUCTS */
+.products{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:16px;
+}
+
+.product{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:16px;
+  overflow:hidden;
+  transition:.2s;
+}
+
+.product:hover{
+  transform:translateY(-4px);
+  box-shadow:var(--shadow);
+}
+
+.product-image{
+  height:210px;
+  background:linear-gradient(145deg,#f4e9f7,#fff);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:70px;
+  position:relative;
+}
+
+.sale{
+  position:absolute;
+  top:10px;
+  left:10px;
+  background:var(--accent);
+  color:white;
+  padding:5px 8px;
+  border-radius:6px;
+  font-size:11px;
+  font-weight:700;
+}
+
+.product-info{
+  padding:14px;
+}
+
+.product-name{
+  font-weight:600;
+  font-size:14px;
+  min-height:38px;
+}
+
+.rating{
+  color:#E0A72E;
+  font-size:13px;
+  margin:7px 0;
+}
+
+.price{
+  font-family:Poppins;
+  color:var(--primary);
+  font-weight:800;
+  font-size:18px;
+}
+
+.old-price{
+  color:#aaa;
+  text-decoration:line-through;
+  font-size:12px;
+  margin-left:5px;
+}
+
+.add{
+  width:100%;
+  margin-top:10px;
+  padding:10px;
+  background:var(--accent);
+  color:white;
+  border-radius:8px;
+  font-weight:700;
+}
+
+/* PROMO */
+.promo-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+
+.promo{
+  border-radius:18px;
+  padding:28px;
+  min-height:150px;
+  background:linear-gradient(135deg,#f3e6f8,#fff);
+}
+
+.promo:nth-child(2){
+  background:linear-gradient(135deg,#fff0f7,#fff);
+}
+
+.promo h3{
+  font-family:Poppins;
+  color:var(--primary);
+  margin-bottom:7px;
+}
+
+.promo a{
+  display:inline-block;
+  margin-top:15px;
+  color:var(--accent);
+  font-weight:700;
+  font-size:13px;
+}
+
+/* TRUST */
+.trust{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:25px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+}
+
+.trust-item{
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+
+.trust-icon{
+  width:45px;
+  height:45px;
+  background:#f4eaf7;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+}
+
+.trust strong{
+  display:block;
+  font-size:13px;
+}
+
+.trust small{
+  color:var(--muted);
+  font-size:11px;
+}
+
+/* FOOTER */
+footer{
+  margin-top:45px;
+  background:#24102f;
+  color:#eee;
+}
+
+.footer{
+  padding:45px 0 25px;
+  display:grid;
+  grid-template-columns:1.5fr 1fr 1fr 1fr;
+  gap:40px;
+}
+
+.footer h3{
+  font-family:Poppins;
+  margin-bottom:15px;
+}
+
+.footer p,.footer a{
+  display:block;
+  color:#cfc5d3;
+  font-size:13px;
+  line-height:2;
+}
+
+.copyright{
+  border-top:1px solid #432d4e;
+  padding:18px 0;
+  text-align:center;
+  color:#aaa;
+  font-size:12px;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+
+  .header-main{
+    flex-wrap:wrap;
+    padding:12px 0;
+    gap:12px;
+  }
+
+  .logo{
+    min-width:auto;
+  }
+
+  .search{
+    order:3;
+    flex-basis:100%;
+    max-width:none;
+  }
+
+  .actions{
+    margin-left:auto;
+    gap:12px;
+  }
+
+  .nav-inner{
+    overflow-x:auto;
+    gap:20px;
+    white-space:nowrap;
+  }
+
+  .hero-content{
+    width:100%;
+    padding:35px 25px;
+  }
+
+  .hero h1{
+    font-size:36px;
+  }
+
+  .hero-art{
+    display:none;
+  }
+
+  .categories{
+    grid-template-columns:repeat(4,1fr);
+  }
+
+  .products{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .promo-grid{
+    grid-template-columns:1fr;
+  }
+
+  .trust{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .footer{
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+@media(max-width:500px){
+
+  .topbar-inner{
+    justify-content:center;
+    text-align:center;
+  }
+
+  .topbar-inner span:last-child{
+    display:none;
+  }
+
+  .logo-text strong{
+    font-size:20px;
+  }
+
+  .logo-mark{
+    width:42px;
+    height:42px;
+  }
+
+  .actions .action span:last-child{
+    display:none;
+  }
+
+  .categories{
+    grid-template-columns:repeat(4,1fr);
+    gap:8px;
+  }
+
+  .category{
+    padding:12px 5px;
+  }
+
+  .cat-icon{
+    width:45px;
+    height:45px;
+    font-size:21px;
+  }
+
+  .category strong{
+    font-size:10px;
+  }
+
+  .products{
+    gap:10px;
+  }
+
+  .product-image{
+    height:150px;
+    font-size:50px;
+  }
+
+  .product-info{
+    padding:10px;
+  }
+
+  .product-name{
+    font-size:12px;
+  }
+
+  .price{
+    font-size:15px;
+  }
+
+  .footer{
+    grid-template-columns:1fr;
+  }
+
+  .trust{
+    grid-template-columns:1fr;
+  }
+}
+
+/* RIFAH V3 UX + ACCOUNT + SUPPORT + MODELS */
+.hero-models{display:flex!important;align-items:flex-end;justify-content:center;gap:10px;padding:20px 25px 0;min-height:330px}
+.model-card{position:relative;width:48%;height:315px;border-radius:28px 28px 8px 8px;overflow:hidden;background:#f4eaf7;box-shadow:0 15px 35px rgba(66,20,95,.18)}
+.model-card img{width:100%;height:100%;object-fit:cover;display:block}
+.owner-model img{object-position:center 18%}
+.female-model img{object-position:center 18%}
+.model-card span{position:absolute;left:12px;bottom:12px;background:rgba(66,20,95,.9);color:#fff;padding:7px 12px;border-radius:999px;font-size:11px;font-weight:800}
+.rifah-service-strip{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center;padding:12px;background:#fff;border-bottom:1px solid #eadff0}
+.rifah-service-strip a{padding:9px 13px;border-radius:999px;background:#faf3fb;color:#42145F;text-decoration:none;font-weight:700;font-size:12px}
+.rifah-service-strip a:hover{background:#42145F;color:#fff}
+.rifah-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:100000;padding:18px;overflow:auto}
+.rifah-modal-card{max-width:560px;margin:35px auto;background:#fff;border-radius:22px;padding:22px;box-shadow:0 20px 60px rgba(0,0,0,.3);position:relative}
+.rifah-modal-card h2{color:#42145F;margin:0 0 8px}
+.rifah-close{position:absolute;right:15px;top:12px;border:0;background:#f2edf4;border-radius:50%;width:36px;height:36px;font-size:20px;cursor:pointer}
+.rifah-form{display:grid;gap:10px;margin-top:15px}
+.rifah-form input,.rifah-form textarea,.rifah-form select{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;box-sizing:border-box;font:inherit}
+.rifah-form button,.rifah-primary{border:0;background:#C72C8A;color:#fff;padding:12px 16px;border-radius:10px;font-weight:800;cursor:pointer}
+.rifah-link-btn{border:1px solid #42145F;background:#fff;color:#42145F;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer}
+.rifah-order{border:1px solid #eadff0;border-radius:12px;padding:12px;margin:8px 0;background:#faf7fc}
+.rifah-admin{border:2px solid #42145F}
+.rifah-admin .danger{background:#b42318!important}
+.admin-product-row{display:grid;grid-template-columns:1fr 110px 100px;gap:8px;align-items:center;border-bottom:1px solid #eee;padding:8px 0}
+.admin-product-row img{width:70px;height:70px;object-fit:cover;border-radius:10px}
+@media(max-width:700px){.hero-models{min-height:250px;padding:12px 8px 0}.model-card{height:240px}.model-card span{font-size:9px;padding:5px 8px}.rifah-service-strip{justify-content:flex-start;overflow:auto;flex-wrap:nowrap}.admin-product-row{grid-template-columns:1fr 75px}}
+
+/* ===== RIFAH PROFESSIONAL FINAL PATCH ===== */
+html,body{width:100%;min-width:0;overflow-x:hidden}
+body{background:#faf9f7}
+.container{width:94%;max-width:1400px;margin-inline:auto}
+.header-main{gap:18px;width:100%}
+.logo{min-width:205px;flex:0 0 auto}
+.search{max-width:none;min-width:260px;flex:1 1 auto}
+.actions{gap:12px;flex:0 0 auto}
+.action{min-width:58px}
+.action-icon{font-size:29px;line-height:1.05}
+.action>span:last-of-type{font-size:12px;font-weight:700}
+.badge{width:22px;height:22px;font-size:11px;right:-5px;top:-7px;font-weight:800}
+.rifah-header-cart{min-width:76px;padding:5px 7px;border-radius:12px;background:#fff7fc}
+.rifah-header-cart .action-icon{font-size:31px}
+.nav-inner{gap:24px;flex-wrap:wrap}
+.nav-inner a{white-space:nowrap}
+.category-btn{border-radius:8px}
+.rifah-service-strip{gap:8px;padding:12px 10px;box-shadow:0 3px 12px rgba(66,20,95,.05)}
+.rifah-service-strip a{font-size:13px;padding:10px 14px}
+.hero-box{min-height:440px}
+.hero-content{z-index:3}
+.hero-art.hero-models{position:relative;min-height:410px;flex:1;gap:14px;padding:18px 28px 0}
+.model-card{height:380px;border-radius:32px 32px 12px 12px;background:linear-gradient(145deg,#fff,#f7eafa);border:1px solid rgba(66,20,95,.08)}
+.model-card img{object-fit:cover}
+.owner-model img{object-position:center 18%}
+.female-model img{object-position:center 18%}
+.model-card:after{content:"";position:absolute;inset:auto 0 0;height:45%;background:linear-gradient(transparent,rgba(36,9,48,.48));pointer-events:none}
+.model-card span{z-index:2;left:14px;bottom:14px;font-size:12px;padding:8px 13px}
+.hero-models:before{content:"RIFAH FASHION";position:absolute;top:18px;right:28px;background:rgba(255,255,255,.78);backdrop-filter:blur(8px);color:#42145F;padding:8px 13px;border-radius:999px;font-size:11px;font-weight:900;letter-spacing:.8px;z-index:5}
+.hero-models:after{content:"Style • Trust • For Everyone";position:absolute;bottom:12px;right:35px;color:#42145F;background:rgba(255,255,255,.82);padding:7px 12px;border-radius:999px;font-weight:800;font-size:11px;z-index:5}
+.rifah-modal-card{max-width:640px}
+.rifah-account-tabs{display:flex;gap:8px;background:#faf5fb;border-radius:12px;padding:5px;margin:12px 0}
+.rifah-account-tabs button{flex:1;border:0;padding:10px;border-radius:9px;background:transparent;color:#42145F;font-weight:800;cursor:pointer}
+.rifah-account-tabs button.active{background:#42145F;color:#fff}
+.rifah-dashboard{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
+.rifah-dashboard button{border:1px solid #eadff0;background:#fff;border-radius:14px;padding:14px;text-align:left;font-weight:800;color:#42145F;cursor:pointer}
+.rifah-profile-box{background:linear-gradient(135deg,#42145F,#C72C8A);color:#fff;padding:16px;border-radius:16px;margin-top:12px}
+.rifah-profile-box small{opacity:.86}
+.rifah-hidden-contact{display:none!important}
+.rifah-support-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:15px}
+.rifah-support-actions a{display:inline-flex;align-items:center;justify-content:center;padding:11px 14px;border-radius:10px;background:#f8eff9;color:#42145F;font-weight:800;text-decoration:none}
+.rifah-support-actions a.primary{background:#C72C8A;color:#fff}
+.footer .contact-direct{display:none!important}
+.footer .support-launch{display:inline-flex!important;margin-top:6px;padding:9px 12px;background:#f8eff9;border-radius:9px;color:#42145F;font-weight:800}
+@media (min-width:1100px){
+  .header-main{min-height:94px}
+  .logo img{max-width:205px!important}
+  .action-icon{font-size:31px}
+  .rifah-header-cart .action-icon{font-size:34px}
+  .badge{width:24px;height:24px;font-size:12px}
+}
+@media (max-width:900px){
+  .container{width:94%}
+  .header-main{flex-wrap:wrap;padding:10px 0}
+  .logo{min-width:170px}
+  .search{order:3;width:100%;flex-basis:100%}
+  .actions{margin-left:auto}
+  .hero-box{flex-direction:column}
+  .hero-content{width:100%;padding:35px 28px 10px}
+  .hero h1{font-size:36px}
+  .hero-art.hero-models{width:100%;padding:12px 18px 18px}
+  .model-card{height:330px}
+}
+@media (max-width:600px){
+  .container{width:92%}
+  .actions{gap:5px}
+  .action{min-width:48px}
+  .action-icon{font-size:24px}
+  .rifah-header-cart .action-icon{font-size:27px}
+  .action>span:last-of-type{font-size:10px}
+  .hero-models{gap:8px!important}
+  .model-card{height:270px;border-radius:22px 22px 8px 8px}
+  .hero-models:before,.hero-models:after{display:none}
+  .rifah-dashboard{grid-template-columns:1fr}
+}
+
+
+/* ===== RIFAH EASY PRODUCT MANAGER V3 ===== */
+.rifah-product-manager{background:linear-gradient(135deg,#fff,#faf5fc);border:1px solid #eadff0;border-radius:18px;padding:16px;margin:12px 0 18px}
+.rifah-manager-title{font-size:20px;font-weight:900;color:#42145F;margin:0 0 4px}
+.rifah-manager-help{font-size:12px;color:#666;margin:0 0 14px}
+.rifah-product-grid-form{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.rifah-product-grid-form .full{grid-column:1/-1}
+.rifah-product-grid-form input,.rifah-product-grid-form select,.rifah-product-grid-form textarea{width:100%;box-sizing:border-box;padding:12px;border:1px solid #d9cfe0;border-radius:11px;background:#fff;font:inherit}
+.rifah-product-grid-form textarea{min-height:95px;resize:vertical}
+.rifah-upload-box{border:2px dashed #cdb5d8;background:#fff;border-radius:13px;padding:13px;text-align:center;color:#42145F;font-weight:800}
+.rifah-upload-box input{border:0;padding:8px;width:100%;box-sizing:border-box}
+.rifah-preview{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.rifah-preview img{width:72px;height:72px;object-fit:cover;border-radius:10px;border:1px solid #eadff0}
+.rifah-product-detail{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+.rifah-detail-main{width:100%;height:360px;object-fit:contain;background:#faf7fc;border-radius:16px}
+.rifah-detail-thumbs{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.rifah-detail-thumbs img{width:62px;height:62px;object-fit:cover;border-radius:8px;border:2px solid transparent;cursor:pointer}
+.rifah-detail-thumbs img.active{border-color:#C72C8A}
+.rifah-detail-title{font-size:24px;font-weight:900;color:#42145F;margin:0 0 8px}
+.rifah-detail-price{font-size:24px;font-weight:900;color:#C72C8A}
+.rifah-detail-old{color:#999;text-decoration:line-through;margin-left:8px}
+.rifah-detail-meta{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.rifah-chip{background:#f5eafa;color:#42145F;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:800}
+.rifah-detail-description{white-space:pre-line;color:#555;line-height:1.65;margin:12px 0}
+@media(max-width:700px){.rifah-product-grid-form,.rifah-product-detail{grid-template-columns:1fr}.rifah-product-grid-form .full{grid-column:auto}.rifah-detail-main{height:280px}}
+
+</style>
+<style id="rifah-frontend-fixes">
+.rifah-support-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}.rifah-support-actions a,.rifah-support-actions button{display:flex;align-items:center;justify-content:center;gap:7px;text-decoration:none;border:0;border-radius:11px;padding:12px;font-weight:800;cursor:pointer;background:#f7eef9;color:#42145F}.rifah-support-actions a.primary,.rifah-support-actions button.primary{background:#C72C8A;color:#fff}.rifah-support-info{background:#faf7fc;border:1px solid #eadff0;border-radius:13px;padding:13px;line-height:1.8}.rifah-feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}.rifah-feature-card{background:#fff;border:1px solid #eadff0;border-radius:12px;padding:14px;text-align:center;cursor:pointer;font-weight:800;color:#42145F}.rifah-feature-card:hover{box-shadow:0 8px 25px rgba(66,20,95,.1);transform:translateY(-2px)}.rifah-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.rifah-detail-grid img{width:100%;max-height:330px;object-fit:contain;border-radius:14px;background:#faf7fc}.rifah-variant{display:inline-block;border:1px solid #ddd;border-radius:8px;padding:7px 10px;margin:4px;cursor:pointer}.rifah-variant.active{border-color:#C72C8A;background:#fff1fa;color:#C72C8A}.rifah-search-empty{display:none;text-align:center;padding:20px;color:#777}.rifah-user-status{font-size:12px;color:#42145F;margin:8px 0;font-weight:700}
+@media(max-width:700px){.rifah-support-actions{grid-template-columns:1fr}.rifah-feature-grid{grid-template-columns:1fr 1fr}.rifah-detail-grid{grid-template-columns:1fr}}
+</style>
+<style id="rifah-layout-final-fix">
+/* Final desktop/mobile layout refinement */
+@media (min-width:901px){
+  .container{width:min(94%,1320px)}
+  .products{grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+  .product-image{height:205px}
+  .product-info{padding:12px 13px}
+  .product-name{font-size:13px;min-height:20px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.35}
+  .rating{white-space:nowrap;margin:6px 0}
+  .price{font-size:17px;white-space:nowrap}
+  .add{white-space:nowrap;padding:9px 8px}
+  .promo-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+  .promo{min-height:145px;padding:24px}
+  .promo h3{font-size:21px;white-space:nowrap}
+  .promo p{font-size:14px;line-height:1.55}
+  .footer{grid-template-columns:1.45fr 1fr 1fr 1fr;gap:28px}
+  .footer h3{font-size:17px;white-space:nowrap}
+  .footer p,.footer a{font-size:12px;line-height:1.9;white-space:nowrap}
+}
+
+/* One unified fashion advertisement, not two separate boxes */
+.hero-box{overflow:hidden}
+.hero-art.hero-models{
+  position:relative!important;
+  display:flex!important;
+  align-items:flex-end!important;
+  justify-content:center!important;
+  gap:0!important;
+  min-height:410px!important;
+  padding:10px 18px 0!important;
+  background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(199,44,138,.10));
+}
+.model-card{
+  position:relative!important;
+  width:50%!important;
+  height:395px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  overflow:hidden!important;
+}
+.model-card img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  display:block!important;
+  border:0!important;
+}
+.owner-model img{object-position:center bottom!important;object-fit:contain!important;transform:scale(1.08);transform-origin:center bottom}
+.female-model img{object-position:center 18%!important}
+.model-card:after{display:none!important}
+.model-card span{display:none!important}
+.hero-models:before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:2!important;
+  pointer-events:none!important;
+  background:linear-gradient(90deg,rgba(255,247,251,.05),rgba(255,247,251,0) 48%,rgba(255,247,251,.10))!important;
+}
+.hero-models:after{
+  content:""!important;
+  position:absolute!important;
+  left:50%!important;
+  bottom:20px!important;
+  transform:translateX(-50%)!important;
+  width:max-content!important;
+  max-width:90%!important;
+  padding:8px 16px!important;
+  border-radius:999px!important;
+  background:rgba(66,20,95,.90)!important;
+  color:#fff!important;
+  font-size:12px!important;
+  font-weight:800!important;
+  letter-spacing:.2px!important;
+  z-index:6!important;
+  content:"Style • Trust • For Everyone"!important;
+}
+.hero-ad-copy{
+  position:absolute!important;
+  top:20px!important;
+  right:20px!important;
+  z-index:7!important;
+  text-align:right!important;
+  color:#42145F!important;
+  display:flex!important;
+  flex-direction:column!important;
+  gap:2px!important;
+  pointer-events:none!important;
+}
+.hero-ad-copy strong{font-family:Poppins,sans-serif;font-size:18px;line-height:1.1}
+.hero-ad-copy span{font-size:12px;font-weight:800;color:#C72C8A}
+.hero-ad-copy small{font-size:11px;color:#6d5a74;font-weight:700}
+
+/* Prevent desktop-mode cards and footer text from becoming tall vertical columns */
+@media (min-width:901px) and (max-width:1100px){
+  .products{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+  .product-image{height:175px}
+  .product-name{font-size:12px}
+  .footer{gap:16px}
+  .footer p,.footer a{font-size:11px}
+  .footer h3{font-size:15px}
+}
+
+@media (max-width:900px){
+  .products{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .product-name{white-space:normal;min-height:38px}
+  .hero-art.hero-models{min-height:335px!important}
+  .model-card{height:320px!important}
+  .hero-ad-copy{top:10px;right:12px}
+  .hero-ad-copy strong{font-size:15px}
+  .hero-ad-copy span{font-size:10px}
+  .hero-ad-copy small{font-size:9px}
+  .footer{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+  .footer p,.footer a{white-space:normal}
+}
+</style>
+<style id="rifah-v2-clarity-fix">
+/* V2: sharper model photos on desktop mode */
+.hero-art.hero-models{image-rendering:auto!important;}
+.model-card{isolation:isolate!important;}
+.model-card img{image-rendering:auto!important;filter:none!important;backface-visibility:hidden;transform:none;}
+.owner-model img{object-fit:contain!important;object-position:center bottom!important;transform:scale(1.02)!important;transform-origin:center bottom!important;}
+.female-model img{object-fit:cover!important;object-position:center 18%!important;}
+@media (min-width:901px){
+  .hero-art.hero-models{min-height:430px!important;padding:10px 24px 0!important;gap:8px!important;}
+  .model-card{height:415px!important;}
+  .owner-model img{object-fit:contain!important;}
+  .female-model img{object-fit:cover!important;}
+}
+/* Clear cart quantity badges */
+#headerCartBadge{min-width:30px!important;width:30px!important;height:30px!important;border-radius:50%!important;font-size:14px!important;font-weight:900!important;line-height:30px!important;box-shadow:0 3px 10px rgba(0,0,0,.22)!important;border:2px solid #fff!important;z-index:20!important;}
+#rifah-cart-count{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-width:28px!important;height:28px!important;padding:0 8px!important;border-radius:999px!important;background:#C72C8A!important;color:#fff!important;font-size:15px!important;font-weight:900!important;line-height:1!important;margin-left:4px!important;box-shadow:0 2px 8px rgba(0,0,0,.18)!important;}
+#rifah-cart-box{font-size:16px!important;padding:13px 18px!important;white-space:nowrap!important;}
+@media(max-width:700px){#headerCartBadge{width:26px!important;height:26px!important;min-width:26px!important;font-size:12px!important;}#rifah-cart-count{min-width:25px!important;height:25px!important;font-size:13px!important;}}
+</style>
+<style id="rifah-final-all-in-one-css">
+:root{--r1:#42145F;--r2:#6B2589;--ra:#C72C8A;--gold:#D6A84F;--ink:#18151C;--muted:#77717C;--bg:#FAF9F7;--card:#fff;--line:#ece7ef;--ok:#16865a;--danger:#c43d4b}
+html{scroll-behavior:smooth} body{background:linear-gradient(180deg,#fff 0,#faf9f7 35%,#fff 100%)}
+button,input,select,textarea{font:inherit}.rifah-hidden{display:none!important}
+.rifah-toast{position:fixed;right:18px;bottom:18px;z-index:100000;background:#18151c;color:#fff;padding:13px 16px;border-radius:13px;box-shadow:0 12px 35px rgba(0,0,0,.2);transform:translateY(20px);opacity:0;pointer-events:none;transition:.25s}.rifah-toast.show{transform:none;opacity:1}
+.rifah-modal{position:fixed;inset:0;background:rgba(17,10,24,.58);backdrop-filter:blur(6px);z-index:99990;display:none;padding:18px;overflow:auto}.rifah-modal.open{display:flex;align-items:center;justify-content:center}.rifah-dialog{width:min(980px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:24px;box-shadow:0 25px 80px rgba(0,0,0,.28);padding:22px}.rifah-dialog.sm{width:min(560px,100%)}
+.rifah-dialog-head{display:flex;justify-content:space-between;align-items:center;gap:15px;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:18px}.rifah-close{width:40px;height:40px;border-radius:50%;background:#f3eff5;font-size:22px}.rifah-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.rifah-field{display:grid;gap:6px}.rifah-field.full{grid-column:1/-1}.rifah-field label{font-weight:700;font-size:13px}.rifah-field input,.rifah-field select,.rifah-field textarea{width:100%;padding:12px 13px;border:1px solid #ddd5e2;border-radius:12px;outline:none;background:#fff}.rifah-field input:focus,.rifah-field select:focus,.rifah-field textarea:focus{border-color:var(--ra);box-shadow:0 0 0 3px rgba(199,44,138,.1)}
+.rifah-primary{background:linear-gradient(135deg,var(--r1),var(--r2));color:#fff;padding:12px 16px;border-radius:12px;font-weight:800}.rifah-secondary{background:#fff;border:1px solid var(--line);padding:11px 15px;border-radius:12px;font-weight:700}.rifah-danger{background:#fff0f1;color:var(--danger);padding:9px 12px;border-radius:10px;font-weight:800}.rifah-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}.rifah-admin-top{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px}.rifah-stat{padding:15px;border:1px solid var(--line);border-radius:15px;background:linear-gradient(145deg,#fff,#faf7fb)}.rifah-stat b{display:block;font-size:22px;margin-top:4px}.rifah-product-admin{display:grid;grid-template-columns:70px 1fr auto;gap:12px;align-items:center;border:1px solid var(--line);padding:11px;border-radius:15px;margin-bottom:9px}.rifah-product-admin img{width:70px;height:70px;object-fit:cover;border-radius:12px;background:#f5f0f7}.rifah-product-admin .emoji{width:70px;height:70px;border-radius:12px;display:grid;place-items:center;background:#f5f0f7;font-size:34px}.rifah-admin-list{display:grid;gap:8px}.rifah-cat-pill{display:inline-flex;align-items:center;gap:7px;padding:8px 12px;border-radius:999px;background:#f7f1fa;border:1px solid #eadcf0;margin:4px;font-weight:700}.rifah-cat-pill button{border:0;background:transparent;color:var(--danger);font-weight:900}
+#rifahProductsGrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:18px}.rifah-dynamic-product{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 7px 25px rgba(66,20,95,.05);transition:.2s}.rifah-dynamic-product:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(66,20,95,.1)}.rifah-dynamic-img{height:210px;background:linear-gradient(135deg,#f7effa,#fff);display:grid;place-items:center;overflow:hidden;position:relative}.rifah-dynamic-img img{width:100%;height:100%;object-fit:cover}.rifah-dynamic-img .emoji{font-size:70px}.rifah-dynamic-info{padding:14px}.rifah-dynamic-name{font-weight:800;min-height:42px}.rifah-cat{font-size:12px;color:var(--r2);font-weight:800;margin:5px 0}.rifah-price{font-size:20px;font-weight:900}.rifah-old{text-decoration:line-through;color:#999;font-size:13px;margin-left:6px}.rifah-card-actions{display:grid;grid-template-columns:1fr 42px;gap:8px;margin-top:11px}.rifah-card-actions button{border-radius:11px;padding:10px}.rifah-add{background:var(--r1);color:#fff;font-weight:800}.rifah-heart{background:#f7f1fa;color:var(--ra);font-size:18px}.rifah-empty{grid-column:1/-1;padding:40px;text-align:center;border:1px dashed #d9cfe0;border-radius:18px;color:var(--muted)}
+.rifah-cart-row{display:grid;grid-template-columns:60px 1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}.rifah-cart-thumb{width:60px;height:60px;border-radius:12px;background:#f6f0f8;display:grid;place-items:center;overflow:hidden}.rifah-cart-thumb img{width:100%;height:100%;object-fit:cover}.rifah-qty{display:flex;align-items:center;gap:6px}.rifah-qty button{width:30px;height:30px;border-radius:8px;background:#f3edf5}.rifah-order{border:1px solid var(--line);border-radius:15px;padding:14px;margin-bottom:10px}.rifah-badge{display:inline-block;padding:5px 9px;border-radius:999px;background:#eaf8f1;color:var(--ok);font-weight:800;font-size:12px}.rifah-track{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:20px 0}.rifah-track div{padding:12px;border-radius:12px;background:#f5f0f7;text-align:center;font-weight:800}.rifah-track .active{background:#eadcf0;color:var(--r1)}
+.hero-art-clean{position:relative!important;overflow:hidden!important;background:radial-gradient(circle at 20% 20%,rgba(255,255,255,.22),transparent 30%),linear-gradient(135deg,#42145f,#7d2d91 55%,#c72c8a)!important;min-height:300px;border-radius:28px}.hero-art-clean:before{content:"";position:absolute;inset:-30%;background:repeating-linear-gradient(45deg,transparent 0 34px,rgba(255,255,255,.05) 34px 36px);transform:rotate(-8deg)}.hero-shape{position:absolute;right:14%;top:17%;width:210px;height:210px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,rgba(255,255,255,.35) 8%,rgba(255,255,255,.08) 35%,transparent 68%);border:1px solid rgba(255,255,255,.3);display:grid;place-items:center}.hero-shape span{font-family:Poppins;font-size:110px;font-weight:800;color:rgba(255,255,255,.9);text-shadow:0 15px 35px rgba(0,0,0,.18)}.hero-mini{position:absolute;right:6%;bottom:18px;color:#fff;text-align:right;font-weight:900;letter-spacing:2px;font-size:13px}.hero-mini small{font-size:9px;opacity:.8}.hero-orb{position:absolute;border-radius:50%;background:rgba(255,255,255,.08)}.orb1{width:180px;height:180px;left:-50px;bottom:-60px}.orb2{width:110px;height:110px;right:45%;top:-40px}
+#rifahStoreToolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 0 15px}.rifah-results-title{font-weight:800}.rifah-results-title span{color:var(--ra)}#rifahSort{padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fff}
+@media(max-width:1000px){#rifahProductsGrid{grid-template-columns:repeat(3,minmax(0,1fr))}.rifah-admin-top{grid-template-columns:repeat(2,1fr)}}@media(max-width:650px){#rifahProductsGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.rifah-dynamic-img{height:170px}.rifah-grid{grid-template-columns:1fr}.rifah-field.full{grid-column:auto}.rifah-product-admin{grid-template-columns:55px 1fr}.rifah-product-admin>div:last-child{grid-column:1/-1}.rifah-track{grid-template-columns:repeat(2,1fr)}.hero-art-clean{min-height:230px}.hero-shape{width:150px;height:150px;right:7%;top:15%}.hero-shape span{font-size:78px}.hero-mini{font-size:9px}.hero-mini small{font-size:7px}}
+</style></head>
+<body>
+<div class="topbar">
+<div class="container topbar-inner">
+<span>🚚 Fast &amp; Reliable Delivery Across Bangladesh</span>
+<span>✨ Special Offers Available Today</span>
+</div>
+</div>
+<header class="header">
+<div class="container header-main">
+<a class="logo" href="#">
+<img alt="Rifah Online Shop" src="logo.png" style="width:180px;height:auto;display:block;"/>
+</a>
+<div class="search">
+<select>
+<option>All Categories</option>
+<option>Women's Fashion</option>
+<option>Men's Fashion</option>
+<option>Kids &amp; Baby</option>
+<option>Electronics</option>
+<option>Toys</option>
+</select>
+<input id="rifahSearchInput" placeholder="Search for products..." type="search"/>
+<button id="rifahSearchBtn" type="button">⌕</button>
+</div>
+<div class="actions">
+<a class="action rifah-account-link" href="#account">
+<span class="action-icon">👤</span><span>My Account</span>
+</a>
+<a class="action rifah-wishlist-link" href="#wishlist">
+<span class="action-icon">♡</span><span>Wishlist</span>
+</a>
+<a class="action rifah-header-cart" href="#cart">
+<span class="action-icon">🛒</span><span>Cart</span><b class="badge" id="headerCartBadge">0</b>
+</a>
+</div>
+</div>
+</header>
+<nav class="nav">
+<div class="container nav-inner">
+<a class="category-btn" href="#">☰ Browse Categories</a>
+<a href="#">Home</a>
+<a href="#">Shop</a>
+<a href="#">Hot Deals</a>
+<a href="#">New Arrivals</a>
+<a href="#">About Us</a>
+<a href="#">Contact</a>
+</div>
+<button class="rifah-secondary" id="rifahAdminLaunch" style="margin-left:8px" type="button">⚙️ Admin</button></nav>
+<div class="rifah-service-strip">
+<a class="rifah-all-products" href="#products">🛍️ All Products</a>
+<a data-rifah-modal="orders" href="#account">📦 My Orders</a>
+<a data-rifah-modal="wishlist" href="#wishlist">♡ Wishlist</a>
+<a data-rifah-modal="track" href="#track">🚚 Track Order</a>
+<a data-rifah-modal="account" href="#account">👤 Login / Register</a>
+<a data-rifah-modal="contact" href="#support">📞 Customer Support</a>
+</div>
+<div class="container">
+<div aria-label="Customer shortcuts" class="rifah-feature-grid">
+<button class="rifah-feature-card" data-rifah-modal="orders" type="button">📦<br/>My Orders</button>
+<button class="rifah-feature-card" data-rifah-modal="wishlist" type="button">♡<br/>Wishlist</button>
+<button class="rifah-feature-card" data-rifah-modal="track" type="button">🚚<br/>Track Order</button>
+<button class="rifah-feature-card" data-rifah-modal="account" type="button">👤<br/>Login / Register</button>
+</div>
+</div>
+<section id="rifahCategorySection" style="margin:18px auto;max-width:1200px;padding:0 14px">
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+<button class="rifah-primary" id="rifahAllProductsBtn" style="white-space:nowrap" type="button">🛍️ All Products</button>
+<div id="rifahCategoryScroller" style="display:flex;gap:8px;overflow-x:auto;scroll-behavior:smooth;touch-action:pan-x;padding:4px 2px;flex:1;scrollbar-width:none">
+</div>
+</div>
+</section>
+<main>
+<section class="hero">
+<div class="container">
+<div class="hero-box">
+<div class="hero-content">
+<div class="hero-label">Biggest Sale of the Year</div>
+<h1>Everything You Love, In One Place.</h1>
+<p>
+          Discover fashion, kids products, electronics, toys
+          and more at Rifah Online Shop.
+        </p>
+<a class="primary-btn" href="#products">
+          Shop Now →
+        </a>
+</div>
+<div class="hero-art hero-art-clean"><div class="hero-orb orb1"></div><div class="hero-orb orb2"></div><div class="hero-shape"><span>R</span></div><div class="hero-mini">RIFAH ONLINE SHOP<br/><small>STYLE • VALUE • CONFIDENCE</small></div></div>
+</div>
+</div>
+</section>
+<section class="section">
+<div class="container">
+<div class="section-head">
+<h2>Shop by Category</h2>
+<a class="view rifah-all-products" href="#products">View All Products →</a>
+</div>
+<div class="categories">
+<a class="category" href="#">
+<div class="cat-icon">👗</div>
+<strong>Women's Fashion</strong>
+</a>
+<a class="category" href="#">
+<div class="cat-icon">👔</div>
+<strong>Men's Fashion</strong>
+</a>
+<a class="category" href="#">
+<div class="cat-icon">👶</div>
+<strong>Kids &amp; Baby</strong>
+</a>
+<a class="category" href="#">
+<div class="cat-icon">⚡</div>
+<strong>Electronics</strong>
+</a>
+<a class="category" href="#">
+<div class="cat-icon">🧸</div>
+<strong>Toys</strong>
+</a>
+<a class="category" href="#">
+<div class="cat-icon">🏠</div>
+<strong>Home</strong>
+</a>
+<a class="category" href="#">
+<div class="cat-icon">＋</div>
+<strong>More</strong>
+</a>
+</div>
+</div>
+</section>
+<section class="section" id="products">
+<div class="container">
+<div class="section-head">
+<h2>Best Selling Products</h2>
+<a class="view" href="#">View All →</a>
+</div>
+<div id="rifahStoreToolbar"><div class="rifah-results-title"><span id="rifahResultsCount">0</span> products</div><select id="rifahSort"><option value="new">Newest</option><option value="low">Price: Low to High</option><option value="high">Price: High to Low</option><option value="name">Name: A-Z</option></select></div><div class="products" id="rifahProductsGrid"></div>
+</div>
+</section>
+<section class="section" id="deals">
+<div class="container">
+<div class="promo-grid">
+<div class="promo">
+<h3>Combo Offers</h3>
+<p>Save more when you buy together.</p>
+<a href="#">Shop Offers →</a>
+</div>
+<div class="promo">
+<h3>Deals of the Day</h3>
+<p>Limited-time discounts on selected products.</p>
+<a href="#">View Deals →</a>
+</div>
+<div class="promo">
+<h3>New Arrivals</h3>
+<p>Discover the latest products.</p>
+<a href="#">Explore Now →</a>
+</div>
+</div>
+</div>
+</section>
+<section class="section">
+<div class="container">
+<div class="section-head">
+<h2>Why Choose Rifah Online Shop?</h2>
+</div>
+<div class="trust">
+<div class="trust-item">
+<div class="trust-icon">🛡️</div>
+<div>
+<strong>Quality Products</strong>
+<small>Selected with care</small>
+</div>
+</div>
+<div class="trust-item">
+<div class="trust-icon">🚚</div>
+<div>
+<strong>Fast Delivery</strong>
+<small>Reliable delivery service</small>
+</div>
+</div>
+<div class="trust-item">
+<div class="trust-icon">💳</div>
+<div>
+<strong>Secure Payment</strong>
+<small>COD &amp; Online Payment</small>
+</div>
+</div>
+<div class="trust-item">
+<div class="trust-icon">🎧</div>
+<div>
+<strong>Customer Support</strong>
+<small>We're here to help</small>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<section class="section" id="about"><div class="container"><div class="section-head"><h2>About Rifah Online Shop</h2></div><div style="background:#fff;border:1px solid #ece7ef;border-radius:20px;padding:24px;line-height:1.8"><p>Rifah Online Shop is a modern online store for fashion, kids products, toys, shoes and electronics.</p><p>We focus on simple shopping, clear product information and a smooth customer experience.</p></div></div></section><section class="section" id="support"><div class="container"><div class="section-head"><h2>Contact &amp; Policies</h2></div><div style="background:#fff;border:1px solid #ece7ef;border-radius:20px;padding:24px;line-height:1.8"><p><b>Contact:</b> 01837786320</p><p><b>WhatsApp:</b> 01837786320</p><p><b>Email:</b> Ahmeddidarhridoy@gmail.com</p><p><b>Shipping:</b> Delivery time depends on destination and available shipping service.</p><p><b>Return &amp; Refund:</b> Contact support with your order ID if there is a product issue.</p><p><b>Privacy:</b> Customer information should only be used to process orders and support.</p></div></div></section><footer>
+<div class="container footer">
+<div>
+<h3>Rifah Online Shop</h3>
+<p>
+        Your trusted online shopping destination for
+        fashion, lifestyle, electronics and more.
+      </p>
+</div>
+<div>
+<h3>Customer Service</h3>
+<a data-rifah-modal="contact" href="#support">📞 Contact Us</a>
+<a data-rifah-modal="shipping" href="#support">🚚 Shipping Policy</a>
+<a data-rifah-modal="return" href="#support">↩️ Return &amp; Refund Policy</a>
+<a data-rifah-modal="privacy" href="#support">🔒 Privacy Policy</a>
+<a data-rifah-modal="terms" href="#support">📄 Terms &amp; Conditions</a>
+</div>
+<div>
+<h3>My Account</h3>
+<a data-rifah-modal="orders" href="#account">📦 My Orders</a>
+<a data-rifah-modal="wishlist" href="#wishlist">♡ Wishlist</a>
+<a data-rifah-modal="track" href="#track">🚚 Track Order</a>
+<a data-rifah-modal="account" href="#account">👤 Login / Register</a>
+</div>
+<div>
+<h3>Payment</h3>
+<p>Cash on Delivery</p>
+<p>Online Payment</p>
+<p>bKash • Nagad • Card</p>
+<p class="contact-direct">📞 01837786320</p>
+<p class="contact-direct">💬 WhatsApp: 01837786320</p>
+<p class="contact-direct">✉️ Ahmeddidarhridoy@gmail.com</p>
+<a class="support-launch" data-rifah-modal="contact" href="#support">📞 Contact Support</a>
+</div>
+</div>
+<div class="copyright">
+    © 2026 Rifah Online Shop. All Rights Reserved.
+  </div>
+</footer>
+<style>
+#rifah-cart-box{
+position:fixed;
+right:15px;
+bottom:15px;
+z-index:9999;
+background:#42145F;
+color:white;
+padding:12px 18px;
+border-radius:30px;
+font-weight:bold;
+box-shadow:0 5px 20px rgba(0,0,0,.25);
+cursor:pointer;
+}
+#rifah-cart-panel{
+display:none;
+position:fixed;
+right:15px;
+bottom:75px;
+width:320px;
+max-width:90%;
+background:white;
+color:#222;
+z-index:10000;
+border-radius:15px;
+padding:18px;
+box-shadow:0 5px 30px rgba(0,0,0,.3);
+}
+#rifah-cart-panel h3{
+margin-top:0;
+color:#42145F;
+}
+.rifah-cart-item{
+border-bottom:1px solid #ddd;
+padding:10px 0;
+}
+.rifah-cart-total{
+font-weight:bold;
+font-size:18px;
+margin-top:15px;
+}
+#rifah-checkout{
+width:100%;
+margin-top:15px;
+padding:12px;
+border:0;
+border-radius:8px;
+background:#C72C8A;
+color:white;
+font-weight:bold;
+}
+
+/* Enhanced checkout */
+.rifah-checkout-summary{
+  background:#faf7fc;border:1px solid #eadff0;border-radius:14px;
+  padding:15px;margin:18px 0;
+}
+.rifah-summary-row{
+  display:flex;justify-content:space-between;gap:12px;
+  padding:6px 0;font-size:14px;color:#555;
+}
+.rifah-summary-row.total{
+  border-top:1px solid #ddd;margin-top:8px;padding-top:12px;
+  font-size:18px;font-weight:800;color:#42145F;
+}
+.rifah-plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.rifah-plan{
+  border:1px solid #ddd;background:#fff;border-radius:10px;
+  padding:11px 6px;text-align:center;font-size:13px;font-weight:700;
+}
+.rifah-plan.active{border:2px solid #42145F;background:#f7f1fa;color:#42145F}
+.rifah-coupon{display:flex;gap:8px;margin-top:10px}
+.rifah-coupon input{flex:1;padding:12px;border:1px solid #ddd;border-radius:9px}
+.rifah-coupon button{padding:12px 15px;border:0;border-radius:9px;background:#42145F;color:#fff;font-weight:700}
+.rifah-note{
+  width:100%;min-height:75px;padding:12px;border:1px solid #ddd;
+  border-radius:10px;box-sizing:border-box;font-size:14px;resize:vertical;
+}
+@media(max-width:500px){.rifah-plan-grid{grid-template-columns:1fr}.rifah-coupon{flex-direction:column}}
+
+</style>
+<div id="rifah-cart-box">🛒 Cart (<span id="rifah-cart-count">0</span>)</div>
+<div id="rifah-cart-panel">
+<h3>Your Cart</h3>
+<div id="rifah-cart-items">Your cart is empty.</div>
+<div class="rifah-cart-total">
+Total: ৳<span id="rifah-cart-total">0</span>
+</div>
+<button id="rifah-checkout">Checkout</button>
+</div>
+<!-- RIFAH ACCOUNT / SUPPORT / ADMIN MODALS -->
+<!-- RIFAH REAL BACKEND: Firebase Auth + Firestore bridge -->
+<div id="rifahFinalAppLayer">
+<div class="rifah-toast" id="rifahToast"></div>
+<div class="rifah-modal" id="rifahModal"><div class="rifah-dialog" id="rifahDialog"><div class="rifah-dialog-head"><h2 id="rifahModalTitle">Rifah Online Shop</h2><button class="rifah-close" id="rifahModalClose">×</button></div><div id="rifahModalBody"></div></div></div>
+<div class="rifah-modal" id="rifahAdminModal"><div class="rifah-dialog"><div class="rifah-dialog-head"><div><h2>⚙️ Rifah Admin Panel</h2><small>Frontend-only mode. Orders/products are saved on this browser until Firebase is connected.</small></div><button class="rifah-close" id="rifahAdminClose">×</button></div><div id="rifahAdminBody"></div></div></div>
+<script>
+(function(){
+'use strict';
+const KEY={products:'rifahFinalProducts',cats:'rifahFinalCats',cart:'rifahCart',wish:'rifahWishlist',users:'rifahUsers',session:'rifahSession',orders:'rifahOrders',admin:'rifahAdminPassword'};
+const defaults=[
+{id:'p1',name:"Premium Women's Dress",price:1250,old:1550,cat:'Dress',emoji:'👗',tag:'-20%',desc:'Elegant premium women’s dress.'},
+{id:'p2',name:"Men's Premium Casual Shirt",price:880,old:1100,cat:'T-Shirt',emoji:'👔',tag:'NEW',desc:'Premium casual shirt for men.'},
+{id:'p3',name:'Kids Party Dress',price:750,old:950,cat:'Kids',emoji:'👧',tag:'',desc:'Comfortable party dress for kids.'},
+{id:'p4',name:'LED Smart Bulb',price:350,old:420,cat:'Electronics',emoji:'💡',tag:'-15%',desc:'Smart LED bulb for home.'},
+{id:'p5',name:'Soft Teddy Bear',price:420,old:550,cat:'Toys',emoji:'🧸',tag:'',desc:'Soft and cute teddy bear.'}
+];
+const defaultCats=['Women','Men','Kids','Saree','T-Shirt','Dress','Shoes','Toys','Electronics'];
+const $=id=>document.getElementById(id); const qs=(s,r=document)=>r.querySelector(s), qsa=(s,r=document)=>[...r.querySelectorAll(s)];
+function get(k,f=[]){try{let x=JSON.parse(localStorage.getItem(k));return x??f}catch(e){return f}}
+function set(k,v){localStorage.setItem(k,JSON.stringify(v))}
+if(!localStorage.getItem(KEY.products)) set(KEY.products,defaults);
+if(!localStorage.getItem(KEY.cats)) set(KEY.cats,defaultCats);
+if(!localStorage.getItem(KEY.wish)) set(KEY.wish,[]);
+if(!localStorage.getItem(KEY.orders)) set(KEY.orders,[]);
+if(!localStorage.getItem(KEY.admin)) localStorage.setItem(KEY.admin,'Rifah1234');
+function toast(msg){const t=$('rifahToast');t.textContent=msg;t.classList.add('show');clearTimeout(window.__rt);window.__rt=setTimeout(()=>t.classList.remove('show'),2200)}
+function cats(){return get(KEY.cats,defaultCats)} function products(){return get(KEY.products,defaults)}
+function saveProducts(x){set(KEY.products,x)}
+function currentUser(){return get(KEY.session,null)}
+function cart(){return get(KEY.cart,[])}
+function saveCart(x){set(KEY.cart,x);renderCart();updateBadges()}
+function updateBadges(){const n=cart().reduce((a,x)=>a+(+x.qty||0),0);qsa('#rifah-cart-count,#headerCartBadge').forEach(e=>e.textContent=n);const hb=$('rifah-cart-count');if(hb)hb.textContent=n}
+function imgHTML(p,cls=''){return p.img?'<img class="'+cls+'" src="'+p.img.replace(/"/g,'&quot;')+'" alt="">':'<div class="emoji">'+(p.emoji||'🛍️')+'</div>'}
+let activeCat='';
+function renderProducts(){let arr=products(); const search=($('rifahSearchInput')?.value||'').trim().toLowerCase(); if(activeCat)arr=arr.filter(p=>p.cat.toLowerCase()===activeCat.toLowerCase()); if(search)arr=arr.filter(p=>(p.name+' '+p.cat+' '+(p.desc||'')).toLowerCase().includes(search)); const sort=$('rifahSort')?.value||'new'; if(sort==='low')arr.sort((a,b)=>a.price-b.price); if(sort==='high')arr.sort((a,b)=>b.price-a.price); if(sort==='name')arr.sort((a,b)=>a.name.localeCompare(b.name)); const g=$('rifahProductsGrid'); if(!g)return; $('rifahResultsCount').textContent=arr.length; g.querySelectorAll('.rifah-dynamic-product,.rifah-empty').forEach(x=>x.remove()); if(!arr.length){g.insertAdjacentHTML('beforeend','<div class="rifah-empty"><h3>No products found</h3><p>এই ক্যাটাগরিতে এখনো কোনো product নেই।</p></div>');return} arr.forEach(p=>{const liked=get(KEY.wish,[]).includes(p.id);const el=document.createElement('article');el.className='rifah-dynamic-product';el.dataset.id=p.id;el.innerHTML='<div class="rifah-dynamic-img">'+(p.tag?'<span class="sale">'+p.tag+'</span>':'')+imgHTML(p)+'</div><div class="rifah-dynamic-info"><div class="rifah-cat">'+esc(p.cat)+'</div><div class="rifah-dynamic-name">'+esc(p.name)+'</div><div class="rating">★★★★★</div><div><span class="rifah-price">৳'+num(p.price)+'</span>'+(p.old?'<span class="rifah-old">৳'+num(p.old)+'</span>':'')+'</div><div class="rifah-card-actions"><button class="rifah-add" data-add="'+p.id+'">Add to Cart</button><button class="rifah-heart" data-wish="'+p.id+'">'+(liked?'♥':'♡')+'</button></div></div>';g.appendChild(el)})}
+function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))} function num(v){return Number(v||0).toLocaleString('en-US')}
+function addCart(id){const p=products().find(x=>x.id===id);if(!p)return;let c=cart();let x=c.find(i=>i.id===id);if(x)x.qty++;else c.push({id:p.id,name:p.name,price:+p.price||0,qty:1,img:p.img||'',emoji:p.emoji||'🛍️'});saveCart(c);toast('✓ '+p.name+' added to cart');openCart()}
+function renderCart(){const c=cart(),body=$('rifahModalBody'); if(!$('rifahModal')?.classList.contains('open'))return; let total=c.reduce((a,x)=>a+x.price*x.qty,0);$('rifahModalTitle').textContent='🛒 Your Cart'; if(!c.length){body.innerHTML='<div class="rifah-empty">Your cart is empty.<br><button class="rifah-primary" data-go="products" style="margin-top:12px">Continue Shopping</button></div>';return} body.innerHTML='<div>'+c.map(x=>'<div class="rifah-cart-row"><div class="rifah-cart-thumb">'+imgHTML({img:x.img,emoji:x.emoji})+'</div><div><b>'+esc(x.name)+'</b><div>৳'+num(x.price)+' × '+x.qty+'</div><div class="rifah-qty"><button data-minus="'+x.id+'">−</button><b>'+x.qty+'</b><button data-plus="'+x.id+'">+</button><button class="rifah-danger" data-remove="'+x.id+'">Remove</button></div></div><b>৳'+num(x.price*x.qty)+'</b></div>').join('')+'</div><div style="display:flex;justify-content:space-between;margin-top:18px;font-size:20px"><b>Total</b><b>৳'+num(total)+'</b></div><div class="rifah-actions"><button class="rifah-primary" id="goCheckout">Proceed to Checkout</button><button class="rifah-secondary" data-go="products">Continue Shopping</button></div>'}
+function openModal(title,html,small=false){$('rifahModalTitle').textContent=title;$('rifahModalBody').innerHTML=html;$('rifahDialog').classList.toggle('sm',!!small);$('rifahModal').classList.add('open')}
+function closeModal(){$('rifahModal').classList.remove('open')}
+function openCart(){openModal('🛒 Your Cart','',false);renderCart()}
+function wishlist(){const w=get(KEY.wish,[]), ps=products().filter(p=>w.includes(p.id));openModal('♡ Wishlist',ps.length?'<div id="wishGrid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px">'+ps.map(p=>'<div class="rifah-order"><b>'+esc(p.name)+'</b><div>৳'+num(p.price)+'</div><div class="rifah-actions"><button class="rifah-primary" data-add="'+p.id+'">Add to Cart</button><button class="rifah-danger" data-wish-remove="'+p.id+'">Remove</button></div></div>').join('')+'</div>':'<div class="rifah-empty">Your Wishlist is empty.</div>')}
+function account(){const u=currentUser();if(!u){openModal('👤 Login / Register',accountForm(),true);return}openModal('👤 My Account','<div class="rifah-order"><b>'+esc(u.name||'Customer')+'</b><br>'+esc(u.email||'')+'<br>'+esc(u.phone||'')+'</div><div class="rifah-actions"><button class="rifah-primary" data-action="orders">📦 My Orders</button><button class="rifah-secondary" data-action="logout">Logout</button></div>',true)}
+function accountForm(){return '<div class="rifah-grid"><div class="rifah-field full"><label>Full Name</label><input id="accName" placeholder="Your name"></div><div class="rifah-field"><label>Email</label><input id="accEmail" type="email" placeholder="you@example.com"></div><div class="rifah-field"><label>Phone</label><input id="accPhone" placeholder="Phone number"></div><div class="rifah-field"><label>Password</label><input id="accPass" type="password" placeholder="Minimum 6 characters"></div></div><div class="rifah-actions"><button class="rifah-primary" id="accRegister">Create Account</button><button class="rifah-secondary" id="accLogin">Login</button><button class="rifah-secondary" id="accForgot">Forgot Password</button></div><small style="display:block;margin-top:12px;color:#777">Single-file demo account: data is stored in this browser. Firebase can be connected later for multi-device accounts.</small>'}
+function register(){const e=$('accEmail').value.trim(),pass=$('accPass').value,n=$('accName').value.trim(),ph=$('accPhone').value.trim();if(!e||pass.length<6)return toast('Email ও 6+ character password দিন');let us=get(KEY.users,[]);if(us.some(u=>u.email.toLowerCase()===e.toLowerCase()))return toast('এই email দিয়ে account already আছে');const u={id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),name:n,email:e,phone:ph,password:pass};us.push(u);set(KEY.users,us);set(KEY.session,{id:u.id,name:u.name,email:u.email,phone:u.phone});toast('✓ Account created');account()}
+function login(){const e=$('accEmail').value.trim(),p=$('accPass').value, u=get(KEY.users,[]).find(x=>x.email.toLowerCase()===e.toLowerCase()&&x.password===p);if(!u)return toast('Email বা password ভুল');set(KEY.session,{id:u.id,name:u.name,email:u.email,phone:u.phone});toast('✓ Login successful');account()}
+function orders(){const u=currentUser();if(!u)return account();const os=get(KEY.orders,[]).filter(o=>o.userId===u.id);openModal('📦 My Orders',os.length?os.map(o=>'<div class="rifah-order"><b>Order #'+esc(o.id)+'</b><br>Amount: ৳'+num(o.total)+'<br><span class="rifah-badge">'+esc(o.status||'Pending')+'</span><br><small>'+esc(o.date||'')+'</small></div>').join(''):'<div class="rifah-empty">No orders yet.</div>')}
+function track(){openModal('🚚 Track Order','<div class="rifah-field"><label>Order ID</label><input id="trackId" placeholder="Example: RF-123456"></div><div class="rifah-actions"><button class="rifah-primary" id="trackBtn">Track Order</button></div><div id="trackResult"></div>',true)}
+function checkout(){const c=cart();if(!c.length)return toast('Cart is empty');const u=currentUser();if(!u){account();toast('Order করার আগে Login/Register করুন');return}const total=c.reduce((a,x)=>a+x.price*x.qty,0);openModal('🧾 Checkout','<div class="rifah-grid"><div class="rifah-field full"><label>Full Name</label><input id="coName" value="'+esc(u.name)+'"></div><div class="rifah-field"><label>Phone</label><input id="coPhone" value="'+esc(u.phone||'')+'"></div><div class="rifah-field"><label>Payment Method</label><select id="coPay"><option>Cash on Delivery</option><option>Manual bKash/Nagad/Rocket</option><option>Card Payment (Gateway later)</option></select></div><div class="rifah-field full"><label>Delivery Address</label><textarea id="coAddress" rows="3" placeholder="Full delivery address"></textarea></div></div><div class="rifah-order" style="margin-top:15px"><b>Order Total: ৳'+num(total)+'</b><br><small>Paid payment gateway is intentionally not included. This button creates the order locally.</small></div><div class="rifah-actions"><button class="rifah-primary" id="placeOrder">Place Order</button></div>',true)}
+function placeOrder(){const u=currentUser(),c=cart(),total=c.reduce((a,x)=>a+x.price*x.qty,0);const id='RF-'+Date.now().toString().slice(-8);let os=get(KEY.orders,[]);os.unshift({id,userId:u.id,items:c,total,status:'Pending',name:$('coName').value,phone:$('coPhone').value,address:$('coAddress').value,payment:$('coPay').value,date:new Date().toLocaleString()});set(KEY.orders,os);set(KEY.cart,[]);updateBadges();openModal('✓ Order Placed','<div style="text-align:center;padding:20px"><div style="font-size:55px">🎉</div><h2>Order #'+id+'</h2><p>Your order has been saved successfully.</p><p><b>Total: ৳'+num(total)+'</b></p><button class="rifah-primary" data-action="orders" style="margin-top:12px">View My Orders</button></div>',true)}
+function admin(){const pass=prompt('Enter Admin Password');if(pass!==localStorage.getItem(KEY.admin))return toast('Admin password ভুল');renderAdmin()}
+function renderAdmin(){const ps=products(),cs=cats(),os=get(KEY.orders,[]);$('rifahAdminBody').innerHTML='<div class="rifah-admin-top"><div class="rifah-stat">Products<b>'+ps.length+'</b></div><div class="rifah-stat">Categories<b>'+cs.length+'</b></div><div class="rifah-stat">Orders<b>'+os.length+'</b></div><div class="rifah-stat">Wishlist<b>'+get(KEY.wish,[]).length+'</b></div></div><div class="rifah-actions"><button class="rifah-primary" id="adminAdd">＋ Add Product</button><button class="rifah-secondary" id="adminCats">Manage Categories</button><button class="rifah-secondary" id="adminPass">Change Password</button></div><hr style="border:0;border-top:1px solid #eee;margin:18px 0"><h3>Products</h3><div class="rifah-admin-list">'+ps.map(p=>'<div class="rifah-product-admin"><div>'+(p.img?'<img src="'+esc(p.img)+'">':'<div class="emoji">'+(p.emoji||'🛍️')+'</div>')+'</div><div><b>'+esc(p.name)+'</b><br><small>'+esc(p.cat)+' • ৳'+num(p.price)+'</small></div><div class="rifah-actions"><button class="rifah-secondary" data-edit="'+p.id+'">Edit</button><button class="rifah-danger" data-delete="'+p.id+'">Delete</button></div></div>').join('')+'</div><hr style="border:0;border-top:1px solid #eee;margin:18px 0"><h3>Recent Orders</h3><div>'+ (os.slice(0,10).map(o=>'<div class="rifah-order"><b>#'+esc(o.id)+'</b> • ৳'+num(o.total)+' • '+esc(o.status)+'</div>').join('')||'<p>No orders yet.</p>')+'</div>';$('rifahAdminModal').classList.add('open')}
+function productForm(p){const is=p&&p.id;openModal(is?'✏️ Edit Product':'＋ Add Product','<div class="rifah-grid"><div class="rifah-field"><label>Product Name</label><input id="pfName" value="'+esc(p?.name||'')+'"></div><div class="rifah-field"><label>Category</label><select id="pfCat">'+cats().map(c=>'<option '+(c===p?.cat?'selected':'')+'>'+esc(c)+'</option>').join('')+'</select></div><div class="rifah-field"><label>Price</label><input id="pfPrice" type="number" value="'+(p?.price||'')+'"></div><div class="rifah-field"><label>Old Price</label><input id="pfOld" type="number" value="'+(p?.old||'')+'"></div><div class="rifah-field"><label>Emoji</label><input id="pfEmoji" value="'+esc(p?.emoji||'🛍️')+'"></div><div class="rifah-field"><label>Image URL (optional)</label><input id="pfImg" value="'+esc(p?.img||'')+'" placeholder="https://..."></div><div class="rifah-field full"><label>Description</label><textarea id="pfDesc" rows="3">'+esc(p?.desc||'')+'</textarea></div></div><div class="rifah-actions"><button class="rifah-primary" id="pfSave">Save Product</button></div>',true);$('pfSave').onclick=()=>saveProduct(is?p.id:null)}
+function saveProduct(id){let ps=products();const obj={id:id||('p-'+Date.now()),name:$('pfName').value.trim(),cat:$('pfCat').value,price:+$('pfPrice').value||0,old:+$('pfOld').value||0,emoji:$('pfEmoji').value.trim()||'🛍️',img:$('pfImg').value.trim(),desc:$('pfDesc').value.trim()};if(!obj.name||!obj.price)return toast('Name ও Price দিন');if(id)ps=ps.map(p=>p.id===id?obj:p);else ps.push(obj);saveProducts(ps);renderProducts();closeModal();renderAdmin();toast('✓ Product saved')}
+function manageCats(){openModal('📂 Manage Categories','<div>'+cats().map(c=>'<span class="rifah-cat-pill">'+esc(c)+' <button data-catdel="'+esc(c)+'">×</button></span>').join('')+'</div><div class="rifah-actions"><input id="newCat" placeholder="New category" style="flex:1;padding:11px;border:1px solid #ddd;border-radius:10px"><button class="rifah-primary" id="addCat">Add</button></div>',true)}
+function route(hash){hash=hash||'#home';if(hash==='#home'){activeCat='';renderProducts();scroll('home');return}if(hash==='#products'||hash==='#shop'||hash==='#hot-deals'||hash==='#new-arrivals'){activeCat='';renderProducts();scroll('products');return}if(hash==='#about'){scroll('about');return}if(hash==='#wishlist'){wishlist();return}if(hash==='#account'){account();return}if(hash==='#track'){track();return}if(hash.startsWith('#category-')){activeCat=decodeURIComponent(hash.slice(10));renderProducts();scroll('products');return}}
+function scroll(id){$(id)?.scrollIntoView({behavior:'smooth',block:'start'})}
+// Delegated clicks for every major button/category/product/cart
+
+document.addEventListener('click', function(e){
+  const a=e.target.closest('a');
+  if(a){
+    const txt=a.textContent.toLowerCase();
+    if(['home','shop','hot deals','new arrivals','about us'].some(x=>txt.includes(x))){
+      e.preventDefault();
+      if(txt.includes('home')) location.hash='#home';
+      else if(txt.includes('about')) location.hash='#about';
+      else if(txt.includes('hot')) location.hash='#hot-deals';
+      else if(txt.includes('new arrivals')) location.hash='#new-arrivals';
+      else location.hash='#shop';
+      return;
+    }
+    if(txt.includes('wishlist')){e.preventDefault();wishlist();return;}
+    if(txt.includes('my orders')){e.preventDefault();orders();return;}
+    if(txt.includes('track')){e.preventDefault();track();return;}
+    if(txt.includes('contact')){e.preventDefault();scroll('support');return;}
+    if(txt.includes('login')||txt.includes('account')){e.preventDefault();account();return;}
+    if(txt.includes('all products')||txt.includes('view all')||txt.includes('shop now')||txt.includes('explore now')||txt.includes('shop offers')||txt.includes('view deals')){e.preventDefault();location.hash='#products';return;}
+    if(a.classList.contains('category')||txt.includes('women')||txt.includes('men')||txt.includes('kids')||txt.includes('electronics')||txt.includes('toys')||txt.includes('saree')||txt.includes('t-shirt')||txt.includes('dress')||txt.includes('shoes')){
+      e.preventDefault();
+      let c=cats().find(x=>txt.includes(x.toLowerCase()));
+      if(!c){if(txt.includes('women'))c='Women';else if(txt.includes('men'))c='Men';else if(txt.includes('kids'))c='Kids';else if(txt.includes('electronics'))c='Electronics';else if(txt.includes('toys'))c='Toys';}
+      if(c) location.hash='#category-'+encodeURIComponent(c);
+      return;
+    }
+  }
+  const add=e.target.closest('[data-add]');
+  if(add){e.preventDefault();addCart(add.dataset.add);return;}
+  const wish=e.target.closest('[data-wish]');
+  if(wish){let w=get(KEY.wish,[]);w=w.includes(wish.dataset.wish)?w.filter(x=>x!==wish.dataset.wish):w.concat(wish.dataset.wish);set(KEY.wish,w);renderProducts();toast(w.includes(wish.dataset.wish)?'♡ Added to Wishlist':'Removed from Wishlist');return;}
+  const wr=e.target.closest('[data-wish-remove]');
+  if(wr){set(KEY.wish,get(KEY.wish,[]).filter(x=>x!==wr.dataset.wishRemove));wishlist();return;}
+  const mi=e.target.closest('[data-minus]');
+  if(mi){let c=cart(),x=c.find(i=>i.id===mi.dataset.minus);if(x){x.qty--;if(x.qty<=0)c=c.filter(i=>i.id!==x.id);saveCart(c);renderCart();}return;}
+  const pl=e.target.closest('[data-plus]');
+  if(pl){let c=cart(),x=c.find(i=>i.id===pl.dataset.plus);if(x)x.qty++;saveCart(c);renderCart();return;}
+  const rm=e.target.closest('[data-remove]');
+  if(rm){saveCart(cart().filter(i=>i.id!==rm.dataset.remove));renderCart();return;}
+  if(e.target.closest('#goCheckout')){checkout();return;}
+  if(e.target.closest('[data-go="products"]')){closeModal();location.hash='#products';return;}
+  const act=e.target.closest('[data-action]')?.dataset.action;
+  if(act==='orders'){orders();return;}
+  if(act==='logout'){localStorage.removeItem(KEY.session);account();toast('Logged out');return;}
+  if(e.target.closest('#accRegister')){register();return;}
+  if(e.target.closest('#accLogin')){login();return;}
+  if(e.target.closest('#accForgot')){toast('Use the admin/browser reset if you forget the demo password');return;}
+  if(e.target.closest('#placeOrder')){placeOrder();return;}
+  if(e.target.closest('#trackBtn')){const id=$('trackId').value.trim();const o=get(KEY.orders,[]).find(x=>x.id===id);$('trackResult').innerHTML=o?'<div class="rifah-track"><div class="active">Placed</div><div class="active">Confirmed</div><div>Shipped</div><div>Delivered</div></div><div class="rifah-order"><b>Status:</b> '+esc(o.status||'Pending')+'<br><b>Amount:</b> ৳'+num(o.total)+'</div>':'<div class="rifah-empty" style="margin-top:15px">Order not found.</div>';return;}
+  const edit=e.target.closest('[data-edit]');
+  if(edit){productForm(products().find(p=>p.id===edit.dataset.edit));return;}
+  const del=e.target.closest('[data-delete]');
+  if(del){if(confirm('Delete this product?')){saveProducts(products().filter(p=>p.id!==del.dataset.delete));renderProducts();renderAdmin();toast('Product deleted');}return;}
+  const catdel=e.target.closest('[data-catdel]');
+  if(catdel){set(KEY.cats,cats().filter(c=>c!==catdel.dataset.catdel));manageCats();return;}
+  if(e.target.closest('#addCat')){const n=$('newCat').value.trim();if(!n)return;if(!cats().some(c=>c.toLowerCase()===n.toLowerCase()))set(KEY.cats,cats().concat(n));manageCats();toast('Category added');return;}
+  if(e.target.closest('#adminAdd')){productForm();return;}
+  if(e.target.closest('#adminCats')){manageCats();return;}
+  if(e.target.closest('#adminPass')){const p=prompt('New Admin Password (min 6 characters)');if(p&&p.length>=6){localStorage.setItem(KEY.admin,p);toast('Admin password changed');}return;}
+});
+$('rifahAdminLaunch')?.addEventListener('click',admin); $('rifahModalClose')?.addEventListener('click',closeModal);$('rifahAdminClose')?.addEventListener('click',()=>$('rifahAdminModal').classList.remove('open'));$('rifahModal')?.addEventListener('click',e=>{if(e.target.id==='rifahModal')closeModal()});$('rifahAdminModal')?.addEventListener('click',e=>{if(e.target.id==='rifahAdminModal')$('rifahAdminModal').classList.remove('open')});
+// Existing admin trigger(s)
+qsa('[id*=Admin],[class*=admin]').forEach(el=>{if(el.tagName==='BUTTON'||el.tagName==='A')el.addEventListener('click',e=>{e.preventDefault();admin()})});
+$('rifahSearchInput')?.addEventListener('input',renderProducts);$('rifahSearchInput')?.addEventListener('keydown',e=>{if(e.key==='Enter'){location.hash='#products'}});$('rifahSort')?.addEventListener('change',renderProducts);
+$('rifah-cart-box')?.addEventListener('click',e=>{if(!e.target.closest('button'))openCart()});
+window.addEventListener('hashchange',()=>route(location.hash));
+window.addEventListener('load',()=>{renderProducts();updateBadges();route(location.hash||'#home')});
+})();
+</script></div></body>
+</html>
