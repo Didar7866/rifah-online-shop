@@ -3737,6 +3737,72 @@ function init(){
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
 })();
 </script>
+<script id="rifah-cart-instant-fix">
+(function(){
 
+  function getCart(){
+    try{
+      const data = JSON.parse(localStorage.getItem("rifahCart") || "[]");
+      return Array.isArray(data) ? data : [];
+    }catch(e){
+      return [];
+    }
+  }
+
+  function refreshCartUI(){
+    const cart = getCart();
+
+    const count = cart.reduce(function(total,item){
+      return total + (Number(item.qty) || 0);
+    },0);
+
+    document.querySelectorAll(
+      "#headerCartBadge, #rifah-cart-count"
+    ).forEach(function(el){
+      el.textContent = count;
+    });
+
+    document.querySelectorAll(".badge").forEach(function(el){
+      el.textContent = count;
+    });
+
+    try{
+      if(typeof window.updateCart === "function"){
+        window.updateCart();
+      }
+    }catch(e){}
+
+    try{
+      if(typeof window.syncBadges === "function"){
+        window.syncBadges();
+      }
+    }catch(e){}
+
+    try{
+      if(typeof window.renderCart === "function"){
+        window.renderCart();
+      }
+    }catch(e){}
+  }
+
+  document.addEventListener(
+    "rifah:cart-updated",
+    refreshCartUI
+  );
+
+  window.addEventListener(
+    "storage",
+    refreshCartUI
+  );
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    refreshCartUI
+  );
+
+  setInterval(refreshCartUI,500);
+
+})();
+</script>
 </body>
 </html>
