@@ -3737,70 +3737,872 @@ function init(){
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
 })();
 </script>
-<script id="rifah-cart-instant-fix">
+<script id="rifah-final-cart-professional-fix">
 (function(){
+
+  /* =========================================
+     RIFAH ONLINE SHOP
+     FINAL CART INSTANT + PROFESSIONAL CART
+     ========================================= */
+
+  const CART_KEY = "rifahCart";
 
   function getCart(){
     try{
-      const data = JSON.parse(localStorage.getItem("rifahCart") || "[]");
+      const data = JSON.parse(
+        localStorage.getItem(CART_KEY) || "[]"
+      );
       return Array.isArray(data) ? data : [];
     }catch(e){
       return [];
     }
   }
 
-  function refreshCartUI(){
-    const cart = getCart();
+  function saveCart(cart){
+    localStorage.setItem(
+      CART_KEY,
+      JSON.stringify(cart)
+    );
 
-    const count = cart.reduce(function(total,item){
+    document.dispatchEvent(
+      new CustomEvent("rifah:cart-updated")
+    );
+
+    updateEverything();
+  }
+
+  function getCount(){
+    return getCart().reduce(function(total,item){
       return total + (Number(item.qty) || 0);
     },0);
+  }
+
+  function getTotal(){
+    return getCart().reduce(function(total,item){
+      return total +
+        ((Number(item.price)||0) *
+         (Number(item.qty)||0));
+    },0);
+  }
+
+  /* =========================================
+     CART NUMBER INSTANT UPDATE
+     ========================================= */
+
+  function updateBadges(){
+
+    const count = getCount();
 
     document.querySelectorAll(
-      "#headerCartBadge, #rifah-cart-count"
+      "#headerCartBadge,#rifah-cart-count,.badge"
     ).forEach(function(el){
       el.textContent = count;
     });
 
-    document.querySelectorAll(".badge").forEach(function(el){
-      el.textContent = count;
+  }
+
+  /* =========================================
+     SMALL SUCCESS MESSAGE
+     ========================================= */
+
+  function showToast(message){
+
+    let toast =
+      document.getElementById(
+        "rifahCartToast"
+      );
+
+    if(!toast){
+
+      toast = document.createElement("div");
+
+      toast.id = "rifahCartToast";
+
+      toast.style.cssText = `
+        position:fixed;
+        left:50%;
+        bottom:25px;
+        transform:translateX(-50%);
+        background:#42145F;
+        color:#fff;
+        padding:13px 20px;
+        border-radius:30px;
+        font-size:14px;
+        font-weight:700;
+        z-index:999999;
+        box-shadow:0 8px 25px rgba(0,0,0,.25);
+        opacity:0;
+        transition:.25s;
+        pointer-events:none;
+      `;
+
+      document.body.appendChild(toast);
+    }
+
+    toast.textContent = message;
+
+    toast.style.opacity = "1";
+
+    clearTimeout(toast.__timer);
+
+    toast.__timer = setTimeout(function(){
+      toast.style.opacity = "0";
+    },1800);
+  }
+
+  /* =========================================
+     PROFESSIONAL CART DRAWER
+     ========================================= */
+
+  function createCart(){
+
+    if(document.getElementById(
+      "rifahProfessionalCart"
+    )) return;
+
+    const style =
+      document.createElement("style");
+
+    style.id =
+      "rifah-professional-cart-style";
+
+    style.textContent = `
+
+      #rifahProfessionalCart{
+        position:fixed;
+        inset:0;
+        z-index:999998;
+        display:none;
+        background:rgba(20,10,30,.55);
+        backdrop-filter:blur(3px);
+      }
+
+      #rifahProfessionalCart.active{
+        display:block;
+      }
+
+      #rifahCartDrawer{
+        position:absolute;
+        top:0;
+        right:0;
+        width:min(430px,94vw);
+        height:100%;
+        background:#fff;
+        box-shadow:-10px 0 35px rgba(0,0,0,.20);
+        display:flex;
+        flex-direction:column;
+        animation:rifahCartSlide .25s ease;
+      }
+
+      @keyframes rifahCartSlide{
+        from{
+          transform:translateX(100%);
+        }
+        to{
+          transform:translateX(0);
+        }
+      }
+
+      #rifahCartHead{
+        padding:18px 18px 15px;
+        background:linear-gradient(
+          135deg,
+          #42145F,
+          #8b1f72
+        );
+        color:#fff;
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+      }
+
+      #rifahCartHead h2{
+        margin:0;
+        font-size:20px;
+      }
+
+      #rifahCartClose{
+        width:38px;
+        height:38px;
+        border:0;
+        border-radius:50%;
+        background:rgba(255,255,255,.16);
+        color:#fff;
+        font-size:24px;
+        cursor:pointer;
+      }
+
+      #rifahCartBody{
+        flex:1;
+        overflow-y:auto;
+        padding:15px;
+        background:#faf8fb;
+      }
+
+      .rf-pro-cart-item{
+        background:#fff;
+        border:1px solid #eee;
+        border-radius:15px;
+        padding:12px;
+        margin-bottom:12px;
+        display:flex;
+        gap:12px;
+        box-shadow:0 3px 12px rgba(0,0,0,.05);
+      }
+
+      .rf-pro-cart-img{
+        width:70px;
+        height:70px;
+        border-radius:12px;
+        object-fit:cover;
+        background:#f3edf5;
+        flex-shrink:0;
+      }
+
+      .rf-pro-cart-info{
+        flex:1;
+        min-width:0;
+      }
+
+      .rf-pro-cart-name{
+        font-weight:700;
+        color:#32113f;
+        font-size:14px;
+        margin-bottom:5px;
+      }
+
+      .rf-pro-cart-price{
+        color:#8b1f72;
+        font-weight:800;
+        margin-bottom:8px;
+      }
+
+      .rf-pro-qty{
+        display:flex;
+        align-items:center;
+        gap:8px;
+      }
+
+      .rf-pro-qty button{
+        width:30px;
+        height:30px;
+        border:1px solid #ddd;
+        border-radius:8px;
+        background:#fff;
+        cursor:pointer;
+        font-size:18px;
+        font-weight:bold;
+      }
+
+      .rf-pro-qty span{
+        min-width:25px;
+        text-align:center;
+        font-weight:700;
+      }
+
+      .rf-pro-remove{
+        border:0;
+        background:none;
+        color:#d33;
+        font-size:12px;
+        margin-left:7px;
+        cursor:pointer;
+      }
+
+      #rifahCartEmpty{
+        text-align:center;
+        padding:70px 20px;
+        color:#777;
+      }
+
+      #rifahCartEmpty .rf-empty-icon{
+        font-size:50px;
+        margin-bottom:12px;
+      }
+
+      #rifahCartFooter{
+        padding:16px;
+        border-top:1px solid #eee;
+        background:#fff;
+      }
+
+      .rf-cart-total-row{
+        display:flex;
+        justify-content:space-between;
+        font-size:17px;
+        font-weight:800;
+        color:#32113f;
+        margin-bottom:13px;
+      }
+
+      #rfProfessionalCheckout{
+        width:100%;
+        border:0;
+        border-radius:12px;
+        padding:14px;
+        background:#42145F;
+        color:#fff;
+        font-size:16px;
+        font-weight:800;
+        cursor:pointer;
+      }
+
+      #rfProfessionalCheckout:disabled{
+        opacity:.45;
+        cursor:not-allowed;
+      }
+
+      @media(max-width:480px){
+        #rifahCartDrawer{
+          width:100%;
+        }
+      }
+    `;
+
+    document.head.appendChild(style);
+
+    const box =
+      document.createElement("div");
+
+    box.id =
+      "rifahProfessionalCart";
+
+    box.innerHTML = `
+
+      <div id="rifahCartDrawer">
+
+        <div id="rifahCartHead">
+          <h2>🛒 My Cart</h2>
+
+          <button
+            type="button"
+            id="rifahCartClose"
+          >×</button>
+        </div>
+
+        <div id="rifahCartBody"></div>
+
+        <div id="rifahCartFooter">
+
+          <div class="rf-cart-total-row">
+            <span>Total</span>
+            <span id="rfProfessionalTotal">
+              ৳0
+            </span>
+          </div>
+
+          <button
+            type="button"
+            id="rfProfessionalCheckout"
+          >
+            Proceed to Checkout →
+          </button>
+
+        </div>
+
+      </div>
+    `;
+
+    document.body.appendChild(box);
+
+    document.getElementById(
+      "rifahCartClose"
+    ).onclick = closeCart;
+
+    box.addEventListener(
+      "click",
+      function(e){
+        if(e.target === box){
+          closeCart();
+        }
+      }
+    );
+
+    document.getElementById(
+      "rfProfessionalCheckout"
+    ).onclick = function(){
+
+      const cart = getCart();
+
+      if(!cart.length){
+        showToast("আপনার Cart খালি");
+        return;
+      }
+
+      closeCart();
+
+      const checkout =
+        document.getElementById(
+          "rifah-checkout-box"
+        );
+
+      if(checkout){
+        checkout.style.display = "block";
+      }else{
+        const oldCheckout =
+          document.getElementById(
+            "rifah-checkout"
+          );
+
+        if(oldCheckout){
+          oldCheckout.click();
+        }
+      }
+    };
+
+    renderProfessionalCart();
+  }
+
+  function openCart(){
+    createCart();
+
+    renderProfessionalCart();
+
+    document.getElementById(
+      "rifahProfessionalCart"
+    ).classList.add("active");
+
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeCart(){
+
+    const box =
+      document.getElementById(
+        "rifahProfessionalCart"
+      );
+
+    if(box){
+      box.classList.remove("active");
+    }
+
+    document.body.style.overflow = "";
+  }
+
+  /* =========================================
+     RENDER CART
+     ========================================= */
+
+  function renderProfessionalCart(){
+
+    const body =
+      document.getElementById(
+        "rifahCartBody"
+      );
+
+    if(!body) return;
+
+    const cart = getCart();
+
+    const total = getTotal();
+
+    const totalEl =
+      document.getElementById(
+        "rfProfessionalTotal"
+      );
+
+    if(totalEl){
+      totalEl.textContent =
+        "৳" + total.toLocaleString();
+    }
+
+    const checkoutBtn =
+      document.getElementById(
+        "rfProfessionalCheckout"
+      );
+
+    if(checkoutBtn){
+      checkoutBtn.disabled =
+        cart.length === 0;
+    }
+
+    if(!cart.length){
+
+      body.innerHTML = `
+        <div id="rifahCartEmpty">
+          <div class="rf-empty-icon">
+            🛒
+          </div>
+
+          <h3>আপনার Cart খালি</h3>
+
+          <p>
+            পছন্দের Product Cart-এ যোগ করুন।
+          </p>
+        </div>
+      `;
+
+      return;
+    }
+
+    body.innerHTML = cart.map(
+      function(item,index){
+
+        const image =
+          item.image ||
+          item.images?.[0] ||
+          "";
+
+        return `
+
+          <div class="rf-pro-cart-item">
+
+            ${
+              image
+              ?
+              `<img
+                class="rf-pro-cart-img"
+                src="${image}"
+                alt=""
+              >`
+              :
+              `<div class="rf-pro-cart-img"
+                style="
+                  display:flex;
+                  align-items:center;
+                  justify-content:center;
+                  font-size:28px;
+                "
+              >🛍️</div>`
+            }
+
+            <div class="rf-pro-cart-info">
+
+              <div class="rf-pro-cart-name">
+                ${item.name || "Product"}
+              </div>
+
+              <div class="rf-pro-cart-price">
+                ৳${Number(
+                  item.price || 0
+                ).toLocaleString()}
+              </div>
+
+              <div class="rf-pro-qty">
+
+                <button
+                  type="button"
+                  data-rf-minus="${index}"
+                >−</button>
+
+                <span>
+                  ${Number(item.qty || 1)}
+                </span>
+
+                <button
+                  type="button"
+                  data-rf-plus="${index}"
+                >+</button>
+
+                <button
+                  type="button"
+                  class="rf-pro-remove"
+                  data-rf-remove="${index}"
+                >
+                  Remove
+                </button>
+
+              </div>
+
+            </div>
+
+          </div>
+        `;
+      }
+    ).join("");
+  }
+
+  /* =========================================
+     CART + / - / REMOVE
+     ========================================= */
+
+  document.addEventListener(
+    "click",
+    function(e){
+
+      const plus =
+        e.target.closest(
+          "[data-rf-plus]"
+        );
+
+      const minus =
+        e.target.closest(
+          "[data-rf-minus]"
+        );
+
+      const remove =
+        e.target.closest(
+          "[data-rf-remove]"
+        );
+
+      if(
+        !plus &&
+        !minus &&
+        !remove
+      ) return;
+
+      const index = Number(
+        (plus || minus || remove).dataset.rfPlus ??
+        (plus || minus || remove).dataset.rfMinus ??
+        (plus || minus || remove).dataset.rfRemove
+      );
+
+      const cart = getCart();
+
+      if(!cart[index]) return;
+
+      if(plus){
+        cart[index].qty =
+          (Number(cart[index].qty)||0) + 1;
+      }
+
+      if(minus){
+        cart[index].qty =
+          (Number(cart[index].qty)||0) - 1;
+
+        if(cart[index].qty <= 0){
+          cart.splice(index,1);
+        }
+      }
+
+      if(remove){
+        cart.splice(index,1);
+      }
+
+      saveCart(cart);
+
+      renderProfessionalCart();
+
+    },
+    true
+  );
+
+  /* =========================================
+     ADD TO CART
+     ========================================= */
+
+  function addProductFromButton(btn){
+
+    const card =
+      btn.closest(".product");
+
+    if(!card) return false;
+
+    const nameEl =
+      card.querySelector(
+        ".product-name"
+      );
+
+    const priceEl =
+      card.querySelector(
+        ".price"
+      );
+
+    const imageEl =
+      card.querySelector(
+        ".product-image img"
+      );
+
+    const name =
+      nameEl
+      ?
+      nameEl.textContent.trim()
+      :
+      "Rifah Product";
+
+    const price =
+      priceEl
+      ?
+      Number(
+        priceEl.textContent
+          .replace(/[^\d]/g,"")
+      ) || 0
+      :
+      0;
+
+    const image =
+      imageEl
+      ?
+      imageEl.src
+      :
+      "";
+
+    const cart = getCart();
+
+    const existing =
+      cart.find(function(item){
+        return item.name === name;
+      });
+
+    if(existing){
+
+      existing.qty =
+        (Number(existing.qty)||0) + 1;
+
+    }else{
+
+      cart.push({
+        name:name,
+        price:price,
+        qty:1,
+        image:image
+      });
+
+    }
+
+    saveCart(cart);
+
+    renderProfessionalCart();
+
+    showToast(
+      "✓ " + name + " Cart-এ যোগ হয়েছে"
+    );
+
+    return true;
+  }
+
+  /*
+   * Existing Add buttons-এর পুরোনো
+   * click listener বাদ দিয়ে নতুন
+   * instant listener দেওয়া হচ্ছে।
+   */
+
+  function prepareAddButtons(){
+
+    document.querySelectorAll(
+      ".product .add"
+    ).forEach(function(oldBtn){
+
+      if(oldBtn.dataset.rfFinalCart){
+        return;
+      }
+
+      const newBtn =
+        oldBtn.cloneNode(true);
+
+      newBtn.dataset.rfFinalCart =
+        "1";
+
+      oldBtn.replaceWith(newBtn);
+
+      newBtn.addEventListener(
+        "click",
+        function(e){
+
+          e.preventDefault();
+          e.stopPropagation();
+
+          addProductFromButton(
+            newBtn
+          );
+
+        }
+      );
+
     });
 
+  }
+
+  /* =========================================
+     HEADER CART BUTTON
+     ========================================= */
+
+  function prepareCartButton(){
+
+    const cartBox =
+      document.getElementById(
+        "rifah-cart-box"
+      );
+
+    if(!cartBox) return;
+
+    cartBox.onclick = function(e){
+
+      if(e){
+        e.preventDefault();
+        e.stopPropagation();
+      }
+
+      openCart();
+
+    };
+  }
+
+  /* =========================================
+     UPDATE EVERYTHING
+     ========================================= */
+
+  function updateEverything(){
+
+    updateBadges();
+
+    renderProfessionalCart();
+
     try{
-      if(typeof window.updateCart === "function"){
+      if(
+        typeof window.updateCart ===
+        "function"
+      ){
         window.updateCart();
       }
     }catch(e){}
 
-    try{
-      if(typeof window.syncBadges === "function"){
-        window.syncBadges();
-      }
-    }catch(e){}
-
-    try{
-      if(typeof window.renderCart === "function"){
-        window.renderCart();
-      }
-    }catch(e){}
   }
 
-  document.addEventListener(
-    "rifah:cart-updated",
-    refreshCartUI
-  );
+  /* =========================================
+     START
+     ========================================= */
 
-  window.addEventListener(
-    "storage",
-    refreshCartUI
-  );
+  function start(){
 
-  document.addEventListener(
-    "DOMContentLoaded",
-    refreshCartUI
-  );
+    createCart();
 
-  setInterval(refreshCartUI,500);
+    prepareAddButtons();
+
+    prepareCartButton();
+
+    updateEverything();
+
+  }
+
+  if(
+    document.readyState ===
+    "loading"
+  ){
+    document.addEventListener(
+      "DOMContentLoaded",
+      start
+    );
+  }else{
+    start();
+  }
+
+  /*
+   * Admin Panel থেকে নতুন Product
+   * যোগ হলে Add to Cart button-ও
+   * সঙ্গে সঙ্গে কাজ করবে।
+   */
+
+  const observer =
+    new MutationObserver(
+      function(){
+
+        prepareAddButtons();
+
+        prepareCartButton();
+
+        updateBadges();
+
+      }
+    );
+
+  observer.observe(
+    document.body,
+    {
+      childList:true,
+      subtree:true
+    }
+  );
 
 })();
 </script>
